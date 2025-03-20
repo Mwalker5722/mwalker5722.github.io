@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Request a Demo - Your AI Business</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			form textarea {
+				resize: none;
+			}
+			.box.alt.container {
+				border: none !important;
+				background: rgba(255, 255, 255, 0.8);
+				box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+				backdrop-filter: blur(10px);
+				padding: 2em;
+				border-radius: 10px;
+			}
+			.box.alt.container::before, 
+			.box.alt.container::after {
+				display: none !important;
+			}
+			input, textarea {
+				background-color: #ffffff !important;
+				border: 1px solid #ccc !important;
+				color: #333 !important;
+			}
+			input:focus, textarea:focus {
+				border-color: #00c6ff !important;
+				box-shadow: 0 0 5px rgba(0, 198, 255, 0.5);
+				outline: none;
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+		<div id="header">
+			<span class="logo icon fa-comments"></span>
+			<h1>Request a Demo</h1>
+			<p>Experience our AI-powered conversational system tailored to your business.</p>
+		</div>
+
+		<!-- Main -->
+		<div id="main">
+			<header class="major container medium">
+				<h2>Fill out the form below, and we'll connect you with a custom demo setup.</h2>
+			</header>
+
+			<div class="box alt container">
+				<form method="post" action="sendmail.php">
+					<div class="row gtr-50 gtr-uniform">
+						<div class="col-6 col-12-mobilep">
+							<input type="text" name="name" placeholder="Full Name" required />
+						</div>
+						<div class="col-6 col-12-mobilep">
+							<input type="email" name="email" placeholder="Email Address" required />
+						</div>
+						<div class="col-12">
+							<input type="text" name="business" placeholder="Business Name" required />
+						</div>
+						<div class="col-12">
+							<textarea name="message" placeholder="Tell us briefly what you're looking for..." rows="6"></textarea>
+						</div>
+						<div class="col-12">
+							<ul class="actions special">
+								<li><input type="submit" value="Submit Request" /></li>
+							</ul>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<footer class="major container medium">
+				<p>Or call our AI assistant now:</p>
+				<p><strong>[Phone Number Placeholder]</strong></p>
+			</footer>
+
+		</div>
+
+		<!-- Footer -->
+		<div id="footer">
+			<div class="container medium">
+				<header class="major last">
+					<h2>We're easy to reach</h2>
+					<p>Our AI is available 24/7 to assist you with any questions.</p>
+				</header>
+				<ul class="copyright">
+					<li>&copy; 2024 Your AI Business. All rights reserved.</li>
+				</ul>
+			</div>
+		</div>
+
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+		<elevenlabs-convai agent-id="5ELfgEcpwCNy7kRsXnCF"></elevenlabs-convai>
+		<script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+
+	</body>
+</html>
