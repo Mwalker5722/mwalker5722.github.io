@@ -4,13 +4,40 @@
   <title>The Index Cloud</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon/web-app-manifest-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="favicon/web-app-manifest-512x512.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+  <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg">
+  <link rel="shortcut icon" href="favicon/favicon.ico">
+  <link rel="manifest" href="favicon/site.webmanifest">
+
   <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .logo-container img {
+      width: 130px; /* Larger size */
+      height: auto;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body class="is-preload">
 
   <!-- Header -->
   <div id="header">
-    <span class="logo icon fa-comments"></span>
+    <div class="logo-container">
+      <img src="images/logo.png" alt="The Index Cloud Logo" onclick="triggerElevenWidget()">
+    </div>
     <h1>The Index Cloud</h1>
     <p>Intelligent conversational AI services, built for seamless integration and exceptional performance.</p>
   </div>
@@ -72,7 +99,13 @@
   <script src="assets/js/main.js"></script>
 
   <elevenlabs-convai agent-id="5ELfgEcpwCNy7kRsXnCF"></elevenlabs-convai>
-  <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+  <script src="https://elevenlabs.io/convai-widget/index.js" async></script>
+
+  <script>
+    function triggerElevenWidget() {
+      document.querySelector('elevenlabs-convai').shadowRoot.querySelector('button').click();
+    }
+  </script>
 
 </body>
 </html>
