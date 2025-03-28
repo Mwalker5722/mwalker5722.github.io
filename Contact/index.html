@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — The Index Cloud</title>
+  <meta name="description" content="Contact The Index Cloud — Smart conversations made simple.">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-96x96.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="/favicon/site.webmanifest">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(ellipse at center, rgba(128,0,192,0.2), transparent 60%), #1b0231;
+      color: #fff;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    body::before, body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before {
+      background-image: radial-gradient(#ffffff 1px, transparent 1px);
+      background-size: 2px 2px;
+      opacity: 0.05;
+      animation: starScroll1 90s linear infinite;
+    }
+
+    body::after {
+      background-image: radial-gradient(#ffffff 1.5px, transparent 1.5px);
+      background-size: 3px 3px;
+      opacity: 0.03;
+      animation: starScroll2 120s linear infinite reverse;
+    }
+
+    @keyframes starScroll1 { 0% { background-position: 0 0; } 100% { background-position: 2000px 2000px; } }
+    @keyframes starScroll2 { 0% { background-position: 0 0; } 100% { background-position: -1500px 2000px; } }
+
+    /* ✅ NAVBAR */
+    .navbar-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 999;
+    }
+
+    .navbar {
+      display: flex;
+      gap: 3rem;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.85);
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #fff;
+      text-shadow: 0 0 10px rgba(213, 54, 255, 0.6);
+    }
+
+    /* ✅ FORM */
+    .demo-form-container {
+      position: absolute;
+      top: 54%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.88);
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 40px rgba(213,54,255,0.2);
+      border-radius: 20px;
+      max-width: 400px;
+      width: 90%;
+      padding: 1.3rem;
+      text-align: center;
+      z-index: 100;
+    }
+
+    h1 {
+      margin-bottom: 0.65rem;
+      font-size: 1.7rem;
+      text-shadow: 0 0 8px rgba(213,54,255,0.3);
+    }
+
+    p.subtext {
+      margin-bottom: 0.35rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    p.optional-note {
+      margin-bottom: 1rem;
+      color: rgba(255,255,255,0.5);
+      font-style: italic;
+    }
+
+    form input, form textarea, form button {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 0.75rem;
+      border-radius: 7px;
+      border: none;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    form input, form textarea {
+      background-color: rgba(255,255,255,0.08);
+      border: 1px solid rgba(213,54,255,0.25);
+      color: #fff;
+    }
+
+    textarea { resize: none; }
+
+    form input:focus, form textarea:focus {
+      border-color: rgba(213,54,255,0.45);
+      box-shadow: 0 0 7px rgba(213,54,255,0.25);
+    }
+
+    form button {
+      background: linear-gradient(90deg, rgba(213,54,255,0.85), rgba(128,0,192,0.85));
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    form button:hover {
+      background: linear-gradient(90deg, rgba(128,0,192,0.95), rgba(213,54,255,0.95));
+    }
+
+    #formMessage {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #b3ffec;
+      background-color: rgba(0, 255, 150, 0.15);
+      border: 1px solid rgba(0, 255, 150, 0.4);
+      box-shadow: 0 0 10px rgba(0, 255, 150, 0.2);
+    }
+
+    .footer {
+      margin-top: 0.8rem;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+	
+	 /* ... your existing styles ... */
+
+  /* ✅ FORM ANIMATION */
+  @keyframes fadeInUpZoom {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -40%) scale(0.85);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(0.88);
+    }
+  }
+
+  .demo-form-container {
+    position: absolute;
+    top: 54%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.88);
+    animation: fadeInUpZoom 1s ease-out both;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 40px rgba(213,54,255,0.2);
+    border-radius: 20px;
+    max-width: 400px;
+    width: 90%;
+    padding: 1.3rem;
+    text-align: center;
+    z-index: 100;
+  }
+
+  /* ... rest of your styles ... */
+  </style>
+</head>
+<body>
+
+<!-- ✅ Navbar -->
+<div class="navbar-wrapper">
+  <nav class="navbar">
+    <a href="/">Home</a>
+    <a href="/Info/">How It Works</a>
+    <a href="/Contact/">Contact</a>
+  </nav>
+</div>
+
+<!-- ✅ Form -->
+<div class="demo-form-container">
+  <h1>Let's Talk!</h1>
+  <p class="subtext">Discover how The Index Cloud can help your business communicate smarter, 24/7.</p>
+  <p class="optional-note">All fields are optional — just share what you’d like!</p>
+
+  <form id="contactForm">
+    <!-- Hidden config fields -->
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_subject" value="New Inquiry via The Index Cloud">
+    <input type="hidden" name="_template" value="box">
+
+    <!-- Visible fields -->
+    <input type="text" name="name" placeholder="Your Name">
+    <input type="email" name="email" placeholder="Your Email">
+    <input type="text" name="company" placeholder="Company Name">
+    <input type="text" name="website" placeholder="Company Website">
+    <textarea name="message" rows="3" placeholder="What’s your business all about?"></textarea>
+
+    <button type="submit">Send</button>
+  </form>
+
+  <!-- Custom success message -->
+  <div id="formMessage">Your message has been sent. We’ll be in touch soon.</div>
+
+  <div class="footer">Powered by The Index Cloud — Smart conversations made simple.</div>
+</div>
+
+<!-- ✅ JS: FormSubmit AJAX handling -->
+<script>
+  const form = document.getElementById("contactForm");
+  const messageBox = document.getElementById("formMessage");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const formData = new FormData(form);
+
+    fetch("https://formsubmit.co/ajax/support@theindexcloud.com", {
+      method: "POST",
+      headers: { 'Accept': 'application/json' },
+      body: formData
+    }).then(response => {
+      if (response.ok) {
+        messageBox.textContent = "Your message has been sent. We’ll be in touch soon.";
+        messageBox.style.display = "block";
+        form.reset();
+      } else {
+        messageBox.textContent = "Something went wrong. Please try again.";
+        messageBox.style.backgroundColor = "rgba(255, 80, 80, 0.15)";
+        messageBox.style.borderColor = "rgba(255, 80, 80, 0.4)";
+        messageBox.style.display = "block";
+      }
+    }).catch(() => {
+      messageBox.textContent = "Submission failed. Please check your internet connection.";
+      messageBox.style.backgroundColor = "rgba(255, 80, 80, 0.15)";
+      messageBox.style.borderColor = "rgba(255, 80, 80, 0.4)";
+      messageBox.style.display = "block";
+    });
+  });
+</script>
+
+</body>
+</html>
