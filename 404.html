@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Page Not Found | The Index Cloud</title>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-96x96.png">
+  <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+  <link rel="manifest" href="favicon/site.webmanifest">
+  <meta name="theme-color" content="#1b0231">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #fff;
+      background: radial-gradient(ellipse at center, rgba(128,0,192,0.2), transparent 60%), #1b0231;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      text-align: center;
+    }
+
+    body::before, body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-repeat: repeat;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before {
+      background-image: radial-gradient(#ffffff 1px, transparent 1px);
+      background-size: 2px 2px;
+      opacity: 0.05;
+      animation: starScroll1 90s linear infinite;
+    }
+
+    body::after {
+      background-image: radial-gradient(#ffffff 1.5px, transparent 1.5px);
+      background-size: 3px 3px;
+      opacity: 0.03;
+      animation: starScroll2 120s linear infinite reverse;
+    }
+
+    @keyframes starScroll1 {
+      0% { background-position: 0 0; }
+      100% { background-position: 2000px 2000px; }
+    }
+
+    @keyframes starScroll2 {
+      0% { background-position: 0 0; }
+      100% { background-position: -1500px 2000px; }
+    }
+
+    .navbar-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 1000;
+    }
+
+    .navbar {
+      display: flex;
+      gap: 3rem;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.85);
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #fff;
+      text-shadow: 0 0 10px rgba(213, 54, 255, 0.6);
+    }
+
+    .orb {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(213,54,255,0.5), transparent 70%);
+      filter: blur(30px);
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+    }
+
+    .error-content {
+      position: relative;
+      z-index: 1;
+      margin-top: 10rem;
+    }
+
+    .error-content h1 {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+    }
+
+    .error-content p {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 2rem;
+    }
+
+    .error-content a {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      font-weight: 600;
+      font-size: 1rem;
+      background-color: rgba(213,54,255,0.9);
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 0 20px rgba(213,54,255,0.3);
+      transition: background 0.3s;
+    }
+
+    .error-content a:hover {
+      background-color: rgba(213,54,255,1);
+    }
+
+    footer {
+      margin-top: 5rem;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar-wrapper">
+    <nav class="navbar">
+      <a href="/">Home</a>
+      <a href="/Info/">How It Works</a>
+      <a href="/Contact/">Contact</a>
+    </nav>
+  </div>
+
+  <div class="orb"></div>
+
+  <div class="error-content">
+    <h1>404</h1>
+    <p>The page you're looking for doesn't exist.</p>
+    <a href="/">Return Home</a>
+  </div>
+
+  <footer>
+    &copy; 2025 The Index Cloud — Smart conversations made simple.
+  </footer>
+
+</body>
+</html>
