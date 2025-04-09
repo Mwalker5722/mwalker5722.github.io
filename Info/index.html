@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Index Cloud — How It Works</title>
 
-  <!-- Favicon and App Icons -->
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon/web-app-manifest-192x192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
@@ -20,7 +19,7 @@
 <meta property="og:image" content="https://theindexcloud.com/favicon/preview.png">
 <meta property="og:url" content="https://theindexcloud.com/Info/">
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -75,7 +74,6 @@
       z-index: 1000;
       background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .navbar {
@@ -96,20 +94,7 @@
       text-shadow: 0 0 10px rgba(213, 54, 255, 0.6);
     }
 
-    .main-title {
-      text-align: center;
-      font-size: 2.4rem;
-      font-weight: 600;
-      padding-top: 6.5rem;
-      color: rgba(255,255,255,0.95);
-      text-shadow: 0 0 18px rgba(213,54,255,0.4);
-    }
-
-    header.page-header {
-      text-align: center;
-      padding: 2rem 1rem;
-    }
-
+    /* Default Section Styles */
     .section {
       max-width: 1000px;
       margin: 3rem auto;
@@ -117,18 +102,91 @@
       text-align: center;
     }
 
+    /* Default H2 style (Applies to all sections including .product-overview) */
     .section h2 {
-      margin-bottom: 1rem;
-      font-size: 1.8rem;
-      text-shadow: 0 0 6px rgba(213,54,255,0.3);
+      margin-bottom: 1.5rem;
+      font-size: 1.9rem;
+      font-weight: 600;
+      text-shadow: 0 0 8px rgba(213,54,255,0.35);
+      color: #fff;
     }
 
+    /* Default Paragraph style (Applies to all sections including .product-overview) */
     .section p, .section ul {
       color: rgba(240,240,240,0.85);
       line-height: 1.7;
       margin-bottom: 1.5rem;
+      font-size: 1rem;
     }
 
+    /* Product Overview Section Specific Layout */
+    .product-overview {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: slideFadeIn 0.8s ease-out 0.2s forwards;
+        margin: 1rem auto 3rem auto; /* Keep margin adjustment */
+        padding: 5rem 1.5rem 1.5rem 1.5rem;
+        border-radius: 15px;
+        max-width: 1000px;
+        /* text-align: center; /* Inherited from .section */
+    }
+
+    /* Specific H2 rule for .product-overview removed - it now uses .section h2 */
+
+     /* Specific Intro paragraph rule simplified - relies on .section p now */
+     .product-overview .overview-intro {
+        max-width: 800px;
+        margin: 0 auto 2.5rem auto; /* Keep specific margin */
+        font-weight: 400; /* Keep specific weight if needed */
+        opacity: 0; /* Keep animation style */
+        animation: fadeIn 0.7s ease-out 0.8s forwards; /* Keep animation style */
+        /* font-size, color, line-height now inherited from .section p */
+    }
+
+    .overview-points {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 2rem;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .overview-point {
+        flex: 1;
+        min-width: 250px;
+        text-align: center;
+        opacity: 0;
+        transform: translateY(15px);
+        animation: slideFadeInPoint 0.7s ease-out forwards;
+    }
+
+    .overview-point:nth-child(1) { animation-delay: 1.0s; }
+    .overview-point:nth-child(2) { animation-delay: 1.2s; }
+    .overview-point:nth-child(3) { animation-delay: 1.4s; }
+
+    /* Specific rule for .overview-point h3 removed - combined below */
+
+    /* Specific rule for .overview-point p removed - relies on .section p */
+
+
+    @keyframes slideFadeIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    @keyframes fadeIn {
+         to { opacity: 1; }
+    }
+     @keyframes slideFadeInPoint {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Feature Grid Styles */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -151,17 +209,29 @@
       transform: translateY(0);
     }
 
-    .feature-card h3 {
+    /* Combined H3 style for Feature Cards AND Overview Points */
+    .feature-card h3,
+    .overview-point h3 {
       margin-bottom: 0.6rem;
       font-size: 1.3rem;
+      font-weight: 600;
+      color: #fff;
+      text-shadow: none;
     }
 
     footer {
       text-align: center;
       color: rgba(255,255,255,0.4);
-      padding: 2rem 1rem;
+      padding: 3rem 1rem 2rem 1rem;
       font-size: 0.8rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 4rem;
     }
+
+     .interest-container {
+        margin-bottom: 2rem !important;
+     }
+
   </style>
 </head>
 <body>
@@ -174,21 +244,27 @@
   </nav>
 </div>
 
-<div class="main-title">The Index Cloud</div>
+<section class="section product-overview">
+  <h2>Meet The Index Cloud</h2> <p class="overview-intro"> Go beyond basic chatbots. Deploy an AI conversationalist with lifelike fluency, designed to be an intelligent, integrated extension of your team.
+  </p>
 
-<header class="page-header">
-  <h1>Custom-trained, context-aware, and precision-tuned to scale human communication.</h1>
-</header>
+  <div class="overview-points">
+    <div class="overview-point">
+      <h3>Your Voice, Your Knowledge</h3> <p>Trained exclusively on your unique documents, workflows, and data, The Index learns your specific environment and communicates precisely in your brand's distinct tone and style. No generic scripts, only authentic interaction.</p> </div>
+    <div class="overview-point">
+      <h3>Seamless Memory & Context</h3> <p>It remembers. Across chat, voice, and email, The Index maintains context, providing fluid, intelligent continuity. Users experience one seamless conversation, not fragmented exchanges.</p> </div>
+    <div class="overview-point">
+      <h3>Rapid Deployment & Evolution</h3> <p>Get started in days, not months. The Index integrates effortlessly and continuously learns from every interaction, adapting in real-time to improve performance and insights without manual intervention.</p> </div>
+  </div>
+</section>
 
-<section class="section">
-  <h2>Step-by-Step</h2>
-  <div class="features-grid">
-    <div class="feature-card"><h3>1. We Learn</h3><p>We analyze your unique documents, logs, workflows, FAQs, and language patterns to build a deep model of your knowledge environment.</p></div>
-    <div class="feature-card"><h3>2. We Align</h3><p>Your tone, your style, your phrasing — The Index mirrors it with precision. No canned responses, only your voice at scale.</p></div>
+<section class="section"> <h2>Step-by-Step</h2> <div class="features-grid">
+    <div class="feature-card"><h3>1. We Learn</h3> <p>We analyze your unique documents, logs, workflows, FAQs, and language patterns to build a deep model of your knowledge environment.</p> </div>
+    <div class="feature-card"><h3>2. We Align</h3> <p>Your tone, your style, your phrasing — The Index mirrors it with precision. No canned responses, only your voice at scale.</p> </div>
     <div class="feature-card"><h3>3. We Integrate</h3><p>Web, mobile, APIs, phone trees — The Index plugs in wherever your users are, without friction or complex deployments.</p></div>
-    <div class="feature-card"><h3>4. We Safeguard</h3><p>Built-in fallbacks and escalation routes ensure that no user is left without resolution — even in edge cases.</p></div>
-    <div class="feature-card"><h3>5. You Deploy</h3><p>Launch with control — manage guardrails, escalation thresholds, memory depth, and more.</p></div>
-    <div class="feature-card"><h3>6. It Evolves</h3><p>Through feedback loops and live interactions, The Index learns and adapts to your business in real-time.</p></div>
+        <div class="feature-card"><h3>4. We Safeguard</h3><p>Built-in fallbacks and escalation routes ensure that no user is left without resolution — even in edge cases.</p></div>
+        <div class="feature-card"><h3>5. You Deploy</h3><p>Launch with control — manage guardrails, escalation thresholds, memory depth, and more.</p></div>
+        <div class="feature-card"><h3>6. It Evolves</h3><p>Through feedback loops and live interactions, The Index learns and adapts to your business in real-time.</p></div>
   </div>
 </section>
 
@@ -235,7 +311,7 @@
 </section>
 
 <footer>
-  <div class="interest-container" style="text-align:center; margin: 1rem 0;">
+  <div class="interest-container" style="text-align:center; margin: 1rem 0 2rem 0;">
   <h3 style="color: rgba(255,255,255,0.9); font-size: 1.4rem; margin-bottom: 1rem;">
     Interested in learning more?
   </h3>
@@ -248,8 +324,11 @@
     text-decoration: none;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(213,54,255,0.4);
-    transition: background 0.3s ease;
-  ">Let's Talk</a>
+    transition: background 0.3s ease, transform 0.2s ease;
+  "
+  onmouseover="this.style.transform='scale(1.05)'"
+  onmouseout="this.style.transform='scale(1)'"
+  >Let's Talk</a>
 </div>
 
   The Index Cloud — Smart conversations made simple.
