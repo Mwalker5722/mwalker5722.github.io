@@ -50,8 +50,9 @@
 
     /* STARFIELD BACKGROUND + PURPLE GLOW */
     body {
+      /* Changed 'ellipse' to 'circle' */
       background:
-        radial-gradient(ellipse at center, rgba(128,0,192,0.2), transparent 60%),
+        radial-gradient(circle at center, rgba(128,0,192,0.2), transparent 60%),
         #1b0231;
       position: relative;
     }
@@ -110,14 +111,16 @@
       padding: 0;
     }
 
-    /* ORB CONTAINER */
+     /* ORB CONTAINER */
     .orb-container {
       width: 160px;
       height: 160px;
-      position: relative;
+      position: relative; /* Already has relative position */
       z-index: 11;
       cursor: pointer;
 	  -webkit-tap-highlight-color: transparent;
+      animation: appear 0.8s ease-out both; /* Keep animation */
+      top: 5rem; /* <-- ADD THIS LINE */
     }
     .orb {
       width: 100%;
@@ -297,21 +300,18 @@
   }
 }
 
-.orb-nav {
-  margin-top: 1.5rem;
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  z-index: 10;
+/* --- ADDED STANDARD NAVBAR CSS --- */
+.navbar-wrapper {
+  position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 2rem;
+  display: flex; justify-content: center; z-index: 1000; /* High z-index */
+  background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(14px);
 }
-
-.orb-nav a {
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.7);
-  transition: color 0.3s ease, text-shadow 0.3s ease;
-}
+.navbar { display: flex; gap: 3rem; }
+.navbar a { text-decoration: none; font-weight: 600; font-size: 1rem; color: rgba(255, 255, 255, 0.85); transition: color 0.3s; position: relative; padding-bottom: 0.3rem; }
+.navbar a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background-color: rgba(213, 54, 255, 0.8); transform: scaleX(0); transform-origin: bottom right; transition: transform 0.3s ease-out; }
+.navbar a:hover { color: #fff; }
+.navbar a:hover::after { transform: scaleX(1); transform-origin: bottom left; }
+/* --- END STANDARD NAVBAR CSS --- */
 
 .orb-nav a:hover {
   color: #ffffff;
@@ -341,12 +341,40 @@
   animation-delay: 0.3s;
 }
 
-
+/* --- Orb Prompt Style (No Box, Navbar Font) --- */
+    .orb-prompt {
+      visibility: hidden; /* Use visibility for transition */
+      opacity: 0;
+      transform: translateY(10px); /* Start slightly lower */
+      margin-top: 6rem; /* Keep space below orb */
+      /* REMOVED background, border, padding, border-radius */
+      color: rgba(255, 255, 255, 0.85); /* Match navbar link color */
+      font-size: 1rem; /* Match navbar link font size */
+      font-weight: 600; /* Match navbar link font weight */
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Keep transition */
+      z-index: 12;
+      position: relative;
+      cursor: default;
+      display: inline-block; /* Allows transform/positioning */
+    }
+    /* Keep the .orb-prompt.visible rule as is */
+    .orb-prompt.visible {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0); /* Slide up */
+    }
+    /* --- End Orb Prompt Style --- */
   </style>
 </head>
 
 <body>
-
+<div class="navbar-wrapper">
+  <nav class="navbar">
+    <a href="/">The Index</a>
+    <a href="/Info/">What is it?</a>
+    <a href="/Contact/">Lets Talk</a>
+  </nav>
+</div>
 
   <!-- 2) Container for tsparticles -->
   <div id="particles-js"></div>
@@ -366,11 +394,7 @@
       <div class="orb idle" id="orb"></div>
     </div>
 
-    <div class="orb-nav">
-  <a href="/Info/">How It Works</a>
-  <a href="/Contact/">Contact</a>
-</div>
-
+<div id="orb-prompt" class="orb-prompt">Ready to talk? Click the orb.</div>
 
     <!-- Subtitles / AI Speech or status lines -->
     <div class="subtitle-container" id="subtitleContainer"></div>
@@ -504,6 +528,23 @@
         setTimeout(() => clickConvaiButton(buttonText, retries - 1, delay), delay);
       }
     }
+	
+	const orbPrompt = document.getElementById('orb-prompt'); // Prompt element reference
+let promptTimeout; // Variable to hold the timeout
+
+// Function to show the prompt
+function showOrbPrompt() {
+   // Only show if orb isn't already active
+   if (!orb.classList.contains('listening') && !orb.classList.contains('speaking')) {
+      orbPrompt.classList.add('visible');
+   }
+}
+
+// Function to hide the prompt
+function hideOrbPrompt() {
+    clearTimeout(promptTimeout); // Clear timeout if orb is clicked before 3s
+    orbPrompt.classList.remove('visible');
+}
   </script>
 
   <!-- Optional sound effects -->
@@ -512,7 +553,7 @@
 
   <!-- 4) Initialize tsparticles from the local script (repelling absorber) -->
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", () => {promptTimeout = setTimeout(showOrbPrompt, 3000);
     tsParticles.load("particles-js", {
       fullScreen: { enable: false, zIndex: 0 },
       fpsLimit: 60,
