@@ -120,7 +120,7 @@
       cursor: pointer;
 	  -webkit-tap-highlight-color: transparent;
       animation: appear 0.8s ease-out both; /* Keep animation */
-      top: 5rem; /* <-- ADD THIS LINE */
+      top: 4rem; /* <-- ADD THIS LINE */
     }
     .orb {
       width: 100%;
@@ -341,28 +341,28 @@
   animation-delay: 0.3s;
 }
 
-/* --- Orb Prompt Style (Using Transition + JS Timing Fix) --- */
+ /* --- Orb Prompt Style (Initial State for GSAP) --- */
     .orb-prompt {
       visibility: hidden; /* Start hidden */
-      opacity: 0;
-      transform: translateY(10px); /* Start lower */
-      margin-top: 6rem;
+      opacity: 0;         /* Start transparent */
+      transform: translateY(10px); /* Start slightly lower */
+      margin-top: 5rem;
       color: rgba(255, 255, 255, 0.85);
       font-size: 1rem;
       font-weight: 600;
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Define transition */
+      /* transition: ... REMOVED */
       z-index: 12;
       position: relative;
       cursor: default;
       display: inline-block;
+      /* will-change removed, GSAP handles optimization */
     }
-    .orb-prompt.visible {
-      /* Class now ONLY sets the final state for transitioned properties */
-      opacity: 1;
-      transform: translateY(0);
-    }
+    /* REMOVED .orb-prompt.visible rule */
     /* --- End Orb Prompt Style --- */
   </style>
+ 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
 </head>
 
 <body>
@@ -530,16 +530,19 @@
 	const orbPrompt = document.getElementById('orb-prompt'); // Prompt element reference
 let promptTimeout; // Variable to hold the timeout
 
-// UPDATED Function to show the prompt using JS timing fix
+// UPDATED Function to show the prompt using GSAP
     function showOrbPrompt() {
+       // Check if orb is already active
        if (!orb.classList.contains('listening') && !orb.classList.contains('speaking')) {
-          // Step 1: Make element visible BUT still transparent/transformed
+          // Make element visible right before animation starts
           orbPrompt.style.visibility = 'visible';
-
-          // Step 2: After a tiny delay, add the class that triggers the transition
-          setTimeout(() => {
-            orbPrompt.classList.add('visible');
-          }, 50); // 50ms delay
+          // Use GSAP to animate
+          gsap.to(orbPrompt, {
+              duration: 0.8, // Animation duration (seconds)
+              opacity: 1,    // Target opacity
+              y: 0,          // Target vertical position (GSAP alias for translateY(0))
+              ease: "easeOut" // Animation easing
+          });
        }
     }
 
