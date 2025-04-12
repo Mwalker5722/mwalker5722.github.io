@@ -341,27 +341,25 @@
   animation-delay: 0.3s;
 }
 
-/* --- Orb Prompt Style (No Box, Navbar Font) --- */
+/* --- Orb Prompt Style (Using Transition + JS Timing Fix) --- */
     .orb-prompt {
-      visibility: hidden; /* Use visibility for transition */
+      visibility: hidden; /* Start hidden */
       opacity: 0;
-      transform: translateY(10px); /* Start slightly lower */
-      margin-top: 6rem; /* Keep space below orb */
-      /* REMOVED background, border, padding, border-radius */
-      color: rgba(255, 255, 255, 0.85); /* Match navbar link color */
-      font-size: 1rem; /* Match navbar link font size */
-      font-weight: 600; /* Match navbar link font weight */
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Keep transition */
+      transform: translateY(10px); /* Start lower */
+      margin-top: 6rem;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 1rem;
+      font-weight: 600;
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Define transition */
       z-index: 12;
       position: relative;
       cursor: default;
-      display: inline-block; /* Allows transform/positioning */
+      display: inline-block;
     }
-    /* Keep the .orb-prompt.visible rule as is */
     .orb-prompt.visible {
-      visibility: visible;
+      /* Class now ONLY sets the final state for transitioned properties */
       opacity: 1;
-      transform: translateY(0); /* Slide up */
+      transform: translateY(0);
     }
     /* --- End Orb Prompt Style --- */
   </style>
@@ -532,13 +530,18 @@
 	const orbPrompt = document.getElementById('orb-prompt'); // Prompt element reference
 let promptTimeout; // Variable to hold the timeout
 
-// Function to show the prompt
-function showOrbPrompt() {
-   // Only show if orb isn't already active
-   if (!orb.classList.contains('listening') && !orb.classList.contains('speaking')) {
-      orbPrompt.classList.add('visible');
-   }
-}
+// UPDATED Function to show the prompt using JS timing fix
+    function showOrbPrompt() {
+       if (!orb.classList.contains('listening') && !orb.classList.contains('speaking')) {
+          // Step 1: Make element visible BUT still transparent/transformed
+          orbPrompt.style.visibility = 'visible';
+
+          // Step 2: After a tiny delay, add the class that triggers the transition
+          setTimeout(() => {
+            orbPrompt.classList.add('visible');
+          }, 50); // 50ms delay
+       }
+    }
 
 // Function to hide the prompt
 function hideOrbPrompt() {
