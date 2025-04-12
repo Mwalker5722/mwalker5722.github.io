@@ -28,15 +28,19 @@
       background: radial-gradient(ellipse at center, rgba(128,0,192,0.2), transparent 60%), #1b0231;
       overflow-x: hidden;
       position: relative;
+      overflow-y: auto; /* Ensure scrolling is enabled */
+      height: auto;
+      min-height: 100%;
     }
 
     body::before, body::after {
       content: "";
-      position: absolute;
+      position: absolute; /* Keep absolute for scroll */
       top: 0; left: 0; right: 0; bottom: 0;
       pointer-events: none;
       background-repeat: repeat;
-      z-index: 0;
+      z-index: -1; /* Adjusted z-index */
+      min-height: 100vh; /* Ensure coverage */
     }
 
     body::before {
@@ -75,13 +79,14 @@
     .section p, .section ul { color: rgba(240,240,240,0.85); line-height: 1.7; margin-bottom: 1.5rem; font-size: 1rem; }
 
     /* Product Overview Section Layout */
-    .product-overview { opacity: 0; transform: translateY(20px); animation: slideFadeIn 0.8s ease-out 0.2s forwards; margin: 0rem auto 3rem auto; padding: 5.5rem 1.5rem 1rem 1.5rem; max-width: 1000px; text-align: center; } /* Using user's preferred padding/margin from prompt #40 */
+    .product-overview { opacity: 0; transform: translateY(20px); animation: slideFadeIn 0.8s ease-out 0.2s forwards; margin: 0rem auto 3rem auto; padding: 5.5rem 1.5rem 1rem 1.5rem; max-width: 1000px; text-align: center; }
     .product-overview .overview-intro { max-width: 800px; margin: 0 auto 2.5rem auto; font-weight: 400; opacity: 0; animation: fadeIn 0.7s ease-out 0.8s forwards; }
-    .overview-points { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 3rem; max-width: 1000px; margin: 0 auto; text-align: center; }
-    .overview-point { flex: 1; min-width: 270px; opacity: 0; transform: translateY(15px); animation: slideFadeInPoint 0.7s ease-out forwards; }
+    .overview-points { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 1000px; margin: 0 auto; text-align: left; } /* Mobile grid */
+    .overview-point { text-align: left; opacity: 0; transform: translateY(15px); animation: slideFadeInPoint 0.7s ease-out forwards; } /* Mobile align left */
     .overview-point:nth-child(1) { animation-delay: 1.0s; }
     .overview-point:nth-child(2) { animation-delay: 1.2s; }
     .overview-point:nth-child(3) { animation-delay: 1.4s; }
+    @media (min-width: 768px) { .overview-points { grid-template-columns: repeat(3, 1fr); gap: 3rem; } } /* Desktop grid */
     .overview-point h3 { margin-bottom: 0.8rem; font-size: 1.4rem; font-weight: 700; color: #fff; text-shadow: none; }
     @keyframes slideFadeIn { to { opacity: 1; transform: translateY(0); } }
     @keyframes fadeIn { to { opacity: 1; } }
@@ -101,14 +106,12 @@
 
     /* Style for Section 2: "What Makes It Different" (RESPONSIVE) */
     #section-different h2 { margin-bottom: 2rem; }
-    /* Mobile-first: Single Column */
-    #section-different .features-grid { display: block; max-width: 600px; margin: 2rem auto 0 auto; margin-top: 0; }
+    #section-different .features-grid { display: block; max-width: 600px; margin: 2rem auto 0 auto; margin-top: 0; } /* Mobile */
     #section-different .feature-card { background: none; border: none; box-shadow: none; padding: 1rem 0 1rem 1.5rem; text-align: left; border-left: 2px solid rgba(213, 54, 255, 0.4); border-radius: 0; position: relative; margin-bottom: 2rem; }
     #section-different .feature-card:last-child { margin-bottom: 0; }
     #section-different .feature-card h3 { margin-bottom: 0.4rem; }
     #section-different .feature-card p { margin-bottom: 0; }
-    /* Desktop: Two Columns */
-    @media (min-width: 768px) {
+    @media (min-width: 768px) { /* Desktop */
         #section-different .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem 3rem; max-width: none; }
         #section-different .feature-card { margin-bottom: 0; padding: 0.5rem 0 0.5rem 1.5rem; }
     }
@@ -144,44 +147,55 @@
 
 <section class="section product-overview">
   <h2>Meet The Index Cloud</h2>
-  <p class="overview-intro"> Scale consistent, on-brand conversations effortlessly. The Index Cloud deploys an intelligent system trained *exclusively* on your business knowledge and communication style, ready to engage customers with accuracy and understanding across any channel.</p>
+  <p class="overview-intro">
+    Scale your brand's voice effortlessly. The Index Cloud uses a system trained on your specific business knowledge to handle customer conversations with accuracy, consistency, and human-like understanding. It handles routine inquiries efficiently and can even automate common tasks like starting returns.
+  </p>
   <div class="overview-points">
-    <div class="overview-point"> <h3>Your Voice, Your Knowledge</h3> <p>Trained exclusively on your unique documents, workflows, and data, The Index learns your specific environment and communicates precisely in your brand's distinct tone and style. No generic scripts, only authentic interaction.</p> </div>
-    <div class="overview-point"> <h3>Seamless Memory & Context</h3> <p>It remembers. Across chat, voice, and email, The Index maintains context, providing fluid, intelligent continuity. Users experience one seamless conversation, not fragmented exchanges.</p> </div>
-    <div class="overview-point"> <h3>Rapid Deployment & Evolution</h3> <p>Get started in days, not months. The Index integrates effortlessly and continuously learns from every interaction, adapting in real-time to improve performance and insights without manual intervention.</p> </div>
+     <div class="overview-point">
+      <h3>Authentic Brand Voice</h3>
+      <p>We train the system to perfectly mimic your brand's unique communication style. It uses your specific phrasing and tone, ensuring every customer interaction sounds exactly like it comes from you, maintaining brand integrity.</p>
+    </div>
+     <div class="overview-point">
+       <h3>Always-On Availability</h3>
+       <p>Responds instantly with helpful, on-brand answers 24/7. This greatly reduces wait times for common questions and frees your valuable team members to focus their expertise on more complex issues where they add the most value.</p>
+    </div>
+    <div class="overview-point">
+      <h3>Automates Routine Tasks</h3>
+       <p>Beyond conversation, it handles common workflows directly based on your rules. Configure it to initiate support tickets, start return processes, or schedule follow-ups, freeing up your team while providing efficient customer resolution.</p>
+     </div>
   </div>
 </section>
 
 <section class="section"> <h2>Step-by-Step</h2>
   <div class="features-grid">
-    <div class="feature-card"><h3>1. We Learn</h3> <p>We analyze your unique documents, logs, workflows, FAQs, and language patterns to build a deep model of your knowledge environment.</p> </div>
-    <div class="feature-card"><h3>2. We Align</h3> <p>Your tone, your style, your phrasing — The Index mirrors it with precision. No canned responses, only your voice at scale.</p> </div>
-    <div class="feature-card"><h3>3. We Integrate</h3><p>Web, mobile, APIs, phone trees — The Index plugs in wherever your users are, without friction or complex deployments.</p></div>
-    <div class="feature-card"><h3>4. We Safeguard</h3><p>Built-in fallbacks and escalation routes ensure that no user is left without resolution — even in edge cases.</p></div>
-    <div class="feature-card"><h3>5. You Deploy</h3><p>Launch with control — manage guardrails, escalation thresholds, memory depth, and more.</p></div>
-    <div class="feature-card"><h3>6. It Evolves</h3><p>Through feedback loops and live interactions, The Index learns and adapts to your business in real-time.</p></div>
+    <div class="feature-card"><h3>1. We Learn</h3> <p>We thoroughly study your specific business information – support answers, documents, procedures – to build a deep understanding of how you operate and communicate with customers. This detailed understanding forms the core of its knowledge.</p> </div>
+    <div class="feature-card"><h3>2. We Align</h3> <p>We meticulously match the system's responses to your exact brand voice and style. We work with you to fine-tune communication, ensuring it meets your standards before launch, guaranteeing consistent and appropriate communication.</p> </div>
+    <div class="feature-card"><h3>3. We Integrate</h3><p>It works smoothly within your existing website, apps, or phone systems. We handle the setup for a seamless fit and easy integration, minimizing the technical work required on your end.</p></div>
+    <div class="feature-card"><h3>4. We Safeguard</h3><p>Smart safeguards ensure tricky or sensitive questions go directly to your human team based on your rules. This prevents dead-ends and ensures appropriate handling of complex issues.</p></div>
+    <div class="feature-card"><h3>5. You Control</h3><p>You have full oversight and control. Define safety boundaries, determine the system's knowledge scope, and specify exactly when human assistance is needed for specific queries.</p></div>
+    <div class="feature-card"><h3>6. It Evolves</h3><p>It gets smarter by analyzing general *anonymized* interaction patterns and feedback. This helps it adapt to new customer questions and identify emerging trends or potential knowledge gaps.</p></div>
   </div>
 </section>
 
 <section class="section" id="section-different"> <h2>What Makes It Different</h2>
   <div class="features-grid">
-    <div class="feature-card"><h3>Conversational Precision</h3><p>It doesn’t just understand language — it understands your brand’s way of speaking and applies that everywhere.</p></div>
-    <div class="feature-card"><h3>Multi-Channel Intelligence</h3><p>The Index remembers. Across chat, calls, and emails — it knows what happened before, and it uses that to respond better.</p></div>
-    <div class="feature-card"><h3>Failproof by Design</h3><p>Fallbacks route to human support or alternate flows before any conversation goes stale or off-track.</p></div>
-    <div class="feature-card"><h3>Infrastructure-Ready</h3><p>Modular and API-driven. Works inside enterprise systems or startup stacks. It’s built to slide in, not bolt on.</p></div>
-    <div class="feature-card"><h3>Fast to Train</h3><p>Days, not months. The Index is trained on your materials and deployed rapidly — with minimal manual setup.</p></div>
-    <div class="feature-card"><h3>Realtime Adaptation</h3><p>Feedback is learning. The Index constantly improves from performance analytics and real-world queries.</p></div>
+    <div class="feature-card"><h3>Speaks Your Business Fluently</h3><p>Because it learns directly from your own company knowledge and examples, it uses the correct terminology and understands context specific to your operations, providing more relevant and helpful responses than generic systems.</p></div>
+    <div class="feature-card"><h3>Scales Effortlessly</h3> <p>Handles any volume of customer conversations simultaneously without delays or dips in quality, easily growing with your business demands.</p></div>
+    <div class="feature-card"><h3>Failproof by Design</h3><p>Engineered to always provide a helpful outcome. If it encounters something outside its scope or confidence level, it follows pre-set rules to escalate to your team or offer alternative support, never leaving a customer hanging.</p></div>
+    <div class="feature-card"><h3>Automates Tasks & Workflows</h3><p>Goes beyond just answering questions. Based on the conversation and your business rules, it can initiate processes like starting a return, booking appointments, or creating support tickets directly within the dialogue, streamlining workflows for both customers and your team.</p></div>
+    <div class="feature-card"><h3>Custom-Built for You</h3><p>Unlike off-the-shelf solutions, The Index Cloud is built and configured specifically for your business needs, knowledge base, and brand personality from the start.</p></div>
+    <div class="feature-card"><h3>Realtime Adaptation</h3><p>It identifies trends in customer queries and interaction patterns, providing valuable operational insights while continuously refining its general understanding.</p></div>
   </div>
 </section>
 
 <section class="section" id="section-failproof"> <h2>Why It Won’t Fail</h2>
   <div class="features-grid">
-    <div class="feature-card"> <h3>Resilient Architecture</h3> <p>The Index is designed with redundancy and modularity. If one module fails, others continue — keeping your user experience uninterrupted.</p> </div>
-    <div class="feature-card"> <h3>Fallback Systems</h3> <p>When confidence is low or unexpected inputs occur, the system gracefully hands off to live agents or reroutes to trusted fallback flows.</p> </div>
-    <div class="feature-card"> <h3>Real-Time Monitoring</h3> <p>Integrated diagnostics and analytics help us detect problems before users do — enabling instant alerts and fast recovery.</p> </div>
-    <div class="feature-card"> <h3>Scoped Knowledge Domains</h3> <p>Customizable guardrails keep The Index within safe conversational boundaries, preventing hallucinations and off-brand responses.</p> </div>
-    <div class="feature-card"> <h3>Self-Healing Logic</h3> <p>Continuous learning loops mean the system adapts to gaps in coverage, improving itself dynamically over time.</p> </div>
-    <div class="feature-card"> <h3>Human Override</h3> <p>Admins have the power to intervene, escalate, and adjust on the fly — ensuring the system is never a black box you can’t control.</p> </div>
+    <div class="feature-card"> <h3>Reliable Technology</h3> <p>Built with robust infrastructure and backup systems, it keeps working smoothly even if background technical issues occur, ensuring high availability for your customers.</p> </div>
+    <div class="feature-card"> <h3>Knows When to Ask for Help</h3> <p>It clearly understands the boundaries of its knowledge and programmed confidence levels, ensuring it smoothly passes conversations to your team when human expertise is required.</p> </div>
+    <div class="feature-card"> <h3>Constant Monitoring</h3> <p>Our team watches performance closely, using integrated diagnostics to catch potential issues proactively, often before they affect users, and ensure optimal function.</p> </div>
+    <div class="feature-card"> <h3>Stays On Topic</h3> <p>You define precisely what information the system can access and discuss. This prevents irrelevant or inappropriate responses, keeping conversations helpful and protecting your brand reputation.</p> </div>
+    <div class="feature-card"> <h3>Adapts to New Questions</h3> <p>Doesn't just rely on static scripts. By learning from general interaction patterns, it improves its ability to handle new situations and evolving customer questions over time.</p> </div>
+    <div class="feature-card"> <h3>You're Always in Control</h3> <p>Provides clear dashboards and tools allowing your team to easily oversee performance, review interaction types, make adjustments to knowledge or rules, and step in anytime.</p> </div>
   </div>
 </section>
 
