@@ -6,8 +6,7 @@
   <title>Contact — The Index Cloud</title>
   <meta name="description" content="Contact The Index Cloud — Smart conversations made simple.">
 
-  <!-- Favicon and App Icons -->
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon/web-app-manifest-192x192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
@@ -23,7 +22,6 @@
 <meta name="twitter:card" content="summary_large_image">
 
   
-  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
@@ -33,17 +31,17 @@
       font-family: 'Inter', sans-serif;
       background: radial-gradient(ellipse at center, rgba(128,0,192,0.2), transparent 60%), #1b0231;
       color: #fff;
-      height: 100%;
-      overflow: hidden;
+      height: 100%; /* Keep original */
+      overflow: hidden; /* Keep original */
       position: relative;
     }
 
     body::before, body::after {
       content: "";
-      position: fixed;
+      position: absolute; /* Keep original */
       top: 0; left: 0; right: 0; bottom: 0;
       pointer-events: none;
-      z-index: 0;
+      z-index: 0; /* Keep original */
     }
 
     body::before {
@@ -74,7 +72,7 @@
       justify-content: center;
       background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      /* border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Original border - Keep or remove as desired */
       z-index: 999;
     }
 
@@ -83,26 +81,50 @@
       gap: 3rem;
     }
 
+    /* MODIFIED Navbar Link Style */
     .navbar a {
       text-decoration: none;
       font-weight: 600;
       font-size: 1rem;
       color: rgba(255, 255, 255, 0.85);
-      transition: color 0.3s, text-shadow 0.3s;
+      transition: color 0.3s; /* Removed text-shadow transition */
+      position: relative; /* ADDED for pseudo-element */
+      padding-bottom: 0.3rem; /* ADDED space for underline */
     }
 
+    /* MODIFIED Hover Style */
     .navbar a:hover {
       color: #fff;
-      text-shadow: 0 0 10px rgba(213, 54, 255, 0.6);
+      /* text-shadow: 0 0 10px rgba(213, 54, 255, 0.6); */ /* REMOVED Shadow */
     }
+
+    /* --- ADDED CSS FOR UNDERLINE --- */
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: rgba(213, 54, 255, 0.8); /* Purple accent color */
+      transform: scaleX(0); /* Start hidden */
+      transform-origin: bottom right;
+      transition: transform 0.3s ease-out;
+    }
+    .navbar a:hover::after {
+      transform: scaleX(1); /* Expand underline */
+      transform-origin: bottom left;
+    }
+    /* --- END ADDED CSS FOR UNDERLINE --- */
+
 
     /* ✅ FORM */
     .demo-form-container {
-      position: absolute;
-      top: 54%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.88);
-      animation: fadeInUpZoom 1s ease-out both;
+      position: absolute; /* Keep original */
+      top: 54%; /* Keep original */
+      left: 50%; /* Keep original */
+      transform: translate(-50%, -50%) scale(0.88); /* Keep original */
+      animation: fadeInUpZoom 1s ease-out both; /* Keep original */
       background: rgba(0, 0, 0, 0.5);
       box-shadow: 0 0 40px rgba(213,54,255,0.2);
       border-radius: 20px;
@@ -113,15 +135,9 @@
       z-index: 100;
     }
 
-    @keyframes fadeInUpZoom {
-      0% {
-        opacity: 0;
-        transform: translate(-50%, -40%) scale(0.85);
-      }
-      100% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(0.88);
-      }
+    @keyframes fadeInUpZoom { /* Keep original */
+      0% { opacity: 0; transform: translate(-50%, -40%) scale(0.85); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(0.88); }
     }
 
     h1 {
@@ -139,6 +155,7 @@
       margin-bottom: 1rem;
       color: rgba(255,255,255,0.5);
       font-style: italic;
+      font-size: 0.85rem; /* Added back size if needed */
     }
 
     form input, form textarea, form button {
@@ -149,6 +166,7 @@
       border: none;
       font-size: 0.9rem;
       outline: none;
+      font-family: inherit; /* Added font inherit */
     }
 
     form input, form textarea {
@@ -157,7 +175,7 @@
       color: #fff;
     }
 
-    textarea { resize: none; }
+    textarea { resize: none; } /* Keep original */
 
     form input:focus, form textarea:focus {
       border-color: rgba(213,54,255,0.45);
@@ -168,11 +186,13 @@
       background: linear-gradient(90deg, rgba(213,54,255,0.85), rgba(128,0,192,0.85));
       color: #fff;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background 0.3s ease, transform 0.2s ease; /* Added ease to background */
+      font-weight: 600; /* Added weight */
     }
 
     form button:hover {
       background: linear-gradient(90deg, rgba(128,0,192,0.95), rgba(213,54,255,0.95));
+      transform: scale(1.02); /* Adjusted scale */
     }
 
     #formMessage {
@@ -187,7 +207,7 @@
       box-shadow: 0 0 10px rgba(0, 255, 150, 0.2);
     }
 
-    .footer {
+    .footer { /* Keep original */
       margin-top: 0.8rem;
       font-size: 0.65rem;
       color: rgba(255,255,255,0.4);
@@ -198,7 +218,6 @@
 </head>
 <body>
 
-<!-- ✅ Navbar -->
 <div class="navbar-wrapper">
   <nav class="navbar">
     <a href="/">The Index</a>
@@ -207,67 +226,66 @@
   </nav>
 </div>
 
-<!-- ✅ Form -->
 <div class="demo-form-container">
   <h1>Let's Talk!</h1>
   <p class="subtext">Discover how The Index Cloud can help your business communicate smarter, 24/7.</p>
   <p class="optional-note">All fields are optional — just share what you’d like!</p>
 
   <form id="contactForm">
-    <!-- Hidden config fields -->
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_subject" value="New Inquiry via The Index Cloud">
     <input type="hidden" name="_template" value="box">
-
-    <!-- Visible fields -->
     <input type="text" name="name" placeholder="Your Name">
     <input type="email" name="email" placeholder="Your Email">
     <input type="text" name="company" placeholder="Company Name">
     <input type="text" name="website" placeholder="Company Website">
     <textarea name="message" rows="3" placeholder="What’s your business all about?"></textarea>
-
     <button type="submit">Send</button>
   </form>
 
-  <!-- Message will replace the footer -->
-  <div id="formMessage">Your message has been sent. We’ll be in touch soon.</div>
-
+  <div id="formMessage" style="display: none;"></div>
   <div class="footer" id="formFooter">Powered by The Index Cloud — Smart conversations made simple.</div>
 </div>
 
-<!-- ✅ JS: FormSubmit AJAX handling -->
 <script>
   const form = document.getElementById("contactForm");
   const messageBox = document.getElementById("formMessage");
-  const footer = document.getElementById("formFooter");
+  const footer = document.getElementById("formFooter"); // Get the original footer
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     const formData = new FormData(form);
+    const button = form.querySelector("button");
+    button.textContent = "Sending...";
+    button.disabled = true;
+
 
     fetch("https://formsubmit.co/ajax/support@theindexcloud.com", {
       method: "POST",
       headers: { 'Accept': 'application/json' },
       body: formData
-    }).then(response => {
-      if (response.ok) {
-        form.reset();
-        footer.replaceWith(messageBox);
+    }).then(response => response.json())
+    .then(data => {
+        console.log(data);
+        form.reset(); // Reset form fields
+        form.style.display = "none"; // Hide form
         messageBox.textContent = "Your message has been sent. We’ll be in touch soon.";
+        messageBox.style.backgroundColor = "rgba(0, 255, 150, 0.15)";
+        messageBox.style.borderColor = "rgba(0, 255, 150, 0.4)";
+        messageBox.style.color = "#b3ffec";
         messageBox.style.display = "block";
-      } else {
-        footer.replaceWith(messageBox);
+        if (footer) footer.style.display = "none";
+    })
+    .catch(error => {
+        console.error(error);
+        button.textContent = "Send"; // Reset button on error
+        button.disabled = false;
         messageBox.textContent = "Something went wrong. Please try again.";
         messageBox.style.backgroundColor = "rgba(255, 80, 80, 0.15)";
         messageBox.style.borderColor = "rgba(255, 80, 80, 0.4)";
+        messageBox.style.color = "#ff9f9f";
         messageBox.style.display = "block";
-      }
-    }).catch(() => {
-      footer.replaceWith(messageBox);
-      messageBox.textContent = "Submission failed. Please check your internet connection.";
-      messageBox.style.backgroundColor = "rgba(255, 80, 80, 0.15)";
-      messageBox.style.borderColor = "rgba(255, 80, 80, 0.4)";
-      messageBox.style.display = "block";
+        if (footer) footer.style.display = "none";
     });
   });
 </script>
