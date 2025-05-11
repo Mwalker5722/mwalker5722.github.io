@@ -417,26 +417,6 @@
 
     let currentMode = 'Talk';
 
-    function playActivationSound() {
-      const sound = document.getElementById('activationSound');
-      if (sound) {
-        sound.currentTime = 0;
-        sound.play().catch((err) => {
-          console.warn('Activation sound blocked by autoplay policy:', err);
-        });
-      }
-    }
-
-    function playDeactivationSound() {
-      const sound = document.getElementById('deactivationSound');
-      if (sound) {
-        sound.currentTime = 0;
-        sound.play().catch((err) => {
-          console.warn('Deactivation sound blocked by autoplay policy:', err);
-        });
-      }
-    }
-
     function updateOrbStatus(status) {
       orb.classList.remove('idle', 'listening', 'speaking');
       orb.classList.add(status);
