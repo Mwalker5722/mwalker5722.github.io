@@ -316,6 +316,49 @@
   pointer-events: none;
 }
 
+/* === CSS FOR THE GRANT LOGOS (DESKTOP DEFAULTS) === */
+
+        /* Fixed Bottom-Left Badge for Desktop */
+        #elevenlabs-grant-badge-desktop {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            line-height: 0;
+            display: block; /* Visible on desktop by default */
+        }
+
+        #elevenlabs-grant-badge-desktop .grant-logo-desktop {
+            width: 140px; /* Adjust desktop size for the TALL logo if needed */
+            height: auto;
+            display: block;
+            opacity: 0.9;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        #elevenlabs-grant-badge-desktop:hover .grant-logo-desktop {
+            opacity: 1;
+            transform: scale(1.03);
+        }
+
+        /* Main Footer Logo (Mobile Version) - HIDDEN on Desktop */
+        #elevenlabs-grant-link-mobile {
+            display: none; /* Hide this link and its image on desktop */
+            margin-top: 0.75rem; /* Will apply when visible on mobile */
+            text-align: center; /* Helps center the inline-block image below */
+        }
+
+        .grant-logo-mobile { /* Styling for the LONG HORIZONTAL logo, primarily for when it's visible on mobile */
+            display: inline-block; 
+            height: auto;
+            opacity: 0.9;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        #elevenlabs-grant-link-mobile:hover .grant-logo-mobile { /* Hover for the mobile logo */
+            opacity: 1;
+            transform: scale(1.03);
+        }
+
 @media (max-width: 600px) {
   .orb-container {
     width: 120px;
@@ -338,21 +381,27 @@
     top: 0.3rem;
     left: 0.6rem;
   }
-    #elevenlabs-grant-badge {
-        bottom: 10px; /* Moves the corner logo a bit closer to the bottom edge */
-        left: 10px;   /* Moves the corner logo a bit closer to the left edge */
-    }
+    #elevenlabs-grant-badge-desktop {
+                display: none;
+            }
 
-    #elevenlabs-grant-badge img {
-        width: 90px;  /* Makes the corner logo image smaller */
-    }
+            /* Show and Style the Main Footer Logo (Mobile Version) */
+            #elevenlabs-grant-link-mobile {
+                display: block; /* Make the link (and thus image) visible */
+            }
 
-    .footer {
-        font-size: 0.7rem;     /* Makes your main footer text smaller */
-        padding-left: 15px;    /* Adds some space on the left side of the footer text */
-        padding-right: 15px;   /* Adds some space on the right side of the footer text */
-        padding-bottom: 10px;  /* Ensures the original footer logo has space from bottom */
-    }
+            .grant-logo-mobile { /* This is the LONG HORIZONTAL logo for mobile */
+                /* display: inline-block; is inherited from above and fine */
+                width: 100%;     /* Makes it responsive within the padded footer */
+                max-width: 180px;  /* Adjust size for the long logo on mobile (e.g., 160px, 180px, 200px) */
+                /* height, opacity, transition are inherited from general .grant-logo-mobile styles */
+            }
+
+            /* Adjust main .footer padding and font for mobile */
+            .footer { /* This modifies your .footer specifically for mobile */
+                font-size: 0.7rem; 
+                padding: 1rem 15px 20px 15px; /* Mobile footer padding (top, Left/Right, bottom) */
+            }
 }
 
 
@@ -416,28 +465,6 @@
     }
     /* REMOVED .orb-prompt.visible rule */
     /* --- End Orb Prompt Style --- */
-
-	#elevenlabs-grant-badge {
-    position: fixed;
-    bottom: 15px; /* Example: Smaller spacing */
-    left: 15px;   /* Example: Smaller spacing */
-    z-index: 1000;
-    line-height: 0;
-}
-	  
-#elevenlabs-grant-badge img {
-    width: 160px;   /* Adjust width as needed. 120px-150px is often good for a corner badge. */
-    height: auto;   /* Maintain aspect ratio */
-    display: block; /* Removes extra space below the image if its parent is inline */
-    opacity: 0.9;   /* Slightly transparent to be less intrusive, full opacity on hover */
-                    /* Since it's an all-white logo on a dark background, brightness filter is likely not needed */
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-#elevenlabs-grant-badge:hover img {
-    opacity: 1;             /* Fully opaque on hover */
-    transform: scale(1.03); /* A very subtle zoom effect on hover */
-}
   </style>
  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -479,8 +506,12 @@
   </div>
 
   <!-- Footer -->
-  <div class="footer">
+ <div class="footer">
     <p class="footer-branding-text"> Powered by <a href="#">The Index Cloud</a> — Smart conversations made simple.
+    </p>
+    <a href="https://elevenlabs.io/text-to-speech" id="elevenlabs-grant-link-mobile" target="_blank" rel="noopener noreferrer" title="Text to Speech by ElevenLabs - Grants Program">
+        <img src="long_footer_logo.png" alt="ElevenLabs Grants Program (Mobile)" class="grant-logo-mobile">
+    </a>
 </div>
 
 
@@ -653,10 +684,10 @@ function hideOrbPrompt() {
   });
   </script>
 
-<div id="elevenlabs-grant-badge">
-    <a href="https://elevenlabs.io/text-to-speech" target="_blank" rel="noopener noreferrer" title="Text to Speech by ElevenLabs">
-        <img src="elevenlabsgrant.png" alt="Powered by ElevenLabs Grants">
-    </a>
-</div>
+<div id="elevenlabs-grant-badge-desktop">
+        <a href="https://elevenlabs.io/text-to-speech" target="_blank" rel="noopener noreferrer" title="Text to Speech by ElevenLabs">
+            <img src="tall_badge_logo.png" alt="Powered by ElevenLabs Grants (Desktop)" class="grant-logo-desktop">
+        </a>
+    </div>
 </body>
 </html>
