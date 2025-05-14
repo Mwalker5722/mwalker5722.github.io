@@ -246,17 +246,31 @@
 }
 
 #elevenlabs-grant-link img {
-    width: 180px; /* REDUCED SIZE - adjust as needed */
-    height: auto; /* Maintain aspect ratio */
-    display: block; /* Removes extra space if the link is inline-block */
-    opacity: 0.7; /* Make it slightly less prominent by default */
-    transition: opacity 0.3s ease, transform 0.3s ease; /* For hover effects */
+    width: 180px; /* Or your preferred size */
+    height: auto;
+    display: block;
+    opacity: 1; /* Keep it fully opaque */
+
+    /* --- Experiment with hue-rotate and brightness --- */
+    filter: brightness(1.1) hue-rotate(0deg); /* Start with 0deg (no hue change) */
+    /*
+        EXAMPLES TO TRY FOR hue-rotate:
+        filter: brightness(1.1) hue-rotate(90deg);
+        filter: brightness(1.1) hue-rotate(180deg);
+        filter: brightness(1.1) hue-rotate(-45deg); /* Negative values work too */
+        filter: brightness(1.1) hue-rotate(270deg);
+    */
+
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 #elevenlabs-grant-link:hover img {
-    opacity: 1; /* Full opacity on hover */
-    transform: scale(1.05); /* Subtle zoom effect on hover */
+    transform: scale(1.05);
+    filter: brightness(1.15) hue-rotate(0deg); /* Adjust hover hue if desired, or keep it the same */
+    /* Example: Slightly different hue on hover */
+    /* filter: brightness(1.15) hue-rotate(15deg); */
 }
+
 
 	
 	/* Speaking pulse */
