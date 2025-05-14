@@ -399,6 +399,28 @@
     }
     /* REMOVED .orb-prompt.visible rule */
     /* --- End Orb Prompt Style --- */
+
+	#elevenlabs-grant-badge {
+    position: fixed; /* Keeps it in place during scroll */
+    bottom: 20px;    /* Distance from the bottom of the viewport */
+    left: 20px;      /* Distance from the left of the viewport */
+    z-index: 1000;   /* Ensures it's above most other content. Adjust if necessary. */
+    line-height: 0;  /* Helps remove any extra vertical space if the 'a' tag has line-height */
+}
+
+#elevenlabs-grant-badge img {
+    width: 130px;   /* Adjust width as needed. 120px-150px is often good for a corner badge. */
+    height: auto;   /* Maintain aspect ratio */
+    display: block; /* Removes extra space below the image if its parent is inline */
+    opacity: 0.9;   /* Slightly transparent to be less intrusive, full opacity on hover */
+                    /* Since it's an all-white logo on a dark background, brightness filter is likely not needed */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#elevenlabs-grant-badge:hover img {
+    opacity: 1;             /* Fully opaque on hover */
+    transform: scale(1.03); /* A very subtle zoom effect on hover */
+}
   </style>
  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -617,5 +639,11 @@ function hideOrbPrompt() {
     }).then(() => console.log("Particles Loaded"));
   });
   </script>
+
+<div id="elevenlabs-grant-badge">
+    <a href="https://elevenlabs.io/text-to-speech" target="_blank" rel="noopener noreferrer" title="Text to Speech by ElevenLabs">
+        <img src="elevenlabsgrant.png" alt="Powered by ElevenLabs Grants">
+    </a>
+</div>
 </body>
 </html>
