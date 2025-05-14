@@ -215,22 +215,48 @@
 
     /* FOOTER */
     .footer {
-      text-align: center;
-      font-size: 0.8rem;
-      padding: 0.5rem;
-      color: rgba(255,255,255,0.5);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      z-index: 10;
-    }
-    .footer a {
-      color: rgba(255,255,255,0.6);
-      text-decoration: none;
-    }
-    .footer a:hover {
-      color: rgba(255,255,255,0.9);
-    }
+    display: flex; /* Use flexbox for better alignment */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    text-align: center;
+    font-size: 0.75rem; /* Slightly reduce font size for footer */
+    padding: 1.5rem 1rem 2rem; /* Increase padding, especially top/bottom */
+    color: rgba(255, 255, 255, 0.6); /* Slightly increase default text opacity */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 10;
+    border-top: 1px solid rgba(255, 255, 255, 0.15); /* Add a subtle separator line */
+    /* Optional: subtle background to define footer area more */
+    /* background: rgba(27, 2, 49, 0.2); */
+    /* backdrop-filter: blur(5px); */
+}
 
+.footer-branding-text {
+    margin-bottom: 0.75rem; /* Space between your text and the logo */
+}
+
+.footer-branding-text a { /* Styling links within your branding text */
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-branding-text a:hover {
+    color: #ffffff;
+}
+
+#elevenlabs-grant-link img {
+    width: 180px; /* REDUCED SIZE - adjust as needed */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Removes extra space if the link is inline-block */
+    opacity: 0.7; /* Make it slightly less prominent by default */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* For hover effects */
+}
+
+#elevenlabs-grant-link:hover img {
+    opacity: 1; /* Full opacity on hover */
+    transform: scale(1.05); /* Subtle zoom effect on hover */
+}
 
 	
 	/* Speaking pulse */
@@ -401,9 +427,13 @@
 
   <!-- Footer -->
   <div class="footer">
-    Powered by <a href="#">The Index Cloud</a> — Smart conversations made simple.
-<a href="https://elevenlabs.io/text-to-speech">  <img src="https://storage.googleapis.com/eleven-public-cdn/images/elevenlabs-grants-logo.png" alt="Text to Speech" style="width:250px"> </a>
-  </div>
+    <p class="footer-branding-text"> Powered by <a href="#">The Index Cloud</a> — Smart conversations made simple.
+    </p>
+    <a href="https://elevenlabs.io/text-to-speech" id="elevenlabs-grant-link" target="_blank" rel="noopener noreferrer">
+        <img src="https://storage.googleapis.com/eleven-public-cdn/images/elevenlabs-grants-logo.png" alt="Supported by an ElevenLabs Text to Speech Grant">
+    </a>
+</div>
+
 
   <!-- Orb + Convai logic -->
   <script>
