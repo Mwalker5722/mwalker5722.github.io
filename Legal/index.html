@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Documents - The Index Cloud</title>
+    <style>
+        /* Basic Reset & Body Styles */
+        html {
+            line-height: 1.5;
+            -webkit-text-size-adjust: 100%;
+            -moz-tab-size: 4;
+            tab-size: 4;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+        body {
+            margin: 0;
+            font-family: inherit;
+            background-color: #f3f4f6; /* Light gray background */
+            color: #374151; /* Default text color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* justify-content: center; /* Center vertically if content is short */
+            /* Changed to allow content to start from top if long */
+            justify-content: flex-start; 
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        /* Main Container */
+        .main-container {
+            width: 100%;
+            max-width: 56rem; /* Max width for content */
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 2rem; /* Add some space at the top */
+            padding-bottom: 2rem; /* Add some space at the bottom */
+        }
+
+        /* Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .page-header h1 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        .page-header p {
+            color: #4b5563;
+            margin-top: 0;
+        }
+
+        /* Tab Navigation */
+        .tab-navigation {
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            /* Removed background-color, padding, border-radius, box-shadow from here */
+        }
+        .tab-button {
+            flex-grow: 1;
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            /* New Purple Button Styles */
+            background-color: #ddd6fe; /* Light Purple (violet-200) */
+            color: #5b21b6; /* Darker Purple text (violet-700) */
+            border: 1px solid #c4b5fd; /* Slightly darker purple border (violet-300) */
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            outline: none;
+            text-align: center;
+        }
+        .tab-button.active {
+            background-color: #6d28d9; /* Dark Purple (violet-700) */
+            color: white;
+            font-weight: 600;
+            border-color: #5b21b6; /* Darker border for active state (violet-800) */
+        }
+        .tab-button:not(.active):hover {
+            background-color: #c4b5fd; /* Medium Purple on hover (violet-300) */
+            border-color: #a78bfa; /* (violet-400) */
+        }
+
+        /* Document Content Area - Wrapper removed, styles moved or adjusted */
+        .document-content-wrapper {
+            /* This class is kept for structure but most styling is removed */
+            /* background-color, border-radius, box-shadow, padding, max-height, overflow-y removed */
+            width: 100%; /* Ensure it takes full width of its parent (.main-container) */
+        }
+        
+        /* Document Section Specific Styling */
+        .document-section {
+            padding: 1.5rem; /* Add padding directly to sections */
+            background-color: white; /* Give sections a white background */
+            border-radius: 0.5rem; /* Rounded corners for sections */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Shadow for sections */
+            margin-bottom: 1.5rem; /* Space below each section if multiple were visible (though only one is at a time) */
+        }
+        .document-section:last-child {
+            margin-bottom: 0; /* Remove margin from the last section */
+        }
+
+        .document-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #374151;
+            margin-top: 0; /* Adjusted from 1.5rem as section now has padding */
+            margin-bottom: 0.75rem;
+        }
+        .document-section h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #4b5563;
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .document-section h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #4b5563;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .document-section p, .document-section ul {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+            color: #4b5563;
+        }
+        .document-section ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+        .document-section strong {
+            font-weight: 600;
+            color: #1f2937;
+        }
+        .document-section a {
+            color: #6d28d9; /* Purple links */
+            text-decoration: underline;
+        }
+        .document-section a:hover {
+            color: #5b21b6; /* Darker purple on hover */
+        }
+        .document-section em {
+            color: #6b7280;
+        }
+
+
+        /* Responsive Adjustments */
+        @media (min-width: 640px) { /* sm: */
+            body {
+                padding: 1.5rem;
+            }
+            .tab-navigation {
+                gap: 1rem;
+            }
+            .tab-button {
+                flex-grow: 0;
+                font-size: 1rem;
+            }
+            .document-section {
+                padding: 2rem; /* Increase padding for sections on larger screens */
+            }
+        }
+
+        @media (min-width: 1024px) { /* lg: */
+            body {
+                padding: 2rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <header class="page-header">
+            <h1>Legal Information</h1>
+            <p>Terms of Service and Privacy Policy for The Index Cloud</p>
+        </header>
+
+        <div class="tab-navigation">
+            <button id="btnTerms" class="tab-button">
+                Terms of Service
+            </button>
+            <button id="btnPrivacy" class="tab-button">
+                Privacy Policy
+            </button>
+        </div>
+
+        <div id="documentContainer" class="document-content-wrapper">
+            <div id="termsContent" class="document-section">
+                <h2>Terms of Service for The Index Cloud Website AI</h2>
+                <p><em>Effective Date: May 18, 2025</em></p> <p>Welcome to The Index Cloud Website AI. These Terms of Service govern your use of the artificial intelligence chatbot available on theindexcloud.com (the "Website AI"). By interacting with the Website AI, you agree to be bound by these terms. If you do not agree with any part of these terms, you should not use the Website AI.</p>
+
+                <h3>1. Purpose and Nature of the Website AI</h3>
+                <p>The Website AI, known as "The Index," is designed to serve as a specialist AI consultant representing The Index Cloud. Its purpose is to engage you in a helpful and informative conversation about The Index Cloud's services, understand your potential business communication challenges, and explain how our solutions can address them.</p>
+                <p>While interacting with The Index, you are engaging with an artificial intelligence. Although it may display characteristics of natural conversation and briefly explore related topics to demonstrate intelligence, its core function remains centered on providing information about The Index Cloud based on its training and available knowledge.</p>
+                <p>The Website AI is designed to be appropriate in its responses. However, as an AI, it operates based on complex models, and in rare instances, unintended responses could occur.</p>
+                <p>The Website AI is strictly for informational purposes regarding The Index Cloud and is NOT intended to provide, and cannot provide, legal, financial, medical, or any other form of professional advice or services.</p>
+
+                <h3>2. Interaction with the Website AI and User Conduct</h3>
+                <p>You are encouraged to interact with The Index by asking questions about The Index Cloud and discussing your business communication needs.</p>
+                <p>While The Index is programmed to manage the conversation and steer away from inappropriate topics, by using the Website AI, you agree not to:</p>
+                <ul>
+                    <li>Use abusive, harassing, defamatory, or otherwise inappropriate language.</li>
+                    <li>Attempt to gain unauthorized access to the AI system or underlying data.</li>
+                    <li>Attempt to manipulate the AI's responses for unintended purposes.</li>
+                    <li>Engage in any activity that violates applicable laws or regulations through your interaction with the AI.</li>
+                </ul>
+                <p><strong>Age Limit:</strong> This Website AI is not intended for use by individuals under the age of 16. If you are under this age, please do not interact with the Website AI.</p>
+                <p>You should refrain from sharing sensitive personal information (such as passwords, financial details, health information, etc.) with The Index, unless you have explicitly and verbally requested The Index to collect specific information from you for the sole purpose of submitting a form on your behalf (as described in Section 4).</p>
+                <p>The AI is also programmed to avoid discussing sensitive or off-limit topics such as politics, religion, illegal activities, or explicit content. If you attempt to discuss these topics, the AI will attempt to steer the conversation back to relevant subjects or indicate it cannot discuss such matters.</p>
+
+                <h3>3. Disclaimer of Accuracy and Limitation of Liability</h3>
+                <p>The responses provided by The Index are generated by an AI model based on its training data and the information available to it (including specific knowledge about The Index Cloud provided via RAG - Retrieval Augmented Generation).</p>
+                <p>We cannot guarantee that all information provided by the Website AI will be completely accurate, error-free, or exhaustive. Information may occasionally be inaccurate, incomplete, or not entirely up-to-date. If The Index indicates that it does not have specific information, this reflects the limits of its current knowledge base.</p>
+                <p>The information shared by The Index is for general informational purposes only and does not constitute professional advice of any kind (legal, financial, medical, etc.).</p>
+                <p>You acknowledge and agree that any reliance you place on the information provided by the Website AI is strictly at your own risk. The Index Cloud and its affiliates, officers, employees, and agents will not be liable for any decisions made or actions taken based on your interaction with or the information provided by the Website AI, or for any direct, indirect, incidental, consequential, or punitive damages arising from your use of the Website AI.</p>
+
+                <h3>4. Data Processing and Privacy</h3>
+                <p>When you interact with The Index Website AI, your inputs (text and potentially voice data) are sent to and processed by third-party service providers, including OpenAI (for AI processing) and ElevenLabs (for voice synthesis). These providers process the interaction data according to their own terms of service and privacy policies.</p>
+                <p>The Index Cloud itself does NOT store the content of your conversations with the Website AI on our systems. Your interaction data is processed in real-time by these third-party APIs to generate responses.</p>
+                <p>The only exception to our non-storage policy is if you explicitly and verbally instruct The Index to collect specific information from you (such as your name, email, or phone number) for the express purpose of submitting a form on your behalf to The Index Cloud team (e.g., to request a callback or submit a detailed inquiry). In this specific scenario, the information you provide for the explicit purpose of form submission will be collected and processed by The Index Cloud securely for that stated purpose, in accordance with our Privacy Policy. <strong>Please review our full Privacy Policy for detailed information on our data practices.</strong></p>
+                <p>We strongly recommend that you do NOT share sensitive personal information (such as passwords, credit card details, health information, etc.) with The Index, unless it is specifically requested by the AI as part of a form submission process that you have initiated and consented to.</p>
+                <p>For comprehensive details on how The Index Cloud collects, uses, and protects data on our website, including data submitted via forms initiated by the Website AI, and information about the third-party providers we use and their data handling practices, please refer to our full Privacy Policy at <a href="#privacyContent" onclick="showPrivacyFromLink(event)">[Link to your Privacy Policy - viewable on this page]</a>. By using the Website AI, you acknowledge and agree to the data processing activities conducted by these third-party services as necessary to provide the AI functionality.</p>
+
+                <h3>5. Intellectual Property</h3>
+                <p>The Website AI, "The Index," and the underlying technology, including the AI models and conversational capabilities, are the exclusive property of The Index Cloud or its licensors.</p>
+                <p>Your interaction with The Index grants you a limited, non-exclusive, non-transferable right to use the AI for its intended purpose as outlined in these terms – to obtain information about The Index Cloud and potentially initiate contact via a form submission.</p>
+                <p>You may not copy, modify, distribute, sell, reverse engineer, or attempt to extract the source code or underlying components of the Website AI. You do not acquire any ownership rights in the AI itself or the data generated by its overall operation. You have the right to use the output of your specific conversation for your personal informational purposes during that session.</p>
+                <p>You acknowledge that your interaction with The Index serves as an example of the kind of intelligent and natural conversation capabilities that The Index Cloud's custom AI voice agent product offers. The service we provide to businesses is to build and train a custom version of this AI tailored specifically to their unique business information, brand voice, and operational needs.</p>
+
+                <h3>6. Availability and Termination</h3>
+                <p>We strive to make the Website AI available around the clock (24/7). However, we do not guarantee uninterrupted availability. The Website AI service may be temporarily unavailable due to maintenance, technical issues, updates, or other reasons without prior notice.</p>
+                <p>The Index Cloud reserves the right to immediately terminate or suspend your access to the Website AI if we determine, in our sole discretion, that you have violated these Terms of Service, including attempting to compromise the security, integrity, or intended functionality of the Website AI.</p>
+
+                <h3>7. Governing Law and Dispute Resolution</h3>
+                <p>These Terms of Service shall be governed and construed in accordance with the laws of the State of South Carolina, without regard to its conflict of law provisions.</p>
+                <p>Any dispute arising from or relating to your use of the Website AI shall be resolved through binding arbitration administered by the American Arbitration Association (AAA) in accordance with its Consumer Arbitration Rules, and judgment on the award rendered by the arbitrator(s) may be entered in any court having jurisdiction thereof. The arbitration shall take place in Fort Mill, South Carolina, USA.</p>
+
+                <h3>8. Changes to These Terms</h3>
+                <p>We may update these Terms of Service from time to time. The "Effective Date" at the top will indicate when the latest revisions were made. By continuing to use the Website AI after any changes become effective, you agree to be bound by the revised terms.</p>
+
+                <h3>9. Contact Us</h3>
+                <p>If you have any questions about these Terms of Service or your interaction with the Website AI, please contact us at <a href="mailto:legal@theindexcloud.com">legal@theindexcloud.com</a> or through other contact methods provided on our website. For inquiries specifically related to how your data is handled, please also refer to our Privacy Policy.</p>
+            </div>
+
+            <div id="privacyContent" class="document-section" style="display: none;">
+                <h2>Privacy Policy for The Index Cloud</h2>
+                <p><em>Effective Date: May 18, 2025</em></p> <p>This Privacy Policy describes how The Index Cloud ("we," "us," or "our") collects, uses, and shares information when you visit and interact with our website, theindexcloud.com (the "Website"). Your privacy is important to us, and we are committed to transparency in our data practices, particularly regarding your interaction with the Website AI.</p>
+                <p>By using our Website, you agree to the terms of this Privacy Policy.</p>
+
+                <h3>1. Scope of This Privacy Policy</h3>
+                <p>This Privacy Policy applies only to data collected through the theindexcloud.com website. It does not apply to data collected through any other channels, products, or services offered by The Index Cloud, or to practices of companies that we do not own or control.</p>
+
+                <h3>2. Information We Collect</h3>
+                <p>We collect information only when you voluntarily provide it to us through the forms available on our Website, including submissions made via the Website AI.</p>
+                <ul>
+                    <li><strong>Information Collected via Forms:</strong> We collect information that you choose to submit through our manual contact form page or when you explicitly ask the Website AI to submit a form on your behalf. This information typically includes your name, email address, and any message or details you provide. For submissions initiated by the Website AI, the AI is designed to guide the collection of necessary information (typically name and email), excluding phone number unless you choose to provide it in your message. You can submit the manual form page without providing any information if you choose.</li>
+                </ul>
+                <p>We want to be clear: We do NOT use website analytics services, cookies, or any other tracking technologies to collect information about your visit, behavior, device, or IP address as you browse our Website.</p>
+                <p>We also do NOT collect or store logs or transcripts of your conversations with the Website AI directly on our systems, separate from the information you might submit via a form.</p>
+
+                <h3>3. How We Use Your Information</h3>
+                <p>We use the information collected through Website forms solely for the purpose of contacting you and responding to your inquiries or requests.</p>
+                <ul>
+                    <li>To communicate with you directly regarding your questions or comments.</li>
+                    <li>To provide you with information you have requested about The Index Cloud's services.</li>
+                    <li>To follow up on potential interest you have expressed.</li>
+                </ul>
+                <p>We do not use the information collected through our Website forms for targeted advertising, marketing communications unrelated to your inquiry, or any purpose other than direct contact and response.</p>
+
+                <h3>4. How Your Information Is Shared</h3>
+                <p>We value your privacy and do not sell your personal data to third parties. However, operating the Website AI and processing form submissions involves the use of third-party services:</p>
+                <ul>
+                    <li><strong>Website AI Processing:</strong> When you interact with The Index Website AI, your conversation inputs (text and potentially voice data) are processed by third-party artificial intelligence and voice synthesis providers, including OpenAI (privacy policy available at <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener noreferrer">[Link to OpenAI Privacy Policy]</a>) and ElevenLabs (privacy policy available at <a href="https://elevenlabs.io/privacy" target="_blank" rel="noopener noreferrer">[Link to ElevenLabs Privacy Policy]</a>). These providers process the data solely for the purpose of generating the AI's responses to you in real-time. Their processing of this data is governed by their respective terms of service and privacy policies. As stated, The Index Cloud does not store this conversation content.</li>
+                    <li><strong>Form Submission Processing:</strong> When you submit a form on our Website, whether manually or initiated via the Website AI, the submission is processed by third-party form submission services, including Pipedream (privacy policy available at <a href="https://pipedream.com/privacy" target="_blank" rel="noopener noreferrer">[Link to Pipedream Privacy Policy]</a>) and FormSubmit (privacy policy available at <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener noreferrer">[Link to FormSubmit Privacy Policy]</a>). These services are used for the purpose of securely delivering your submitted information to us (typically via email). Their handling of the submission data is subject to their own terms and policies.</li>
+                    <li><strong>Legal Requirements:</strong> We may disclose your information if required to do so by law, in response to a legal process (e.g., a court order, subpoena), or to protect our rights, your safety, or the safety of others.</li>
+                </ul>
+                <p>We personally do not use or retain the data collected by these third-party platforms for their own service improvement purposes, beyond their role in providing the AI processing or form submission delivery to us.</p>
+
+                <h3>5. Data Storage, Security, and International Transfers</h3>
+                <p>The information you submit via Website forms is delivered to us through third-party services (Pipedream/FormSubmit) and typically received and stored by us as email correspondence. We retain this information for as long as necessary to fulfill the purpose for which it was collected (i.e., to address your inquiry and for reasonable follow-up), or as required or permitted by law, and subject to your rights as described in Section 7. We may keep email correspondence for extended periods for business record-keeping purposes, unless you request its deletion and such deletion is permissible.</p>
+                <p>We take reasonable steps to protect the information we receive and store (primarily email correspondence) from unauthorized access, disclosure, alteration, or destruction. However, no method of transmission over the internet or electronic storage is 100% secure, and we cannot guarantee absolute security.</p>
+                <p>Third-party services like OpenAI, ElevenLabs, Pipedream, and FormSubmit have their own security measures in place; we select providers we believe maintain a reasonable standard of security for the services they provide.</p>
+                <h4>International Data Transfers:</h4>
+                <p>Our Website is operated in the United States. If you are located outside of the United States, please be aware that any information you provide to us, including personal data, will be transferred to, processed, and stored in the United States, where privacy laws may be different from those in your country of residence. By using our Website and providing us with your information, you consent to this transfer, processing, and storage of your information in the United States.</p>
+
+                <h3>6. Data Retention</h3>
+                <p>As mentioned, we retain information submitted via Website forms (like email correspondence) for as long as necessary to address your inquiry and for our business records, or as required or permitted by law. This retention is subject to your rights, such as the right to deletion, as outlined in Section 7. We may retain this correspondence for extended periods unless a valid deletion request is made and can be lawfully executed.</p>
+
+                <h3>7. Your Rights Regarding Your Information</h3>
+                <p>You have rights regarding the personal data that you provide to us. Since we only collect data that you voluntarily submit via forms, these rights apply to that submitted information. You have every right to your own data. Subject to applicable law, your rights may include:</p>
+                <ul>
+                    <li><strong>Right to Access:</strong> Request a copy of the personal data we hold about you based on your form submissions.</li>
+                    <li><strong>Right to Correction:</strong> Request that we correct any inaccurate or incomplete personal data we hold about you.</li>
+                    <li><strong>Right to Deletion:</strong> Request that we delete the personal data we hold about you.</li>
+                    <li><strong>Right to Restriction:</strong> Request that we restrict the processing of your personal data under certain conditions.</li>
+                    <li><strong>Right to Object:</strong> Object to our processing of your personal data under certain conditions.</li>
+                </ul>
+                <p>To exercise any of these rights, please contact us using the contact information provided in Section 11 below, by sending an email to <a href="mailto:legal@theindexcloud.com">legal@theindexcloud.com</a> detailing your request. We will respond to your request in accordance with applicable law.</p>
+
+                <h3>8. Children's Privacy</h3>
+                <p>Our Website is not intended for individuals under the age of 16. We do not knowingly collect personal data from children under 16. If we become aware that we have inadvertently collected personal data from a child under 16, we will take steps to delete it as soon as possible.</p>
+
+                <h3>9. Governing Law</h3>
+                <p>This Privacy Policy is governed by and construed in accordance with the laws of the State of South Carolina, USA, without regard to its conflict of law principles.</p>
+
+                <h3>10. Changes to This Privacy Policy</h3>
+                <p>We may update this Privacy Policy from time to time to reflect changes in our practices or for legal reasons. The "Effective Date" at the top of the policy will indicate when the latest revisions were made. Your continued use of the Website after any changes signifies your acceptance of the updated Privacy Policy.</p>
+
+                <h3>11. Contact Us</h3>
+                <p>If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at:</p>
+                <p><a href="mailto:legal@theindexcloud.com">legal@theindexcloud.com</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get button and content elements
+        const btnTerms = document.getElementById('btnTerms');
+        const btnPrivacy = document.getElementById('btnPrivacy');
+        const termsContent = document.getElementById('termsContent');
+        const privacyContent = document.getElementById('privacyContent');
+        // const documentContainer = document.getElementById('documentContainer'); // No longer used for scrolling the box
+
+        // Function to show a specific document and hide others
+        function showDocument(docToShow, btnToActivate) {
+            // Hide all documents
+            termsContent.style.display = 'none';
+            privacyContent.style.display = 'none';
+
+            // Deactivate all buttons
+            btnTerms.classList.remove('active');
+            btnPrivacy.classList.remove('active');
+
+            // Show the selected document
+            docToShow.style.display = 'block';
+            // Activate the selected button
+            btnToActivate.classList.add('active');
+
+            // Scroll the window to the top of the main container or page header
+            // This ensures that when switching tabs, the user sees the start of the content.
+            const mainContainer = document.querySelector('.main-container');
+            if (mainContainer) {
+                // Scroll to the top of the main container.
+                // Alternatively, you could scroll to a specific element like page-header
+                // or just window.scrollTo(0,0) for the very top of the page.
+                 window.scrollTo({ top: mainContainer.offsetTop - 20, behavior: 'smooth' }); // 20px offset for padding
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Event listeners for buttons
+        btnTerms.addEventListener('click', () => {
+            showDocument(termsContent, btnTerms);
+        });
+
+        btnPrivacy.addEventListener('click', () => {
+            showDocument(privacyContent, btnPrivacy);
+        });
+        
+        // Function to handle clicking the link from Terms to Privacy
+        function showPrivacyFromLink(event) {
+            event.preventDefault(); // Prevent default anchor behavior
+            showDocument(privacyContent, btnPrivacy);
+        }
+
+        // Initially show the Terms of Service
+        showDocument(termsContent, btnTerms);
+    </script>
+
+</body>
+</html>
+
