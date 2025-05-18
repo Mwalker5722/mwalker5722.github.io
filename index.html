@@ -465,6 +465,51 @@
     }
     /* REMOVED .orb-prompt.visible rule */
     /* --- End Orb Prompt Style --- */
+
+/* Add this to your existing CSS */
+
+.footer-legal-notice {
+    font-size: 0.7rem; /* Slightly smaller for a disclaimer */
+    color: rgba(255, 255, 255, 0.55); /* Adjust opacity for readability */
+    text-transform: none; /* Keep it sentence case, not uppercase */
+    letter-spacing: normal; /* Normal letter spacing */
+    margin-top: 0.75rem; /* Space above this line */
+    margin-bottom: 0.75rem; /* Space below, adjust if needed */
+    line-height: 1.4; /* Adjust line height for readability */
+    max-width: 90%; /* Ensure it wraps nicely on smaller screens if long */
+    text-align: center; /* Already handled by .footer flex settings but good to be explicit */
+}
+
+.footer-legal-notice a {
+    color: rgba(255, 255, 255, 0.75); /* Make link slightly more prominent */
+    text-decoration: underline;
+    text-decoration-style: dotted; /* Optional: subtle underline style */
+    transition: color 0.3s ease;
+}
+
+.footer-legal-notice a:hover {
+    color: #ffffff; /* Brighter on hover */
+    text-decoration-style: solid; /* Optional: solid underline on hover */
+}
+
+/* Adjust existing .footer CSS if needed for spacing */
+/* For example, your existing .footer might already have padding that works well. */
+/* The .footer in your provided snippet was:
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 0.75rem;
+    padding: 1.5rem 1rem 2rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 10;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+The new .footer-legal-notice will inherit some of these and override others.
+*/
   </style>
  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -509,10 +554,15 @@
  <div class="footer">
     <p class="footer-branding-text"> Powered by <a href="#">The Index Cloud</a> — Smart conversations made simple.
     </p>
+
+    <p class="footer-legal-notice">
+        By using this website, you agree to our 
+        <a href="/legal.html">Terms of Service and Privacy Policy</a>.
+    </p>
     <a href="https://elevenlabs.io/text-to-speech" id="elevenlabs-grant-link-mobile" target="_blank" rel="noopener noreferrer" title="Text to Speech by ElevenLabs - Grants Program">
         <img src="long_footer_logo.png" alt="ElevenLabs Grants Program (Mobile)" class="grant-logo-mobile">
     </a>
-</div>
+    </div>
 
 
   <!-- Orb + Convai logic -->
