@@ -157,6 +157,17 @@
       font-style: italic;
       font-size: 0.85rem; /* Added back size if needed */
     }
+    
+    /* Style for the new link within optional-note */
+    p.optional-note a {
+        color: rgba(255, 255, 255, 0.85); /* Brighter for clickability */
+        text-decoration: underline;
+        font-weight: 600; /* Make it slightly bolder */
+    }
+    p.optional-note a:hover {
+        color: #fff;
+    }
+
 
     form input, form textarea, form button {
       width: 100%;
@@ -228,19 +239,18 @@
 <div class="demo-form-container">
   <h1>Let's Talk!</h1>
   <p class="subtext">Discover how The Index Cloud can help your business communicate smarter, 24/7.</p>
-  <p class="optional-note">All fields are optional — just share what you’d like!</p>
-  <p class="optional-note">The Index can also assist. Try it to send us your details!</p>
+  <p class="optional-note">The Index can also assist. <a href="https://theindexcloud.com">Try it</a> to send us your details!</p>
 
 
   <form id="contactForm">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_subject" value="New Inquiry via The Index Cloud">
     <input type="hidden" name="_template" value="box">
-    <input type="text" name="name" placeholder="Your Name">
-    <input type="email" name="email" placeholder="Your Email">
-    <input type="text" name="company" placeholder="Company Name">
-    <input type="text" name="website" placeholder="Company Website">
-    <textarea name="message" rows="3" placeholder="What’s your business all about?"></textarea>
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <input type="text" name="company" placeholder="Company Name" required>
+    <input type="text" name="website" placeholder="Company Website" required>
+    <textarea name="message" rows="3" placeholder="What’s your business all about?" required></textarea>
     <button type="submit">Send</button>
   </form>
 
@@ -290,6 +300,9 @@
     });
   });
 </script>
+
+<elevenlabs-convai agent-id="wUQHeWr2N6z1QkUwf0tp"></elevenlabs-convai>
+<script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
 
 </body>
 </html>
