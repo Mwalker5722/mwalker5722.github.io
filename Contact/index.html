@@ -159,12 +159,13 @@
     }
     
     /* Style for the new link within optional-note */
-    p.optional-note a {
+    p.optional-note a#triggerConvaiWidget { /* Added ID for specificity if needed */
         color: rgba(255, 255, 255, 0.85); /* Brighter for clickability */
         text-decoration: underline;
         font-weight: 600; /* Make it slightly bolder */
+        cursor: pointer; /* Indicate it's clickable */
     }
-    p.optional-note a:hover {
+    p.optional-note a#triggerConvaiWidget:hover {
         color: #fff;
     }
 
@@ -239,7 +240,7 @@
 <div class="demo-form-container">
   <h1>Let's Talk!</h1>
   <p class="subtext">Discover how The Index Cloud can help your business communicate smarter, 24/7.</p>
-  <p class="optional-note">The Index can also assist. <a href="https://theindexcloud.com">Try it</a> to send us your details!</p>
+  <p class="optional-note">The Index can also assist. <a href="#" id="triggerConvaiWidget">Try it</a> to send us your details!</p>
 
 
   <form id="contactForm">
@@ -303,6 +304,24 @@
 
 <elevenlabs-convai agent-id="wUQHeWr2N6z1QkUwf0tp"></elevenlabs-convai>
 <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const tryItLink = document.getElementById('triggerConvaiWidget');
+    if (tryItLink) {
+      tryItLink.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default link navigation
+        if (window.elevenlabs && window.elevenlabs.convai && typeof window.elevenlabs.convai.show === 'function') {
+          window.elevenlabs.convai.show();
+        } else {
+          console.error('ElevenLabs Convai API not available or show function not found.');
+          // Optionally, you could alert the user or redirect to a contact page as a fallback
+          // alert('AI chat feature is currently unavailable. Please use the form instead.');
+        }
+      });
+    }
+  });
+</script>
 
 </body>
 </html>
