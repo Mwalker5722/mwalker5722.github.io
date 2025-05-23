@@ -228,7 +228,7 @@
 
      .footer#formFooter .footer-branding-text a {
          color: rgba(255,255,255,0.7); 
-         text-decoration: none;
+         text-decoration: none; /* Ensure branding link is not underlined either */
          font-weight: 600;
      }
      .footer#formFooter .footer-branding-text a:hover {
@@ -244,23 +244,15 @@
 
      .footer#formFooter .footer-legal-notice a {
          color: #d8b4fe; /* Link color */
-         text-decoration: none; /* Remove default underline from <a> tag */
+         text-decoration: none; /* Ensure no underline for the entire link */
          font-weight: normal; 
-     }
-
-     .footer#formFooter .footer-legal-notice a .underline-partial {
-         /* This span will get a border that looks like an underline */
-         border-bottom: 1px solid #d8b4fe; /* Same color as the link text */
-         padding-bottom: 0; 
      }
 
      .footer#formFooter .footer-legal-notice a:hover {
          color: #f3e8ff; /* Lighter color on hover for all text in the link */
+         /* text-decoration: underline; /* Optional: underline on hover if desired */
      }
-
-     .footer#formFooter .footer-legal-notice a:hover .underline-partial {
-         border-bottom-color: #f3e8ff; /* Make "underline" color match hover text */
-     }
+     /* Removed .underline-partial CSS rules as the span is no longer used */
      /* === END UPDATED FOOTER STYLES === */
 
   </style>
@@ -296,10 +288,8 @@
      <p class="footer-branding-text">Powered by <a href="https://theindexcloud.com" target="_blank" rel="noopener noreferrer">The Index Cloud</a> — Smart conversations made simple.</p>
      <p class="footer-legal-notice">
          By using this website, you agree to our 
-         <a href="/Legal/">
-             <span class="underline-partial">Terms of Service</span> and Privacy Policy
-         </a>. 
-     </p>
+         <a href="/Legal/">Terms of Service and Privacy Policy</a>. 
+         </p>
   </div>
 </div>
 
