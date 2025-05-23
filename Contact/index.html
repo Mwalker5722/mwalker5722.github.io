@@ -112,7 +112,7 @@
 
      .demo-form-container {
          position: absolute;
-         top: 54%; /* Adjusted slightly for potentially taller content with new footer style */
+         top: 54%; 
          left: 50%;
          transform: translate(-50%, -50%) scale(0.88);
          animation: fadeInUpZoom 1s ease-out both;
@@ -209,26 +209,25 @@
      }
 
     /* === UPDATED FOOTER STYLES for inside the form container === */
-     .footer#formFooter { /* Target specifically the formFooter */
-         margin-top: 1rem; /* Increased space above the footer */
-         padding-top: 0.5rem; /* Add a little padding if needed */
-         /* text-align: center; is inherited from .demo-form-container */
+     .footer#formFooter { 
+         margin-top: 1rem; 
+         padding-top: 0.5rem; 
      }
 
-     .footer#formFooter p { /* Common style for paragraphs in this specific footer */
+     .footer#formFooter p { 
          line-height: 1.4;
-         margin-bottom: 0.3rem; /* Reduced space between footer lines */
+         margin-bottom: 0.3rem; 
      }
 
      .footer#formFooter .footer-branding-text {
          font-size: 0.7rem; 
-         color: rgba(255,255,255,0.5); /* Adjusted opacity */
+         color: rgba(255,255,255,0.5); 
          text-transform: uppercase;
-         letter-spacing: 0.5px; /* Slightly less spacing */
+         letter-spacing: 0.5px; 
      }
 
      .footer#formFooter .footer-branding-text a {
-         color: rgba(255,255,255,0.7); /* Link color for branding */
+         color: rgba(255,255,255,0.7); 
          text-decoration: none;
          font-weight: 600;
      }
@@ -239,18 +238,28 @@
      .footer#formFooter .footer-legal-notice {
          font-size: 0.7rem; 
          color: rgba(255,255,255,0.55);
-         text-transform: none; /* Override general .footer uppercase */
-         letter-spacing: normal; /* Override general .footer letter-spacing */
+         text-transform: none; 
+         letter-spacing: normal; 
      }
 
      .footer#formFooter .footer-legal-notice a {
-         color: #d8b4fe; /* A light violet/purple color (Tailwind violet-300) */
-         text-decoration: underline;
-         font-weight: normal; /* Or 600 if you want it bolder */
+         color: #d8b4fe; /* Link color */
+         text-decoration: none; /* Remove default underline from <a> tag */
+         font-weight: normal; 
+     }
+
+     .footer#formFooter .footer-legal-notice a .underline-partial {
+         /* This span will get a border that looks like an underline */
+         border-bottom: 1px solid #d8b4fe; /* Same color as the link text */
+         padding-bottom: 0; 
      }
 
      .footer#formFooter .footer-legal-notice a:hover {
-         color: #f3e8ff; /* A very light violet/purple on hover (Tailwind violet-100) */
+         color: #f3e8ff; /* Lighter color on hover for all text in the link */
+     }
+
+     .footer#formFooter .footer-legal-notice a:hover .underline-partial {
+         border-bottom-color: #f3e8ff; /* Make "underline" color match hover text */
      }
      /* === END UPDATED FOOTER STYLES === */
 
@@ -283,10 +292,13 @@
   </form>
 
   <div id="formMessage" style="display: none;"></div>
-  <div class="footer" id="formFooter"> <p class="footer-branding-text">Powered by <a href="https://theindexcloud.com" target="_blank" rel="noopener noreferrer">The Index Cloud</a> — Smart conversations made simple.</p>
+  <div class="footer" id="formFooter">
+     <p class="footer-branding-text">Powered by <a href="https://theindexcloud.com" target="_blank" rel="noopener noreferrer">The Index Cloud</a> — Smart conversations made simple.</p>
      <p class="footer-legal-notice">
          By using this website, you agree to our 
-         <a href="/Legal/">Terms of Service and Privacy Policy</a>. 
+         <a href="/Legal/">
+             <span class="underline-partial">Terms of Service</span> and Privacy Policy
+         </a>. 
      </p>
   </div>
 </div>
@@ -319,7 +331,7 @@
              messageBox.style.borderColor = "rgba(0, 255, 150, 0.4)";
              messageBox.style.color = "#b3ffec";
              messageBox.style.display = "block";
-             if (footer) footer.style.display = "none"; // This line hides the footer on success
+             if (footer) footer.style.display = "none";
          })
          .catch(error => {
              console.error("FormSubmit.co error:", error);
@@ -330,7 +342,7 @@
              messageBox.style.borderColor = "rgba(255, 80, 80, 0.4)";
              messageBox.style.color = "#ff9f9f";
              messageBox.style.display = "block";
-             if (footer) footer.style.display = "none"; // This line hides the footer on error
+             if (footer) footer.style.display = "none";
          });
      });
   }
