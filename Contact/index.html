@@ -7,19 +7,19 @@
   <meta name="description" content="Contact The Index Cloud — Smart conversations made simple.">
 
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/favicon/web-app-manifest-192x192.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
-<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
-<link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
-<link rel="manifest" href="/favicon/site.webmanifest">
-<meta name="theme-color" content="#1b0231">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon/web-app-manifest-192x192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
+  <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
+  <link rel="manifest" href="/favicon/site.webmanifest">
+  <meta name="theme-color" content="#1b0231">
 
-<meta property="og:title" content="Contact — The Index Cloud">
-<meta property="og:description" content="Get in touch with us.">
-<meta property="og:image" content="https://theindexcloud.com/favicon/preview.png">
-<meta property="og:url" content="https://theindexcloud.com/Contact/">
-<meta name="twitter:card" content="summary_large_image">
+  <meta property="og:title" content="Contact — The Index Cloud">
+  <meta property="og:description" content="Get in touch with us.">
+  <meta property="og:image" content="https://theindexcloud.com/favicon/preview.png">
+  <meta property="og:url" content="https://theindexcloud.com/Contact/">
+  <meta name="twitter:card" content="summary_large_image">
 
   
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -31,17 +31,17 @@
       font-family: 'Inter', sans-serif;
       background: radial-gradient(ellipse at center, rgba(128,0,192,0.2), transparent 60%), #1b0231;
       color: #fff;
-      height: 100%; /* Keep original */
-      overflow: hidden; /* Keep original */
+      height: 100%;
+      overflow: hidden;
       position: relative;
     }
 
     body::before, body::after {
       content: "";
-      position: absolute; /* Keep original */
+      position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       pointer-events: none;
-      z-index: 0; /* Keep original */
+      z-index: 0;
     }
 
     body::before {
@@ -61,7 +61,6 @@
     @keyframes starScroll1 { 0% { background-position: 0 0; } 100% { background-position: 2000px 2000px; } }
     @keyframes starScroll2 { 0% { background-position: 0 0; } 100% { background-position: -1500px 2000px; } }
 
-    /* ✅ NAVBAR */
     .navbar-wrapper {
       position: fixed;
       top: 0;
@@ -72,7 +71,6 @@
       justify-content: center;
       background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(14px);
-      /* border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Original border - Keep or remove as desired */
       z-index: 999;
     }
 
@@ -81,24 +79,20 @@
       gap: 3rem;
     }
 
-    /* MODIFIED Navbar Link Style */
     .navbar a {
       text-decoration: none;
       font-weight: 600;
       font-size: 1rem;
       color: rgba(255, 255, 255, 0.85);
-      transition: color 0.3s; /* Removed text-shadow transition */
-      position: relative; /* ADDED for pseudo-element */
-      padding-bottom: 0.3rem; /* ADDED space for underline */
+      transition: color 0.3s;
+      position: relative;
+      padding-bottom: 0.3rem;
     }
 
-    /* MODIFIED Hover Style */
     .navbar a:hover {
       color: #fff;
-      /* text-shadow: 0 0 10px rgba(213, 54, 255, 0.6); */ /* REMOVED Shadow */
     }
 
-    /* --- ADDED CSS FOR UNDERLINE --- */
     .navbar a::after {
       content: '';
       position: absolute;
@@ -106,25 +100,22 @@
       left: 0;
       width: 100%;
       height: 2px;
-      background-color: rgba(213, 54, 255, 0.8); /* Purple accent color */
-      transform: scaleX(0); /* Start hidden */
+      background-color: rgba(213, 54, 255, 0.8);
+      transform: scaleX(0);
       transform-origin: bottom right;
       transition: transform 0.3s ease-out;
     }
     .navbar a:hover::after {
-      transform: scaleX(1); /* Expand underline */
+      transform: scaleX(1);
       transform-origin: bottom left;
     }
-    /* --- END ADDED CSS FOR UNDERLINE --- */
 
-
-    /* ✅ FORM */
     .demo-form-container {
-      position: absolute; /* Keep original */
-      top: 54%; /* Keep original */
-      left: 50%; /* Keep original */
-      transform: translate(-50%, -50%) scale(0.88); /* Keep original */
-      animation: fadeInUpZoom 1s ease-out both; /* Keep original */
+      position: absolute;
+      top: 54%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.88);
+      animation: fadeInUpZoom 1s ease-out both;
       background: rgba(0, 0, 0, 0.5);
       box-shadow: 0 0 40px rgba(213,54,255,0.2);
       border-radius: 20px;
@@ -135,7 +126,7 @@
       z-index: 100;
     }
 
-    @keyframes fadeInUpZoom { /* Keep original */
+    @keyframes fadeInUpZoom {
       0% { opacity: 0; transform: translate(-50%, -40%) scale(0.85); }
       100% { opacity: 1; transform: translate(-50%, -50%) scale(0.88); }
     }
@@ -155,20 +146,18 @@
       margin-bottom: 1rem;
       color: rgba(255,255,255,0.5);
       font-style: italic;
-      font-size: 0.85rem; /* Added back size if needed */
+      font-size: 0.85rem;
     }
     
-    /* Style for the new link within optional-note */
-    p.optional-note a#triggerConvaiWidget { /* Added ID for specificity if needed */
-        color: rgba(255, 255, 255, 0.85); /* Brighter for clickability */
+    p.optional-note a#tryItLink {
+        color: rgba(255, 255, 255, 0.85);
         text-decoration: underline;
-        font-weight: 600; /* Make it slightly bolder */
-        cursor: pointer; /* Indicate it's clickable */
+        font-weight: 600;
+        cursor: pointer;
     }
-    p.optional-note a#triggerConvaiWidget:hover {
+    p.optional-note a#tryItLink:hover {
         color: #fff;
     }
-
 
     form input, form textarea, form button {
       width: 100%;
@@ -178,7 +167,7 @@
       border: none;
       font-size: 0.9rem;
       outline: none;
-      font-family: inherit; /* Added font inherit */
+      font-family: inherit;
     }
 
     form input, form textarea {
@@ -187,7 +176,7 @@
       color: #fff;
     }
 
-    textarea { resize: none; } /* Keep original */
+    textarea { resize: none; }
 
     form input:focus, form textarea:focus {
       border-color: rgba(213,54,255,0.45);
@@ -198,13 +187,13 @@
       background: linear-gradient(90deg, rgba(213,54,255,0.85), rgba(128,0,192,0.85));
       color: #fff;
       cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease; /* Added ease to background */
-      font-weight: 600; /* Added weight */
+      transition: background 0.3s ease, transform 0.2s ease;
+      font-weight: 600;
     }
 
     form button:hover {
       background: linear-gradient(90deg, rgba(128,0,192,0.95), rgba(213,54,255,0.95));
-      transform: scale(1.02); /* Adjusted scale */
+      transform: scale(1.02);
     }
 
     #formMessage {
@@ -219,7 +208,7 @@
       box-shadow: 0 0 10px rgba(0, 255, 150, 0.2);
     }
 
-    .footer { /* Keep original */
+    .footer {
       margin-top: 0.8rem;
       font-size: 0.65rem;
       color: rgba(255,255,255,0.4);
@@ -240,8 +229,7 @@
 <div class="demo-form-container">
   <h1>Let's Talk!</h1>
   <p class="subtext">Discover how The Index Cloud can help your business communicate smarter, 24/7.</p>
-  <p class="optional-note">The Index can also assist. <a href="#" id="triggerConvaiWidget">Try it</a> to send us your details!</p>
-
+  <p class="optional-note">The Index can also assist. <a href="#" id="tryItLink">Try it</a> to send us your details!</p> 
 
   <form id="contactForm">
     <input type="hidden" name="_captcha" value="false">
@@ -260,68 +248,111 @@
 </div>
 
 <script>
+  // Existing form submission script
   const form = document.getElementById("contactForm");
   const messageBox = document.getElementById("formMessage");
-  const footer = document.getElementById("formFooter"); // Get the original footer
+  const footer = document.getElementById("formFooter"); 
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    const formData = new FormData(form);
-    const button = form.querySelector("button");
-    button.textContent = "Sending...";
-    button.disabled = true;
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const button = form.querySelector("button");
+      button.textContent = "Sending...";
+      button.disabled = true;
 
-
-    fetch("https://formsubmit.co/ajax/support@theindexcloud.com", {
-      method: "POST",
-      headers: { 'Accept': 'application/json' },
-      body: formData
-    }).then(response => response.json())
-    .then(data => {
-        console.log(data);
-        form.reset(); // Reset form fields
-        form.style.display = "none"; // Hide form
-        messageBox.textContent = "Your message has been sent. We’ll be in touch soon.";
-        messageBox.style.backgroundColor = "rgba(0, 255, 150, 0.15)";
-        messageBox.style.borderColor = "rgba(0, 255, 150, 0.4)";
-        messageBox.style.color = "#b3ffec";
-        messageBox.style.display = "block";
-        if (footer) footer.style.display = "none";
-    })
-    .catch(error => {
-        console.error(error);
-        button.textContent = "Send"; // Reset button on error
-        button.disabled = false;
-        messageBox.textContent = "Something went wrong. Please try again.";
-        messageBox.style.backgroundColor = "rgba(255, 80, 80, 0.15)";
-        messageBox.style.borderColor = "rgba(255, 80, 80, 0.4)";
-        messageBox.style.color = "#ff9f9f";
-        messageBox.style.display = "block";
-        if (footer) footer.style.display = "none";
+      fetch("https://formsubmit.co/ajax/support@theindexcloud.com", {
+        method: "POST",
+        headers: { 'Accept': 'application/json' },
+        body: formData
+      }).then(response => response.json())
+      .then(data => {
+          console.log("FormSubmit.co response:", data);
+          form.reset(); 
+          form.style.display = "none"; 
+          messageBox.textContent = "Your message has been sent. We’ll be in touch soon.";
+          messageBox.style.backgroundColor = "rgba(0, 255, 150, 0.15)";
+          messageBox.style.borderColor = "rgba(0, 255, 150, 0.4)";
+          messageBox.style.color = "#b3ffec";
+          messageBox.style.display = "block";
+          if (footer) footer.style.display = "none";
+      })
+      .catch(error => {
+          console.error("FormSubmit.co error:", error);
+          button.textContent = "Send"; 
+          button.disabled = false;
+          messageBox.textContent = "Something went wrong. Please try again.";
+          messageBox.style.backgroundColor = "rgba(255, 80, 80, 0.15)";
+          messageBox.style.borderColor = "rgba(255, 80, 80, 0.4)";
+          messageBox.style.color = "#ff9f9f";
+          messageBox.style.display = "block";
+          if (footer) footer.style.display = "none";
+      });
     });
+  }
+
+  // New script to handle "Try it" link clicking the ElevenLabs widget button
+  document.addEventListener('DOMContentLoaded', () => {
+    const tryItLink = document.getElementById('tryItLink');
+    const convaiWidgetElement = document.querySelector('elevenlabs-convai'); 
+
+    if (tryItLink && convaiWidgetElement) {
+      tryItLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        console.log('[TryItScript] "Try it" link clicked. Attempting to interact with Convai widget...');
+
+        const clickConvaiButton = () => {
+          const shadowRoot = convaiWidgetElement.shadowRoot;
+
+          if (shadowRoot) {
+            console.log('[TryItScript] Convai widget shadow DOM found.');
+            
+            // Using the selector based on the HTML snippet you provided:
+            const connectButtonSelector = 'button[title="Connect Now"]';
+            // Alternative selector using the class (might be less stable if class name changes):
+            // const connectButtonSelector = 'button._btn_1f9vw_132'; 
+            // Or combining them:
+            // const connectButtonSelector = 'button[title="Connect Now"]._btn_1f9vw_132';
+
+            const connectButton = shadowRoot.querySelector(connectButtonSelector);
+
+            if (connectButton) {
+              console.log(`[TryItScript] Target button found in shadow DOM with selector "${connectButtonSelector}":`, connectButton.outerHTML);
+              connectButton.click();
+              console.log('[TryItScript] Clicked the target button in shadow DOM.');
+            } else {
+              console.error(`[TryItScript] Could not find the target button in the shadow DOM with selector: "${connectButtonSelector}".`);
+              // If the above fails, you can uncomment the logging below to see all buttons again
+              /*
+              const allButtonsInShadow = shadowRoot.querySelectorAll('button');
+              console.log(`[TryItScript] Fallback: Found ${allButtonsInShadow.length} <button> element(s) in shadow DOM.`);
+              allButtonsInShadow.forEach((btn, index) => {
+                console.log(`[TryItScript] Fallback Shadow Button ${index}:`, btn.outerHTML, "| Text:", btn.textContent?.trim(), "| Aria-label:", btn.getAttribute('aria-label'), "| Title:", btn.getAttribute('title'));
+              });
+              */
+            }
+          } else {
+            console.error('[TryItScript] Convai widget shadow DOM not accessible.');
+          }
+        };
+
+        customElements.whenDefined('elevenlabs-convai').then(() => {
+          console.log('[TryItScript] elevenlabs-convai element is defined.');
+          setTimeout(clickConvaiButton, 200); 
+        }).catch(error => {
+          console.error('[TryItScript] Error waiting for elevenlabs-convai element to be defined:', error);
+           setTimeout(clickConvaiButton, 500);
+        });
+      });
+    } else {
+      if (!tryItLink) console.error('[TryItScript] "Try it" link (id="tryItLink") not found.');
+      if (!convaiWidgetElement) console.error('[TryItScript] ElevenLabs Convai widget element (<elevenlabs-convai>) not found.');
+    }
   });
 </script>
 
 <elevenlabs-convai agent-id="wUQHeWr2N6z1QkUwf0tp"></elevenlabs-convai>
 <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const tryItLink = document.getElementById('triggerConvaiWidget');
-    if (tryItLink) {
-      tryItLink.addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent default link navigation
-        if (window.elevenlabs && window.elevenlabs.convai && typeof window.elevenlabs.convai.show === 'function') {
-          window.elevenlabs.convai.show();
-        } else {
-          console.error('ElevenLabs Convai API not available or show function not found.');
-          // Optionally, you could alert the user or redirect to a contact page as a fallback
-          // alert('AI chat feature is currently unavailable. Please use the form instead.');
-        }
-      });
-    }
-  });
-</script>
 
 </body>
 </html>
