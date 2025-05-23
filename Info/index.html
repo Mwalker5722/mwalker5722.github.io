@@ -21,118 +21,160 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', sans-serif;
-      color: #fff;
-      background: radial-gradient(ellipse at center, rgba(128,0,192,0.2), transparent 60%), #1b0231;
-      overflow-x: hidden;
-      position: relative;
-      overflow-y: auto; /* Ensure scrolling is enabled */
-      height: auto;
-      min-height: 100%;
-    }
+     * { margin: 0; padding: 0; box-sizing: border-box; }
+     body {
+         font-family: 'Inter', sans-serif;
+         color: #fff;
+         background: radial-gradient(ellipse at center, rgba(128,0,192,0.2), transparent 60%), #1b0231;
+         overflow-x: hidden;
+         position: relative;
+         overflow-y: auto; /* Ensure scrolling is enabled */
+         height: auto;
+         min-height: 100%;
+     }
 
-    body::before, body::after {
-      content: "";
-      position: absolute; /* Keep absolute for scroll */
-      top: 0; left: 0; right: 0; bottom: 0;
-      pointer-events: none;
-      background-repeat: repeat;
-      z-index: -1; /* Adjusted z-index */
-      min-height: 100vh; /* Ensure coverage */
-    }
+     body::before, body::after {
+         content: "";
+         position: absolute; /* Keep absolute for scroll */
+         top: 0; left: 0; right: 0; bottom: 0;
+         pointer-events: none;
+         background-repeat: repeat;
+         z-index: -1; /* Adjusted z-index */
+         min-height: 100vh; /* Ensure coverage */
+     }
 
-    body::before {
-      background-image: radial-gradient(#ffffff 1px, transparent 1px);
-      background-size: 2px 2px;
-      opacity: 0.05;
-      animation: starScroll1 90s linear infinite;
-    }
+     body::before {
+         background-image: radial-gradient(#ffffff 1px, transparent 1px);
+         background-size: 2px 2px;
+         opacity: 0.05;
+         animation: starScroll1 90s linear infinite;
+     }
 
-    body::after {
-      background-image: radial-gradient(#ffffff 1.5px, transparent 1.5px);
-      background-size: 3px 3px;
-      opacity: 0.03;
-      animation: starScroll2 120s linear infinite reverse;
-    }
+     body::after {
+         background-image: radial-gradient(#ffffff 1.5px, transparent 1.5px);
+         background-size: 3px 3px;
+         opacity: 0.03;
+         animation: starScroll2 120s linear infinite reverse;
+     }
 
-    @keyframes starScroll1 { 0% { background-position: 0 0; } 100% { background-position: 2000px 2000px; } }
-    @keyframes starScroll2 { 0% { background-position: 0 0; } 100% { background-position: -1500px 2000px; } }
-    @keyframes pulseGlow { 0%, 100% { text-shadow: 0 0 8px rgba(213,54,255,0.35); } 50% { text-shadow: 0 0 16px rgba(213,54,255,0.6); } }
-
-
-    .navbar-wrapper {
-      position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 2rem;
-      display: flex; justify-content: center; z-index: 1000;
-      background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(14px);
-    }
-    .navbar { display: flex; gap: 3rem; }
-    .navbar a { text-decoration: none; font-weight: 600; font-size: 1rem; color: rgba(255, 255, 255, 0.85); transition: color 0.3s; position: relative; padding-bottom: 0.3rem; }
-    .navbar a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background-color: rgba(213, 54, 255, 0.8); transform: scaleX(0); transform-origin: bottom right; transition: transform 0.3s ease-out; }
-    .navbar a:hover { color: #fff; }
-    .navbar a:hover::after { transform: scaleX(1); transform-origin: bottom left; }
-
-    /* Default Section Styles */
-    .section { max-width: 1000px; margin: 3rem auto; padding: 0 1.5rem; text-align: center; }
-    .section h2 { margin-bottom: 1.5rem; font-size: 1.9rem; font-weight: 600; color: #fff; animation: pulseGlow 4s ease-in-out infinite; }
-    .section p, .section ul { color: rgba(240,240,240,0.85); line-height: 1.7; margin-bottom: 1.5rem; font-size: 1rem; }
-
-    /* Product Overview Section Layout */
-    .product-overview { opacity: 0; transform: translateY(20px); animation: slideFadeIn 0.8s ease-out 0.2s forwards; margin: 0rem auto 3rem auto; padding: 5.5rem 1.5rem 1rem 1.5rem; max-width: 1000px; text-align: center; }
-    .product-overview .overview-intro { max-width: 800px; margin: 0 auto 2.5rem auto; font-weight: 400; opacity: 0; animation: fadeIn 0.7s ease-out 0.8s forwards; line-height: 1.7; }
-    .overview-points { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 1000px; margin: 0 auto; text-align: left; } /* Mobile grid */
-    .overview-point { text-align: left; opacity: 0; transform: translateY(15px); animation: slideFadeInPoint 0.7s ease-out forwards; } /* Mobile align left */
-    .overview-point:nth-child(1) { animation-delay: 1.0s; }
-    .overview-point:nth-child(2) { animation-delay: 1.2s; }
-    .overview-point:nth-child(3) { animation-delay: 1.4s; }
-    @media (min-width: 768px) { .overview-points { grid-template-columns: repeat(3, 1fr); gap: 3rem; } } /* Desktop grid */
-    .overview-point h3 { margin-bottom: 0.8rem; font-size: 1.4rem; font-weight: 700; color: #fff; text-shadow: none; }
-    @keyframes slideFadeIn { to { opacity: 1; transform: translateY(0); } }
-    @keyframes fadeIn { to { opacity: 1; } }
-    @keyframes slideFadeInPoint { to { opacity: 1; transform: translateY(0); } }
-
-    /* Default Feature Grid Styles (Used by Step-by-Step) */
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-top: 2rem; }
-    /* Base style for ALL feature cards/items for JS Observer */
-    .feature-card { opacity: 0; transform: translateY(30px); transition: transform 0.6s ease, opacity 0.6s ease; text-align: left; }
-    .feature-card.visible { opacity: 1; transform: translateY(0); }
-    /* Box styles only for Step-by-Step */
-    .section:not(#section-different):not(#section-failproof) .feature-card { background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 15px; box-shadow: 0 0 15px rgba(213,54,255,0.1); }
-    .feature-card h3 { margin-bottom: 0.6rem; font-size: 1.3rem; font-weight: 600; color: #fff; text-shadow: none; }
+     @keyframes starScroll1 { 0% { background-position: 0 0; } 100% { background-position: 2000px 2000px; } }
+     @keyframes starScroll2 { 0% { background-position: 0 0; } 100% { background-position: -1500px 2000px; } }
+     @keyframes pulseGlow { 0%, 100% { text-shadow: 0 0 8px rgba(213,54,255,0.35); } 50% { text-shadow: 0 0 16px rgba(213,54,255,0.6); } }
 
 
-    /* --- Layout Variety CSS --- */
+     .navbar-wrapper {
+         position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 2rem;
+         display: flex; justify-content: center; z-index: 1000;
+         background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(14px);
+     }
+     .navbar { display: flex; gap: 3rem; }
+     .navbar a { text-decoration: none; font-weight: 600; font-size: 1rem; color: rgba(255, 255, 255, 0.85); transition: color 0.3s; position: relative; padding-bottom: 0.3rem; }
+     .navbar a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background-color: rgba(213, 54, 255, 0.8); transform: scaleX(0); transform-origin: bottom right; transition: transform 0.3s ease-out; }
+     .navbar a:hover { color: #fff; }
+     .navbar a:hover::after { transform: scaleX(1); transform-origin: bottom left; }
 
-    /* Style for Section 2: "What Makes It Different" (RESPONSIVE) */
-    #section-different h2 { margin-bottom: 2rem; }
-    #section-different .features-grid { display: block; max-width: 600px; margin: 2rem auto 0 auto; margin-top: 0; } /* Mobile */
-    #section-different .feature-card { background: none; border: none; box-shadow: none; padding: 1rem 0 1rem 1.5rem; text-align: left; border-left: 2px solid rgba(213, 54, 255, 0.4); border-radius: 0; position: relative; margin-bottom: 2rem; }
-    #section-different .feature-card:last-child { margin-bottom: 0; }
-    #section-different .feature-card h3 { margin-bottom: 0.4rem; }
-    #section-different .feature-card p { margin-bottom: 0; }
-    @media (min-width: 768px) { /* Desktop */
-        #section-different .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem 3rem; max-width: none; }
-        #section-different .feature-card { margin-bottom: 0; padding: 0.5rem 0 0.5rem 1.5rem; }
-    }
+     /* Default Section Styles */
+     .section { max-width: 1000px; margin: 3rem auto; padding: 0 1.5rem; text-align: center; }
+     .section h2 { margin-bottom: 1.5rem; font-size: 1.9rem; font-weight: 600; color: #fff; animation: pulseGlow 4s ease-in-out infinite; }
+     .section p, .section ul { color: rgba(240,240,240,0.85); line-height: 1.7; margin-bottom: 1.5rem; font-size: 1rem; }
 
-    /* Style for Section 3: "Why It Won’t Fail" (Minimalist List + Heading Accent Line) */
-    #section-failproof h2 { margin-bottom: 3rem; }
-    #section-failproof .features-grid { display: block; margin-top: 0; max-width: 700px; margin-left: auto; margin-right: auto; }
-    #section-failproof .feature-card { background: none; border: none; box-shadow: none; padding: 0; margin-bottom: 3rem; border-radius: 0; position: relative; text-align: left; transition: transform 0.6s ease, opacity 0.6s ease; }
-    #section-failproof .feature-card:last-child { margin-bottom: 0; }
-    #section-failproof .feature-card::before { content: none; }
-    #section-failproof .feature-card h3 { font-size: 1.4rem; font-weight: 700; color: #eee; margin-bottom: 1.2rem; position: relative; display: inline-block; padding-bottom: 0.4rem; }
-    #section-failproof .feature-card h3::after { content: ''; position: absolute; left: 0; bottom: 0; height: 2px; width: 40px; background-color: rgba(213, 54, 255, 0.7); transition: width 0.3s ease-out; }
-    #section-failproof .feature-card:hover h3::after { width: 70px; }
-    #section-failproof .feature-card p { margin-bottom: 0; color: rgba(240,240,240,0.8); }
+     /* Product Overview Section Layout */
+     .product-overview { opacity: 0; transform: translateY(20px); animation: slideFadeIn 0.8s ease-out 0.2s forwards; margin: 0rem auto 3rem auto; padding: 5.5rem 1.5rem 1rem 1.5rem; max-width: 1000px; text-align: center; }
+     .product-overview .overview-intro { max-width: 800px; margin: 0 auto 2.5rem auto; font-weight: 400; opacity: 0; animation: fadeIn 0.7s ease-out 0.8s forwards; line-height: 1.7; }
+     .overview-points { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 1000px; margin: 0 auto; text-align: left; } /* Mobile grid */
+     .overview-point { text-align: left; opacity: 0; transform: translateY(15px); animation: slideFadeInPoint 0.7s ease-out forwards; } /* Mobile align left */
+     .overview-point:nth-child(1) { animation-delay: 1.0s; }
+     .overview-point:nth-child(2) { animation-delay: 1.2s; }
+     .overview-point:nth-child(3) { animation-delay: 1.4s; }
+     @media (min-width: 768px) { .overview-points { grid-template-columns: repeat(3, 1fr); gap: 3rem; } } /* Desktop grid */
+     .overview-point h3 { margin-bottom: 0.8rem; font-size: 1.4rem; font-weight: 700; color: #fff; text-shadow: none; }
+     @keyframes slideFadeIn { to { opacity: 1; transform: translateY(0); } }
+     @keyframes fadeIn { to { opacity: 1; } }
+     @keyframes slideFadeInPoint { to { opacity: 1; transform: translateY(0); } }
 
-    /* --- End Layout Variety CSS --- */
+     /* Default Feature Grid Styles (Used by Step-by-Step) */
+     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-top: 2rem; }
+     /* Base style for ALL feature cards/items for JS Observer */
+     .feature-card { opacity: 0; transform: translateY(30px); transition: transform 0.6s ease, opacity 0.6s ease; text-align: left; }
+     .feature-card.visible { opacity: 1; transform: translateY(0); }
+     /* Box styles only for Step-by-Step */
+     .section:not(#section-different):not(#section-failproof) .feature-card { background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 15px; box-shadow: 0 0 15px rgba(213,54,255,0.1); }
+     .feature-card h3 { margin-bottom: 0.6rem; font-size: 1.3rem; font-weight: 600; color: #fff; text-shadow: none; }
 
 
-    footer { text-align: center; color: rgba(255,255,255,0.4); padding: 3rem 1rem 2rem 1rem; font-size: 0.8rem; border-top: 1px solid rgba(255, 255, 255, 0.08); margin-top: 4rem; }
-    .interest-container { margin-bottom: 2rem !important; }
+     /* --- Layout Variety CSS --- */
 
+     /* Style for Section 2: "What Makes It Different" (RESPONSIVE) */
+     #section-different h2 { margin-bottom: 2rem; }
+     #section-different .features-grid { display: block; max-width: 600px; margin: 2rem auto 0 auto; margin-top: 0; } /* Mobile */
+     #section-different .feature-card { background: none; border: none; box-shadow: none; padding: 1rem 0 1rem 1.5rem; text-align: left; border-left: 2px solid rgba(213, 54, 255, 0.4); border-radius: 0; position: relative; margin-bottom: 2rem; }
+     #section-different .feature-card:last-child { margin-bottom: 0; }
+     #section-different .feature-card h3 { margin-bottom: 0.4rem; }
+     #section-different .feature-card p { margin-bottom: 0; }
+     @media (min-width: 768px) { /* Desktop */
+         #section-different .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem 3rem; max-width: none; }
+         #section-different .feature-card { margin-bottom: 0; padding: 0.5rem 0 0.5rem 1.5rem; }
+     }
+
+     /* Style for Section 3: "Why It Won’t Fail" (Minimalist List + Heading Accent Line) */
+     #section-failproof h2 { margin-bottom: 3rem; }
+     #section-failproof .features-grid { display: block; margin-top: 0; max-width: 700px; margin-left: auto; margin-right: auto; }
+     #section-failproof .feature-card { background: none; border: none; box-shadow: none; padding: 0; margin-bottom: 3rem; border-radius: 0; position: relative; text-align: left; transition: transform 0.6s ease, opacity 0.6s ease; }
+     #section-failproof .feature-card:last-child { margin-bottom: 0; }
+     #section-failproof .feature-card::before { content: none; }
+     #section-failproof .feature-card h3 { font-size: 1.4rem; font-weight: 700; color: #eee; margin-bottom: 1.2rem; position: relative; display: inline-block; padding-bottom: 0.4rem; }
+     #section-failproof .feature-card h3::after { content: ''; position: absolute; left: 0; bottom: 0; height: 2px; width: 40px; background-color: rgba(213, 54, 255, 0.7); transition: width 0.3s ease-out; }
+     #section-failproof .feature-card:hover h3::after { width: 70px; }
+     #section-failproof .feature-card p { margin-bottom: 0; color: rgba(240,240,240,0.8); }
+
+     /* --- End Layout Variety CSS --- */
+
+    /* === UPDATED FOOTER STYLES === */
+     footer { 
+         text-align: center; 
+         color: rgba(255,255,255,0.4); 
+         padding: 2rem 1rem; /* Adjusted padding slightly */ 
+         font-size: 0.8rem; 
+         border-top: 1px solid rgba(255, 255, 255, 0.08); 
+         margin-top: 4rem; 
+     }
+     .interest-container { /* Existing style, ensure it has enough bottom margin */
+        margin: 1rem 0 2.5rem 0 !important; /* Increased bottom margin */
+     }
+
+     footer .footer-branding-text {
+         margin-bottom: 0.75rem; 
+         color: rgba(255,255,255,0.6); /* Slightly more visible */
+         font-size: 0.8rem; 
+     }
+     /* Added link style for branding text if you make "The Index Cloud" a link */
+     footer .footer-branding-text a {
+        color: rgba(255,255,255,0.75);
+        text-decoration: none;
+        font-weight: 600;
+     }
+     footer .footer-branding-text a:hover {
+        color: #fff;
+     }
+
+     footer .footer-legal-notice {
+         font-size: 0.75rem; 
+         color: rgba(255,255,255,0.55);
+         line-height: 1.4;
+         margin-top: 0.5rem; 
+     }
+
+     footer .footer-legal-notice a {
+         color: #d8b4fe; /* Light purple link color */
+         text-decoration: none; /* NO UNDERLINE */
+         font-weight: normal; 
+     }
+
+     footer .footer-legal-notice a:hover {
+         color: #f3e8ff; /* Lighter purple on hover */
+         /* text-decoration: underline; /* Optional: underline on hover if desired */
+     }
+    /* === END UPDATED FOOTER STYLES === */
 
   </style>
 </head>
@@ -140,86 +182,91 @@
 
 <div class="navbar-wrapper">
   <nav class="navbar">
-    <a href="/">The Index</a>
-    <a href="/Contact/">Lets Talk</a>
+     <a href="/">The Index</a>
+     <a href="/Contact/">Lets Talk</a>
   </nav>
 </div>
 
 <section class="section product-overview">
   <h2>Meet The Index Cloud</h2>
   <p class="overview-intro">
-     Tired of losing customers to infuriating phone menus? Traditional systems create poor experiences for most customers (61% report this) and risk significant churn when service fails. The Index Cloud offers a different approach: a custom voice agent trained on your unique knowledge and brand style, ready to handle interactions with accuracy and lifelike consistency, turning potential frustration into a positive outcome.
+      Tired of losing customers to infuriating phone menus? Traditional systems create poor experiences for most customers (61% report this) and risk significant churn when service fails. The Index Cloud offers a different approach: a custom voice agent trained on your unique knowledge and brand style, ready to handle interactions with accuracy and lifelike consistency, turning potential frustration into a positive outcome.
   </p>
   <div class="overview-points">
-    <div class="overview-point">
-      <h3>Authentic Brand Voice</h3>
-      <p>We train the system to perfectly mimic your brand's unique style. It uses your specific phrasing and tone, ensuring every interaction sounds like *you*, maintaining brand integrity unlike impersonal bots.</p>
-    </div>
-    <div class="overview-point">
-       <h3>Always-On Availability</h3>
-       <p>Responds instantly with helpful, on-brand answers 24/7. While 88% prefer humans over menus, Index Cloud resolves common queries immediately, freeing your team for complex issues only people can handle.</p>
-    </div>
-    <div class="overview-point">
-      <h3>Automates Routine Tasks</h3>
-       <p>Go beyond talk – get things done. While 67% of users wrestle with typical IVR for over 5 minutes, Index Cloud can initiate tickets or returns directly within the conversation based on your rules, freeing up your team.</p>
+     <div class="overview-point">
+         <h3>Authentic Brand Voice</h3>
+         <p>We train the system to perfectly mimic your brand's unique style. It uses your specific phrasing and tone, ensuring every interaction sounds like *you*, maintaining brand integrity unlike impersonal bots.</p>
      </div>
+     <div class="overview-point">
+          <h3>Always-On Availability</h3>
+          <p>Responds instantly with helpful, on-brand answers 24/7. While 88% prefer humans over menus, Index Cloud resolves common queries immediately, freeing your team for complex issues only people can handle.</p>
+     </div>
+     <div class="overview-point">
+         <h3>Automates Routine Tasks</h3>
+          <p>Go beyond talk – get things done. While 67% of users wrestle with typical IVR for over 5 minutes, Index Cloud can initiate tickets or returns directly within the conversation based on your rules, freeing up your team.</p>
+      </div>
   </div>
 </section>
 
 <section class="section"> <h2>Step-by-Step</h2>
   <div class="features-grid">
-    <div class="feature-card"><h3>1. We Learn Your Business</h3> <p>We study your specific business information to build a deep understanding of your operations. Unlike static IVRs that 88% find unintelligent, our learning ensures yours truly understands your world.</p> </div>
-    <div class="feature-card"><h3>2. We Align Your Voice</h3> <p>We meticulously match responses to your exact brand voice. We work with you to fine-tune communication, ensuring it meets your standards before launch for consistent messaging.</p> </div>
-    <div class="feature-card"><h3>3. We Integrate Seamlessly</h3><p>Works smoothly within your existing website, apps, or phone systems. We handle the setup for a seamless fit, minimizing technical work on your end for easy integration.</p></div>
-    <div class="feature-card"><h3>4. We Build Safeguards</h3><p>Smart safeguards ensure tricky questions go directly to your team based on your rules, avoiding the dead-ends that 52% of consumers report when trying to reach an agent.</p></div>
-    <div class="feature-card"><h3>5. You Stay In Control</h3><p>You have full oversight. Define safety boundaries, determine the knowledge scope, and specify exactly when human assistance is needed, ensuring technology serves your strategy.</p></div>
-    <div class="feature-card"><h3>6. It Continuously Evolves</h3><p>Gets smarter by analyzing anonymized interaction patterns and feedback. This helps it adapt to new questions and identify trends – constantly improving in ways static phone menus cannot.</p></div>
+     <div class="feature-card"><h3>1. We Learn Your Business</h3> <p>We study your specific business information to build a deep understanding of your operations. Unlike static IVRs that 88% find unintelligent, our learning ensures yours truly understands your world.</p> </div>
+     <div class="feature-card"><h3>2. We Align Your Voice</h3> <p>We meticulously match responses to your exact brand voice. We work with you to fine-tune communication, ensuring it meets your standards before launch for consistent messaging.</p> </div>
+     <div class="feature-card"><h3>3. We Integrate Seamlessly</h3><p>Works smoothly within your existing website, apps, or phone systems. We handle the setup for a seamless fit, minimizing technical work on your end for easy integration.</p></div>
+     <div class="feature-card"><h3>4. We Build Safeguards</h3><p>Smart safeguards ensure tricky questions go directly to your team based on your rules, avoiding the dead-ends that 52% of consumers report when trying to reach an agent.</p></div>
+     <div class="feature-card"><h3>5. You Stay In Control</h3><p>You have full oversight. Define safety boundaries, determine the knowledge scope, and specify exactly when human assistance is needed, ensuring technology serves your strategy.</p></div>
+     <div class="feature-card"><h3>6. It Continuously Evolves</h3><p>Gets smarter by analyzing anonymized interaction patterns and feedback. This helps it adapt to new questions and identify trends – constantly improving in ways static phone menus cannot.</p></div>
   </div>
 </section>
 
 <section class="section" id="section-different"> <h2>What Makes It Different</h2>
   <div class="features-grid">
-    <div class="feature-card"><h3>Speaks Your Business Fluently</h3><p>Unlike generic systems where many callers face irrelevant menus (up to 69%), it uses your terminology and understands context specific to your operations for more relevant answers.</p></div>
-    <div class="feature-card"><h3>Scales Effortlessly</h3> <p>Handles any volume of customer conversations simultaneously without delays or dips in quality, easily growing with your business demands unlike staff-limited solutions.</p></div>
-    <div class="feature-card"><h3>Failproof by Design</h3><p>Engineered to always provide a helpful outcome. If it encounters something outside its scope, it follows your pre-set rules to escalate, never leaving a customer stuck, unlike IVR loops that 86% of users try to bypass.</p></div>
-    <div class="feature-card"><h3>Automates Tasks & Workflows</h3><p>Goes beyond just answering questions, unlike basic IVR. Based on the conversation and your rules, it can initiate processes like returns or bookings directly, streamlining workflows.</p></div>
-    <div class="feature-card"><h3>Custom-Built for You</h3><p>Unlike off-the-shelf IVR or chatbots, The Index Cloud is built and configured specifically for your business needs, knowledge base, and brand personality from the start.</p></div>
-    <div class="feature-card"><h3>Realtime Adaptation</h3><p>It identifies trends in customer queries and interaction patterns, providing valuable operational insights while continuously refining its ability to serve you better.</p></div>
+     <div class="feature-card"><h3>Speaks Your Business Fluently</h3><p>Unlike generic systems where many callers face irrelevant menus (up to 69%), it uses your terminology and understands context specific to your operations for more relevant answers.</p></div>
+     <div class="feature-card"><h3>Scales Effortlessly</h3> <p>Handles any volume of customer conversations simultaneously without delays or dips in quality, easily growing with your business demands unlike staff-limited solutions.</p></div>
+     <div class="feature-card"><h3>Failproof by Design</h3><p>Engineered to always provide a helpful outcome. If it encounters something outside its scope, it follows your pre-set rules to escalate, never leaving a customer stuck, unlike IVR loops that 86% of users try to bypass.</p></div>
+     <div class="feature-card"><h3>Automates Tasks & Workflows</h3><p>Goes beyond just answering questions, unlike basic IVR. Based on the conversation and your rules, it can initiate processes like returns or bookings directly, streamlining workflows.</p></div>
+     <div class="feature-card"><h3>Custom-Built for You</h3><p>Unlike off-the-shelf IVR or chatbots, The Index Cloud is built and configured specifically for your business needs, knowledge base, and brand personality from the start.</p></div>
+     <div class="feature-card"><h3>Realtime Adaptation</h3><p>It identifies trends in customer queries and interaction patterns, providing valuable operational insights while continuously refining its ability to serve you better.</p></div>
   </div>
 </section>
 
 <section class="section" id="section-failproof"> <h2>Why It Won’t Fail</h2>
   <div class="features-grid">
-    <div class="feature-card"> <h3>Reliable Technology</h3> <p>Built with robust infrastructure and backup systems, it keeps working smoothly even if background technical issues occur, ensuring high availability, unlike systems prone to frustrating disconnections.</p> </div>
-    <div class="feature-card"> <h3>Knows When to Ask for Help</h3> <p>It clearly understands its boundaries, ensuring your customers aren't trapped. It smoothly passes conversations to your team when a person's touch is needed, eliminating the universally disliked need (frustrating 52% of callers) to repeat information.</p> </div>
-    <div class="feature-card"> <h3>Constant Monitoring</h3> <p>Our team watches performance closely, using integrated diagnostics to catch potential issues proactively, often before they affect users, and make sure everything runs smoothly.</p> </div>
-    <div class="feature-card"> <h3>Stays On Topic</h3> <p>You define precisely what information the system can access and discuss. This prevents irrelevant or inappropriate responses sometimes found in less controlled systems, protecting your brand.</p> </div>
-    <div class="feature-card"> <h3>Adapts to New Questions</h3> <p>Doesn't just rely on static scripts like old IVRs. By learning from general interaction patterns, it improves its ability to handle new situations and evolving customer questions over time.</p> </div>
-    <div class="feature-card"> <h3>You're Always in Control</h3> <p>Provides clear dashboards and tools allowing you and your team to easily oversee how it's working, see what kind of questions are common, make adjustments to knowledge or rules, and step in anytime.</p> </div>
+     <div class="feature-card"> <h3>Reliable Technology</h3> <p>Built with robust infrastructure and backup systems, it keeps working smoothly even if background technical issues occur, ensuring high availability, unlike systems prone to frustrating disconnections.</p> </div>
+     <div class="feature-card"> <h3>Knows When to Ask for Help</h3> <p>It clearly understands its boundaries, ensuring your customers aren't trapped. It smoothly passes conversations to your team when a person's touch is needed, eliminating the universally disliked need (frustrating 52% of callers) to repeat information.</p> </div>
+     <div class="feature-card"> <h3>Constant Monitoring</h3> <p>Our team watches performance closely, using integrated diagnostics to catch potential issues proactively, often before they affect users, and make sure everything runs smoothly.</p> </div>
+     <div class="feature-card"> <h3>Stays On Topic</h3> <p>You define precisely what information the system can access and discuss. This prevents irrelevant or inappropriate responses sometimes found in less controlled systems, protecting your brand.</p> </div>
+     <div class="feature-card"> <h3>Adapts to New Questions</h3> <p>Doesn't just rely on static scripts like old IVRs. By learning from general interaction patterns, it improves its ability to handle new situations and evolving customer questions over time.</p> </div>
+     <div class="feature-card"> <h3>You're Always in Control</h3> <p>Provides clear dashboards and tools allowing you and your team to easily oversee how it's working, see what kind of questions are common, make adjustments to knowledge or rules, and step in anytime.</p> </div>
   </div>
 </section>
 
 <footer>
-  <div class="interest-container" style="text-align:center; margin: 1rem 0 2rem 0;">
-  <h3 style="color: rgba(255,255,255,0.9); font-size: 1.4rem; margin-bottom: 1rem;"> Interested in learning more? </h3>
-  <a href="/Contact/" style=" display: inline-block; padding: 0.8rem 2rem; background-color: rgba(213,54,255,0.9); color: white; font-weight: 600; text-decoration: none; border-radius: 8px; box-shadow: 0 0 15px rgba(213,54,255,0.4); transition: background 0.3s ease, transform 0.2s ease; " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Let's Talk</a>
-</div>
-  The Index Cloud — Smart conversations made simple.
+  <div class="interest-container"> <h3 style="color: rgba(255,255,255,0.9); font-size: 1.4rem; margin-bottom: 1rem;"> Interested in learning more? </h3>
+    <a href="/Contact/" style=" display: inline-block; padding: 0.8rem 2rem; background-color: rgba(213,54,255,0.9); color: white; font-weight: 600; text-decoration: none; border-radius: 8px; box-shadow: 0 0 15px rgba(213,54,255,0.4); transition: background 0.3s ease, transform 0.2s ease; " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Let's Talk</a>
+  </div>
+  <p class="footer-branding-text">
+      <a href="https://theindexcloud.com" target="_blank" rel="noopener noreferrer">The Index Cloud</a> — Smart conversations made simple.
+  </p>
+  <p class="footer-legal-notice">
+      By using this website, you agree to our 
+      <a href="/Legal/">Terms of Service and Privacy Policy</a>. 
+      </p>
 </footer>
 
 <script>
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
+     entries.forEach(entry => {
+         if (entry.isIntersecting) {
+             entry.target.classList.add('visible');
+             observer.unobserve(entry.target);
+         }
+     });
   }, { threshold: 0.1 });
 
   // Observer targets ALL .feature-card elements
   document.querySelectorAll('.feature-card').forEach(card => {
-    observer.observe(card);
+     observer.observe(card);
   });
 </script>
 <elevenlabs-convai agent-id="wUQHeWr2N6z1QkUwf0tp"></elevenlabs-convai><script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
