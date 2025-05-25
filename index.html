@@ -454,7 +454,7 @@
       visibility: hidden; /* Start hidden */
       opacity: 0;         /* Start transparent */
       transform: translateY(10px); /* Start slightly lower */
-      margin-top: 7rem;
+      margin-top: 6rem;
       color: rgba(255, 255, 255, 0.85);
       font-size: 1rem;
       font-weight: 600;
@@ -512,24 +512,55 @@
 }
 The new .footer-legal-notice will inherit some of these and override others.
 */
-
-/* ADD THIS CSS FOR THE H1 */
+/*
+  NEW STYLES FOR THE H1 - Replace any previous .center-stage h1 styles with this.
+  Place this within your <style> tags.
+*/
 .center-stage h1 {
-  font-size: 2rem; /* Adjust size as needed */
-  font-weight: 600; /* Matches other text weights */
-  color: #ffffff; /* Pure white for prominence */
-  margin-bottom: 1.5rem; /* Creates space BELOW the H1, pushing the orb container's original position down */
-  text-shadow: 0 0 8px rgba(213, 54, 255, 0.5); /* Optional: adds a subtle glow like other elements */
+  font-family: 'Inter', sans-serif; /* Ensures the Inter font is used */
+  font-size: 2.2rem;          /* A bit larger for more impact */
+  font-weight: 400;           /* Try a regular weight for a sleeker feel (Inter 400) */
+  color: #e6e0f0;             /* A very light, slightly desaturated lavender - softer than pure white */
+  text-transform: none;       /* Or try 'uppercase' if you prefer that style */
+  letter-spacing: 0.5px;      /* Subtle spacing for readability */
   line-height: 1.3;
-  padding-left: 1rem; /* Add some padding if text is too close to edges on narrow views */
+
+  margin-top: 2rem;           /* Add some space from the navbar or top of viewport */
+  margin-bottom: 2.5rem;      /* Increase space between H1 and the orb area */
+  
+  padding-left: 1rem;         /* Prevent text touching screen edges */
   padding-right: 1rem;
+
+  text-shadow: 
+    0 0 8px rgba(220, 180, 255, 0.4),  /* Main subtle glow, matching a light purple */
+    0 0 15px rgba(180, 100, 255, 0.2); /* Softer, wider secondary glow */
+
+  opacity: 0;                 /* Start hidden for animation */
+  transform: translateY(-10px); /* Start slightly up for animation */
+  animation: fadeInH1 1s ease-out 0.3s forwards; /* Animation: name duration timing delay fill-mode */
 }
 
-/* You might also want a media query for smaller screens for the H1 */
-@media (max-width: 600px) {
+@keyframes fadeInH1 {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments for H1 on smaller screens */
+@media (max-width: 768px) { /* Broader breakpoint for general tablet/mobile */
   .center-stage h1 {
-    font-size: 1.5rem; /* Smaller font size for mobile */
-    margin-bottom: 1rem;
+    font-size: 1.8rem; 
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 480px) { /* More specific for smaller mobile */
+  .center-stage h1 {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.25px;
   }
 }
   </style>
