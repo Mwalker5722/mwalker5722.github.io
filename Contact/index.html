@@ -34,7 +34,7 @@
          background: radial-gradient(ellipse at center, rgba(128,0,192,0.2), transparent 60%), #1b0231;
          color: #fff;
          height: 100%;
-         overflow: hidden;
+         overflow: hidden; /* Keeps the page from scrolling */
          position: relative;
      }
 
@@ -43,7 +43,7 @@
          position: absolute;
          top: 0; left: 0; right: 0; bottom: 0;
          pointer-events: none;
-         z-index: 0;
+         z-index: 0; /* Starfield behind content */
      }
 
      body::before {
@@ -210,7 +210,7 @@
          box-shadow: 0 0 10px rgba(0, 255, 150, 0.2);
      }
 
-    /* === UPDATED FOOTER STYLES for inside the form container === */
+     /* === UPDATED FOOTER STYLES for inside the form container === */
      .footer#formFooter { 
          margin-top: 1rem; 
          padding-top: 0.5rem; 
@@ -256,6 +256,17 @@
      }
      /* Removed .underline-partial CSS rules as the span is no longer used */
      /* === END UPDATED FOOTER STYLES === */
+
+     /* --- MEDIA QUERY FOR MOBILE FORM POSITIONING --- */
+     @media (max-width: 600px) { /* Adjust breakpoint as needed */
+        .demo-form-container {
+            top: 51%; /* Shift form container up to create ~1.5rem space below */
+                      /* Original was 54%. Adjust this (e.g., 50%, 52%) if needed. */
+            /* You could also slightly reduce scale if the form feels too tall on mobile */
+            /* transform: translate(-50%, -50%) scale(0.85); */
+        }
+     }
+     /* --- END MOBILE FORM POSITIONING --- */
 
   </style>
 </head>
@@ -385,8 +396,30 @@
   });
 </script>
 
-<elevenlabs-convai agent-id="wUQHeWr2N6z1QkUwf0tp"></elevenlabs-convai>
+<elevenlabs-convai agent-id="wUQHeWr2N6z1QkUwf0tp" style="display: none;"></elevenlabs-convai>
 <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
 
 </body>
 </html>
+```
+
+I've incorporated the change to adjust the `top` position of the `.demo-form-container` to `51%` within a media query for screens `600px` wide or less. This should give you approximately the `1.5rem` (or more) of visual space below the form on mobile devices.
+
+**Key change location (within the `<style>` tags):**
+
+```css
+     /* --- MEDIA QUERY FOR MOBILE FORM POSITIONING --- */
+     @media (max-width: 600px) { /* Adjust breakpoint as needed */
+        .demo-form-container {
+            top: 51%; /* Shift form container up to create ~1.5rem space below */
+                      /* Original was 54%. Adjust this (e.g., 50%, 52%) if needed. */
+            /* You could also slightly reduce scale if the form feels too tall on mobile */
+            /* transform: translate(-50%, -50%) scale(0.85); */
+        }
+     }
+     /* --- END MOBILE FORM POSITIONING --- */
+```
+
+Remember to test this on your mobile device and adjust the `51%` value if needed to achieve the precise spacing you want.
+
+This full code should now reflect all the adjustments we've discussed for your `/Contact/` pa
