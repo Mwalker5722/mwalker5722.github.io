@@ -40,24 +40,29 @@
     }
     html, body {
       height: 100%;
-      overflow: hidden;
+      overflow-x: hidden;
       font-family: 'Inter', sans-serif;
       background-color: #1b0231; /* fallback color */
       color: #fff;
     }
-    body {
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* STARFIELD BACKGROUND + PURPLE GLOW */
-    body {
-      /* Changed 'ellipse' to 'circle' */
-      background:
-        radial-gradient(circle at center, rgba(128,0,192,0.2), transparent 60%),
-        #1b0231;
-      position: relative;
-    }
+  body {
+  /* Flexbox properties for layout */
+  display: flex;
+  flex-direction: column;
+  
+  /* For fixed navbar offset (adjust 4.5rem as needed) */
+  padding-top: 4.5rem;
+  
+  /* For vertical scrolling on mobile if needed */
+  overflow-y: auto;
+  
+  /* --- Properties for STARFIELD BACKGROUND + PURPLE GLOW --- */
+  background:
+    radial-gradient(circle at center, rgba(128,0,192,0.2), transparent 60%), /* This is the central purple glow */
+    #1b0231; /* This is the base dark purple background color */
+  position: relative; /* ESSENTIAL for the ::before and ::after star layers */
+  /* Note: font-family, color, and height: 100% are inherited from the 'html, body' rule, which is good. */
+}
     body::before,
     body::after {
       content: "";
@@ -103,15 +108,16 @@
 
     /* MAIN CONTAINER */
     .center-stage {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-      z-index: 10;
-      padding: 0;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* height: 100vh; */   /* <-- COMMENT OUT OR DELETE THIS LINE */
+  flex-grow: 1;       /* <-- ADD THIS LINE (makes it fill available vertical space) */
+  text-align: center;
+  z-index: 10;
+  padding: 0;           /* <-- KEEP OR SET THIS LINE TO padding: 0; as per your request */
+}
 
      /* ORB CONTAINER */
     .orb-container {
