@@ -1,425 +1,734 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Contact — The Index Cloud</title>
+
   <meta name="description" content="Contact The Index Cloud — Smart conversations made simple.">
-  <meta name="robots" content="noindex"> 
+
+  <meta name="robots" content="noindex">
+
   <link rel="canonical" href="https://theindexcloud.com/Contact/" />
 
+
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-96x96.png">
+
   <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+
   <link rel="icon" type="image/png" sizes="192x192" href="/favicon/web-app-manifest-192x192.png">
+
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+
   <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
+
   <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
+
   <link rel="manifest" href="/favicon/site.webmanifest">
+
   <meta name="theme-color" content="#1b0231">
 
+
   <meta property="og:title" content="Contact — The Index Cloud">
+
   <meta property="og:description" content="Get in touch with us.">
+
   <meta property="og:image" content="https://theindexcloud.com/favicon/preview.png">
+
   <meta property="og:url" content="https://theindexcloud.com/Contact/">
+
   <meta name="twitter:card" content="summary_large_image">
 
-  
+
+ 
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
+
   <style>
+
      * { margin: 0; padding: 0; box-sizing: border-box; }
 
+
      html, body {
+
          font-family: 'Inter', sans-serif;
+
          background: radial-gradient(ellipse at center, rgba(128,0,192,0.2), transparent 60%), #1b0231;
+
          color: #fff;
+
          height: 100%;
-         overflow: hidden; /* Keeps the page from scrolling */
+
+         overflow: hidden;
+
          position: relative;
+
      }
+
 
      body::before, body::after {
+
          content: "";
+
          position: absolute;
+
          top: 0; left: 0; right: 0; bottom: 0;
+
          pointer-events: none;
-         z-index: 0; /* Starfield behind content */
+
+         z-index: 0;
+
      }
+
 
      body::before {
+
          background-image: radial-gradient(#ffffff 1px, transparent 1px);
+
          background-size: 2px 2px;
+
          opacity: 0.05;
+
          animation: starScroll1 90s linear infinite;
+
      }
+
 
      body::after {
+
          background-image: radial-gradient(#ffffff 1.5px, transparent 1.5px);
+
          background-size: 3px 3px;
+
          opacity: 0.03;
+
          animation: starScroll2 120s linear infinite reverse;
+
      }
+
 
      @keyframes starScroll1 { 0% { background-position: 0 0; } 100% { background-position: 2000px 2000px; } }
+
      @keyframes starScroll2 { 0% { background-position: 0 0; } 100% { background-position: -1500px 2000px; } }
 
+
      .navbar-wrapper {
+
          position: fixed;
+
          top: 0;
+
          left: 0;
+
          width: 100%;
+
          padding: 1rem 2rem;
+
          display: flex;
+
          justify-content: center;
+
          background: rgba(255, 255, 255, 0.03);
+
          backdrop-filter: blur(14px);
+
          z-index: 999;
+
      }
+
 
      .navbar {
+
          display: flex;
+
          gap: 3rem;
+
      }
+
 
      .navbar a {
+
          text-decoration: none;
+
          font-weight: 600;
+
          font-size: 1rem;
+
          color: rgba(255, 255, 255, 0.85);
+
          transition: color 0.3s;
+
          position: relative;
+
          padding-bottom: 0.3rem;
+
      }
+
 
      .navbar a:hover {
+
          color: #fff;
+
      }
+
 
      .navbar a::after {
+
          content: '';
+
          position: absolute;
+
          bottom: 0;
+
          left: 0;
+
          width: 100%;
+
          height: 2px;
+
          background-color: rgba(213, 54, 255, 0.8);
+
          transform: scaleX(0);
+
          transform-origin: bottom right;
+
          transition: transform 0.3s ease-out;
+
      }
+
      .navbar a:hover::after {
+
          transform: scaleX(1);
+
          transform-origin: bottom left;
+
      }
+
 
      .demo-form-container {
+
          position: absolute;
-         top: 54%; 
+
+         top: 54%;
+
          left: 50%;
+
          transform: translate(-50%, -50%) scale(0.88);
+
          animation: fadeInUpZoom 1s ease-out both;
+
          background: rgba(0, 0, 0, 0.5);
+
          box-shadow: 0 0 40px rgba(213,54,255,0.2);
+
          border-radius: 20px;
+
          max-width: 400px;
+
          width: 90%;
+
          padding: 1.3rem;
+
          text-align: center;
+
          z-index: 100;
+
      }
+
 
      @keyframes fadeInUpZoom {
+
          0% { opacity: 0; transform: translate(-50%, -40%) scale(0.85); }
+
          100% { opacity: 1; transform: translate(-50%, -50%) scale(0.88); }
+
      }
+
 
      h1 {
+
          margin-bottom: 0.65rem;
+
          font-size: 1.7rem;
+
          text-shadow: 0 0 8px rgba(213,54,255,0.3);
+
      }
+
 
      p.subtext {
+
          margin-bottom: 0.35rem;
+
          color: rgba(255,255,255,0.6);
+
      }
+
 
      p.optional-note {
+
          margin-bottom: 1rem;
+
          color: rgba(255,255,255,0.5);
+
          font-style: italic;
+
          font-size: 0.85rem;
+
      }
+
      
+
      p.optional-note a#tryItLink {
+
          color: rgba(255, 255, 255, 0.85);
+
          text-decoration: underline;
+
          font-weight: 600;
+
          cursor: pointer;
+
      }
+
      p.optional-note a#tryItLink:hover {
+
          color: #fff;
+
      }
+
 
      form input, form textarea, form button {
+
          width: 100%;
+
          padding: 0.6rem;
+
          margin-bottom: 0.75rem;
+
          border-radius: 7px;
+
          border: none;
+
          font-size: 0.9rem;
+
          outline: none;
+
          font-family: inherit;
+
      }
 
+
      form input, form textarea {
+
          background-color: rgba(255,255,255,0.08);
+
          border: 1px solid rgba(213,54,255,0.25);
+
          color: #fff;
+
      }
+
 
      textarea { resize: none; }
 
+
      form input:focus, form textarea:focus {
+
          border-color: rgba(213,54,255,0.45);
+
          box-shadow: 0 0 7px rgba(213,54,255,0.25);
+
      }
+
 
      form button {
+
          background: linear-gradient(90deg, rgba(213,54,255,0.85), rgba(128,0,192,0.85));
+
          color: #fff;
+
          cursor: pointer;
+
          transition: background 0.3s ease, transform 0.2s ease;
+
          font-weight: 600;
+
      }
+
 
      form button:hover {
+
          background: linear-gradient(90deg, rgba(128,0,192,0.95), rgba(213,54,255,0.95));
+
          transform: scale(1.02);
+
      }
+
 
      #formMessage {
+
          display: none;
+
          margin-top: 1rem;
+
          padding: 0.8rem 1rem;
+
          border-radius: 8px;
+
          font-size: 0.9rem;
+
          color: #b3ffec;
+
          background-color: rgba(0, 255, 150, 0.15);
+
          border: 1px solid rgba(0, 255, 150, 0.4);
+
          box-shadow: 0 0 10px rgba(0, 255, 150, 0.2);
+
      }
 
-     /* === UPDATED FOOTER STYLES for inside the form container === */
-     .footer#formFooter { 
-         margin-top: 1rem; 
-         padding-top: 0.5rem; 
+
+    /* === UPDATED FOOTER STYLES for inside the form container === */
+
+     .footer#formFooter {
+
+         margin-top: 1rem;
+
+         padding-top: 0.5rem;
+
      }
 
-     .footer#formFooter p { 
+
+     .footer#formFooter p {
+
          line-height: 1.4;
-         margin-bottom: 0.3rem; 
+
+         margin-bottom: 0.3rem;
+
      }
+
 
      .footer#formFooter .footer-branding-text {
-         font-size: 0.7rem; 
-         color: rgba(255,255,255,0.5); 
+
+         font-size: 0.7rem;
+
+         color: rgba(255,255,255,0.5);
+
          text-transform: uppercase;
-         letter-spacing: 0.5px; 
+
+         letter-spacing: 0.5px;
+
      }
+
 
      .footer#formFooter .footer-branding-text a {
-         color: rgba(255,255,255,0.7); 
+
+         color: rgba(255,255,255,0.7);
+
          text-decoration: none; /* Ensure branding link is not underlined either */
+
          font-weight: 600;
+
      }
+
      .footer#formFooter .footer-branding-text a:hover {
+
          color: #fff;
+
      }
+
 
      .footer#formFooter .footer-legal-notice {
-         font-size: 0.7rem; 
+
+         font-size: 0.7rem;
+
          color: rgba(255,255,255,0.55);
-         text-transform: none; 
-         letter-spacing: normal; 
+
+         text-transform: none;
+
+         letter-spacing: normal;
+
      }
+
 
      .footer#formFooter .footer-legal-notice a {
+
          color: #d8b4fe; /* Link color */
+
          text-decoration: none; /* Ensure no underline for the entire link */
-         font-weight: normal; 
+
+         font-weight: normal;
+
      }
+
 
      .footer#formFooter .footer-legal-notice a:hover {
+
          color: #f3e8ff; /* Lighter color on hover for all text in the link */
+
          /* text-decoration: underline; /* Optional: underline on hover if desired */
+
      }
+
      /* Removed .underline-partial CSS rules as the span is no longer used */
+
      /* === END UPDATED FOOTER STYLES === */
 
-     /* --- MEDIA QUERY FOR MOBILE FORM POSITIONING --- */
-     @media (max-width: 600px) { /* Adjust breakpoint as needed */
-        .demo-form-container {
-            top: 51%; /* Shift form container up to create ~1.5rem space below */
-                      /* Original was 54%. Adjust this (e.g., 50%, 52%) if needed. */
-            /* You could also slightly reduce scale if the form feels too tall on mobile */
-            /* transform: translate(-50%, -50%) scale(0.85); */
-        }
-     }
-     /* --- END MOBILE FORM POSITIONING --- */
 
   </style>
+
 </head>
+
 <body>
 
+
 <div class="navbar-wrapper">
+
   <nav class="navbar">
+
      <a href="/">The Index</a>
+
      <a href="/Info/">What is it?</a>
+
   </nav>
+
 </div>
+
 
 <div class="demo-form-container">
+
   <h1>Let's Talk!</h1>
+
   <p class="subtext">Discover how The Index Cloud can help your business communicate smarter, 24/7.</p>
-  <p class="optional-note">The Index can also assist. <a href="#" id="tryItLink">Try it</a> to send us your details!</p> 
+
+  <p class="optional-note">The Index can also assist. <a href="#" id="tryItLink">Try it</a> to send us your details!</p>
+
 
   <form id="contactForm">
+
      <input type="hidden" name="_captcha" value="false">
+
      <input type="hidden" name="_subject" value="New Inquiry via The Index Cloud">
+
      <input type="hidden" name="_template" value="box">
+
      <input type="text" name="name" placeholder="Your Name" required>
+
      <input type="email" name="email" placeholder="Your Email" required>
+
      <input type="text" name="company" placeholder="Company Name" required>
+
      <input type="text" name="website" placeholder="Company Website" required>
+
      <textarea name="message" rows="3" placeholder="What’s your business all about?" required></textarea>
+
      <button type="submit">Send</button>
+
   </form>
 
+
   <div id="formMessage" style="display: none;"></div>
+
   <div class="footer" id="formFooter">
+
      <p class="footer-branding-text">Powered by <a href="https://theindexcloud.com" target="_blank" rel="noopener noreferrer">The Index Cloud</a> — Smart conversations made simple.</p>
+
      <p class="footer-legal-notice">
-         By using this website, you agree to our 
-         <a href="/Legal/">Terms of Service and Privacy Policy</a>. 
+
+         By using this website, you agree to our
+
+         <a href="/Legal/">Terms of Service and Privacy Policy</a>.
+
          </p>
+
   </div>
+
 </div>
 
+
 <script>
+
   // Existing form submission script
+
   const form = document.getElementById("contactForm");
+
   const messageBox = document.getElementById("formMessage");
-  const footer = document.getElementById("formFooter"); 
+
+  const footer = document.getElementById("formFooter");
+
 
   if (form) {
+
      form.addEventListener("submit", function (e) {
+
          e.preventDefault();
+
          const formData = new FormData(form);
+
          const button = form.querySelector("button");
+
          button.textContent = "Sending...";
+
          button.disabled = true;
 
+
          fetch("https://formsubmit.co/ajax/support@theindexcloud.com", {
+
              method: "POST",
+
              headers: { 'Accept': 'application/json' },
+
              body: formData
+
          }).then(response => response.json())
+
          .then(data => {
+
              console.log("FormSubmit.co response:", data);
-             form.reset(); 
-             form.style.display = "none"; 
+
+             form.reset();
+
+             form.style.display = "none";
+
              messageBox.textContent = "Your message has been sent. We’ll be in touch soon.";
+
              messageBox.style.backgroundColor = "rgba(0, 255, 150, 0.15)";
+
              messageBox.style.borderColor = "rgba(0, 255, 150, 0.4)";
+
              messageBox.style.color = "#b3ffec";
+
              messageBox.style.display = "block";
+
              if (footer) footer.style.display = "none";
+
          })
+
          .catch(error => {
+
              console.error("FormSubmit.co error:", error);
-             button.textContent = "Send"; 
+
+             button.textContent = "Send";
+
              button.disabled = false;
+
              messageBox.textContent = "Something went wrong. Please try again.";
+
              messageBox.style.backgroundColor = "rgba(255, 80, 80, 0.15)";
+
              messageBox.style.borderColor = "rgba(255, 80, 80, 0.4)";
+
              messageBox.style.color = "#ff9f9f";
+
              messageBox.style.display = "block";
+
              if (footer) footer.style.display = "none";
+
          });
+
      });
+
   }
 
+
   // New script to handle "Try it" link clicking the ElevenLabs widget button
+
   document.addEventListener('DOMContentLoaded', () => {
+
      const tryItLink = document.getElementById('tryItLink');
-     const convaiWidgetElement = document.querySelector('elevenlabs-convai'); 
+
+     const convaiWidgetElement = document.querySelector('elevenlabs-convai');
+
 
      if (tryItLink && convaiWidgetElement) {
+
          tryItLink.addEventListener('click', (event) => {
+
              event.preventDefault();
+
              console.log('[TryItScript] "Try it" link clicked. Attempting to interact with Convai widget...');
 
+
              const clickConvaiButton = () => {
+
                  const shadowRoot = convaiWidgetElement.shadowRoot;
 
+
                  if (shadowRoot) {
+
                      console.log('[TryItScript] Convai widget shadow DOM found.');
+
                      
+
                      const connectButtonSelector = 'button[title="Connect Now"]';
+
                      const connectButton = shadowRoot.querySelector(connectButtonSelector);
 
+
                      if (connectButton) {
+
                          console.log(`[TryItScript] Target button found in shadow DOM with selector "${connectButtonSelector}":`, connectButton.outerHTML);
+
                          connectButton.click();
+
                          console.log('[TryItScript] Clicked the target button in shadow DOM.');
+
                      } else {
+
                          console.error(`[TryItScript] Could not find the target button in the shadow DOM with selector: "${connectButtonSelector}".`);
+
                      }
+
                  } else {
+
                      console.error('[TryItScript] Convai widget shadow DOM not accessible.');
+
                  }
+
              };
 
+
              customElements.whenDefined('elevenlabs-convai').then(() => {
+
                  console.log('[TryItScript] elevenlabs-convai element is defined.');
-                 setTimeout(clickConvaiButton, 200); 
+
+                 setTimeout(clickConvaiButton, 200);
+
              }).catch(error => {
+
                  console.error('[TryItScript] Error waiting for elevenlabs-convai element to be defined:', error);
+
                   setTimeout(clickConvaiButton, 500);
+
              });
+
          });
+
      } else {
+
          if (!tryItLink) console.error('[TryItScript] "Try it" link (id="tryItLink") not found.');
+
          if (!convaiWidgetElement) console.error('[TryItScript] ElevenLabs Convai widget element (<elevenlabs-convai>) not found.');
+
      }
+
   });
+
 </script>
 
-<elevenlabs-convai agent-id="wUQHeWr2N6z1QkUwf0tp" style="display: none;"></elevenlabs-convai>
+
+<elevenlabs-convai agent-id="wUQHeWr2N6z1QkUwf0tp"></elevenlabs-convai>
+
 <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
 
+
 </body>
-</html>
-```
 
-I've incorporated the change to adjust the `top` position of the `.demo-form-container` to `51%` within a media query for screens `600px` wide or less. This should give you approximately the `1.5rem` (or more) of visual space below the form on mobile devices.
-
-**Key change location (within the `<style>` tags):**
-
-```css
-     /* --- MEDIA QUERY FOR MOBILE FORM POSITIONING --- */
-     @media (max-width: 600px) { /* Adjust breakpoint as needed */
-        .demo-form-container {
-            top: 51%; /* Shift form container up to create ~1.5rem space below */
-                      /* Original was 54%. Adjust this (e.g., 50%, 52%) if needed. */
-            /* You could also slightly reduce scale if the form feels too tall on mobile */
-            /* transform: translate(-50%, -50%) scale(0.85); */
-        }
-     }
-     /* --- END MOBILE FORM POSITIONING --- */
-```
-
-Remember to test this on your mobile device and adjust the `51%` value if needed to achieve the precise spacing you want.
-
-This full code should now reflect all the adjustments we've discussed for your `/Contact/` pa
+</html> 
