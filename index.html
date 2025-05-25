@@ -464,11 +464,23 @@
       cursor: default;
       display: inline-block;
       /* will-change removed, GSAP handles optimization */
+	     /* --- ADD THIS LINE FOR SMOOTH HOVER --- */
+  transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.2s ease;
+  /* GSAP handles the initial appearance animation; this CSS transition is for hover states */
     }
     /* REMOVED .orb-prompt.visible rule */
     /* --- End Orb Prompt Style --- */
 
 /* Add this to your existing CSS */
+/* --- ADD THIS NEW RULE FOR THE .orb-prompt HOVER EFFECT --- */
+.orb-prompt:hover {
+  color: #ffffff; /* Text becomes pure white on hover */
+  text-shadow: 
+    0 0 7px rgba(220, 180, 255, 0.5),  /* A subtle purple glow */
+    0 0 14px rgba(180, 100, 255, 0.3); /* A slightly wider, fainter secondary glow */
+  /* Optional: A very small scale effect. Uncomment if you want to try it. */
+  /* transform: scale(1.015); */ 
+}
 
 .footer-legal-notice {
     font-size: 0.7rem; /* Slightly smaller for a disclaimer */
