@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Index Cloud — How It Works</title>
-  <meta name="robots" content="noindex"> 
-  <link rel="canonical" href="https://theindexcloud.com/Info/" />
 
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
@@ -21,6 +16,13 @@
 <meta property="og:image" content="https://theindexcloud.com/favicon/preview.png">
 <meta property="og:url" content="https://theindexcloud.com/Info/">
 
+   
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Index Cloud — How It Works</title>
+  <meta name="robots" content="noindex"> 
+  <link rel="canonical" href="https://theindexcloud.com/Info/" />
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
      * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,6 +35,7 @@
          overflow-y: auto; /* Ensure scrolling is enabled */
          height: auto;
          min-height: 100%;
+         /* padding-bottom: 6rem; <-- REMOVED FROM HERE */
      }
 
      body::before, body::after {
@@ -131,7 +134,7 @@
 
      /* --- End Layout Variety CSS --- */
 
-    /* === UPDATED FOOTER STYLES === */
+     /* === UPDATED FOOTER STYLES === */
      footer { 
          text-align: center; 
          color: rgba(255,255,255,0.4); 
@@ -141,7 +144,7 @@
          margin-top: 4rem; 
      }
      .interest-container { /* Existing style, ensure it has enough bottom margin */
-        margin: 1rem 0 2.5rem 0 !important; /* Increased bottom margin */
+         margin: 1rem 0 2.5rem 0 !important; /* Increased bottom margin */
      }
 
      footer .footer-branding-text {
@@ -151,12 +154,12 @@
      }
      /* Added link style for branding text if you make "The Index Cloud" a link */
      footer .footer-branding-text a {
-        color: rgba(255,255,255,0.75);
-        text-decoration: none;
-        font-weight: 600;
+         color: rgba(255,255,255,0.75);
+         text-decoration: none;
+         font-weight: 600;
      }
      footer .footer-branding-text a:hover {
-        color: #fff;
+         color: #fff;
      }
 
      footer .footer-legal-notice {
@@ -176,7 +179,15 @@
          color: #f3e8ff; /* Lighter purple on hover */
          /* text-decoration: underline; /* Optional: underline on hover if desired */
      }
-    /* === END UPDATED FOOTER STYLES === */
+     /* === END UPDATED FOOTER STYLES === */
+
+     /* --- ADDED MEDIA QUERY FOR MOBILE BODY PADDING --- */
+     @media (max-width: 768px) { /* Applies styles when screen width is 768px or less */
+       body {
+         padding-bottom: 6rem; /* This padding will ONLY apply to mobile screens */
+       }
+     }
+     /* --- END MOBILE BODY PADDING --- */
 
   </style>
 </head>
