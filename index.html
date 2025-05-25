@@ -454,7 +454,7 @@
       visibility: hidden; /* Start hidden */
       opacity: 0;         /* Start transparent */
       transform: translateY(10px); /* Start slightly lower */
-      margin-top: 5rem;
+      margin-top: 7rem;
       color: rgba(255, 255, 255, 0.85);
       font-size: 1rem;
       font-weight: 600;
@@ -512,6 +512,26 @@
 }
 The new .footer-legal-notice will inherit some of these and override others.
 */
+
+/* ADD THIS CSS FOR THE H1 */
+.center-stage h1 {
+  font-size: 2rem; /* Adjust size as needed */
+  font-weight: 600; /* Matches other text weights */
+  color: #ffffff; /* Pure white for prominence */
+  margin-bottom: 1.5rem; /* Creates space BELOW the H1, pushing the orb container's original position down */
+  text-shadow: 0 0 8px rgba(213, 54, 255, 0.5); /* Optional: adds a subtle glow like other elements */
+  line-height: 1.3;
+  padding-left: 1rem; /* Add some padding if text is too close to edges on narrow views */
+  padding-right: 1rem;
+}
+
+/* You might also want a media query for smaller screens for the H1 */
+@media (max-width: 600px) {
+  .center-stage h1 {
+    font-size: 1.5rem; /* Smaller font size for mobile */
+    margin-bottom: 1rem;
+  }
+}
   </style>
  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -543,7 +563,7 @@ The new .footer-legal-notice will inherit some of these and override others.
       <div class="orb idle" id="orb"></div>
     </div>
 
-<div id="orb-prompt" class="orb-prompt">You can also talk to me at +1844-697-8207!</div>
+<div id="orb-prompt" class="orb-prompt">You can also talk to me at 844-697-8207!</div>
 
     <!-- Subtitles / AI Speech or status lines -->
     <div class="subtitle-container" id="subtitleContainer"></div>
