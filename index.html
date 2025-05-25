@@ -563,6 +563,15 @@ The new .footer-legal-notice will inherit some of these and override others.
     letter-spacing: 0.25px;
   }
 }
+/* ADD THIS NEW CSS RULE FOR THE H1 HOVER EFFECT */
+.center-stage h1:hover {
+  color: #ffffff; /* Makes the text pure white on hover */
+  text-shadow: 
+    0 0 12px rgba(220, 180, 255, 0.6),  /* Slightly brighter and more spread out primary glow */
+    0 0 22px rgba(180, 100, 255, 0.35); /* Slightly brighter and more spread out secondary glow */
+  /* Optional: Very subtle scale effect - uncomment the line below if you like it */
+  /* transform: scale(1.01); */ 
+}
   </style>
  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
