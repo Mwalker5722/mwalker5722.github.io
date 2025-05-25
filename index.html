@@ -516,30 +516,35 @@ The new .footer-legal-notice will inherit some of these and override others.
   NEW STYLES FOR THE H1 - Replace any previous .center-stage h1 styles with this.
   Place this within your <style> tags.
 */
+/* This is the BASE STYLE for your H1 */
 .center-stage h1 {
-  font-family: 'Inter', sans-serif; /* Ensures the Inter font is used */
-  font-size: 2.2rem;          /* A bit larger for more impact */
-  font-weight: 400;           /* Try a regular weight for a sleeker feel (Inter 400) */
-  color: #e6e0f0;             /* A very light, slightly desaturated lavender - softer than pure white */
-  text-transform: none;       /* Or try 'uppercase' if you prefer that style */
-  letter-spacing: 0.5px;      /* Subtle spacing for readability */
+  font-family: 'Inter', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: #e6e0f0;             /* Initial color */
+  text-transform: none;
+  letter-spacing: 0.5px;
   line-height: 1.3;
-
-  margin-top: 2rem;           /* Add some space from the navbar or top of viewport */
-  margin-bottom: 0rem;      /* Increase space between H1 and the orb area */
-  
-  padding-left: 1rem;         /* Prevent text touching screen edges */
+  margin-top: 2rem;
+  margin-bottom: 2.5rem;
+  padding-left: 1rem;
   padding-right: 1rem;
-
   text-shadow: 
-    0 0 8px rgba(220, 180, 255, 0.4),  /* Main subtle glow, matching a light purple */
-    0 0 15px rgba(180, 100, 255, 0.2); /* Softer, wider secondary glow */
+    0 0 8px rgba(220, 180, 255, 0.4),  /* Initial shadow */
+    0 0 15px rgba(180, 100, 255, 0.2);
+  opacity: 0; /* For the initial fade-in animation */
+  transform: translateY(-10px); /* For the initial fade-in animation */
+  animation: fadeInH1 1s ease-out 0.3s forwards;
+  
+  /* --- THIS IS THE CRUCIAL LINE FOR SMOOTH HOVER --- */
+  /* Ensure this line is present and correct */
+  transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease; 
+  /* 'transform' is included here in case you decide to use the scale effect on hover */
 
-  opacity: 0;                 /* Start hidden for animation */
-  transform: translateY(-10px); /* Start slightly up for animation */
-  animation: fadeInH1 1s ease-out 0.3s forwards; /* Animation: name duration timing delay fill-mode */
+  cursor: default; 
 }
 
+/* Your @keyframes fadeInH1 rule remains the same */
 @keyframes fadeInH1 {
   to {
     opacity: 1;
@@ -547,31 +552,19 @@ The new .footer-legal-notice will inherit some of these and override others.
   }
 }
 
-/* Responsive adjustments for H1 on smaller screens */
-@media (max-width: 768px) { /* Broader breakpoint for general tablet/mobile */
-  .center-stage h1 {
-    font-size: 1.8rem; 
-    margin-bottom: 2rem;
-  }
-}
-
-@media (max-width: 480px) { /* More specific for smaller mobile */
-  .center-stage h1 {
-    font-size: 1.5rem;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-    letter-spacing: 0.25px;
-  }
-}
-/* ADD THIS NEW CSS RULE FOR THE H1 HOVER EFFECT */
+/* Your :hover rule remains the same */
 .center-stage h1:hover {
-  color: #ffffff; /* Makes the text pure white on hover */
+  color: #ffffff; /* Target color on hover */
   text-shadow: 
-    0 0 12px rgba(220, 180, 255, 0.6),  /* Slightly brighter and more spread out primary glow */
-    0 0 22px rgba(180, 100, 255, 0.35); /* Slightly brighter and more spread out secondary glow */
+    0 0 12px rgba(220, 180, 255, 0.6),  /* Target shadow on hover */
+    0 0 22px rgba(180, 100, 255, 0.35);
   /* Optional: Very subtle scale effect - uncomment the line below if you like it */
   /* transform: scale(1.01); */ 
 }
+
+/* Your media queries for .center-stage h1 would remain the same */
+/* ... (rest of your H1 media queries) ... */
+
   </style>
  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
