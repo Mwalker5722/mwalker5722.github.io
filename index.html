@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Index Cloud - Smart AI Conversations for Your Brand</title>
-  <meta name="description" content="The Index Cloud offers intelligent AI voice agents that deliver smart, brand-aligned conversations, replacing frustrating phone menus. Scale your customer interactions simply.">
+  <meta name="description" content="The Index Cloud offers intelligent AI voice agents that deliver smart, brand-aligned conversations.">
   <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
   <link rel="manifest" href="/favicon/site.webmanifest">
@@ -15,14 +15,15 @@
   <meta property="og:url" content="https://theindexcloud.com/">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://theindexcloud.com/" />
-
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
   <style>
-    /* All CSS styles from the previous version remain the same */
+    :root {
+      --brand-accent: rgba(213, 54, 255, 0.8);
+      --background-dark: #1b0231;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { height: 100%; }
     body {
@@ -33,25 +34,29 @@
       flex-direction: column;
       overflow-x: hidden;
       background: 
-        radial-gradient(circle at center, rgba(128,0,192,0.2), transparent 60%),
-        #1b0231;
+        radial-gradient(ellipse 60% 40% at 50% 50%, rgba(128,0,192,0.2), transparent),
+        var(--background-dark);
     }
+
+    /* --- Navbar Styles --- */
     .navbar-wrapper {
-      position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 2rem;
+      position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 1.5rem;
       display: flex; justify-content: center; z-index: 1000;
-      background: rgba(27, 2, 49, 0.15);
-      backdrop-filter: blur(14px);
+      background: rgba(27, 2, 49, 0.2);
+      backdrop-filter: blur(15px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-    .navbar { display: flex; gap: 3rem; }
-    .navbar a { text-decoration: none; font-weight: 600; font-size: 1rem; color: rgba(255, 255, 255, 0.85); transition: color 0.3s; position: relative; padding-bottom: 0.3rem; }
+    .navbar { display: flex; gap: 2rem; }
+    .navbar a { text-decoration: none; font-weight: 600; font-size: 0.9rem; color: rgba(255, 255, 255, 0.85); transition: color 0.3s; position: relative; padding-bottom: 0.3rem; }
     .navbar a::after { 
       content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px;
-      background-color: rgba(213, 54, 255, 0.8);
+      background-color: var(--brand-accent);
       transform: scaleX(0); transform-origin: bottom right; transition: transform 0.3s ease-out;
     }
     .navbar a:hover { color: #fff; }
     .navbar a:hover::after { transform: scaleX(1); transform-origin: bottom left; }
+    
+    /* --- Main Hero Section --- */
     .hero-section {
       display: flex;
       flex-direction: column;
@@ -59,35 +64,39 @@
       justify-content: center;
       text-align: center;
       flex-grow: 1;
-      padding: 6rem 1rem 2rem 1rem;
+      padding: 4.5rem 1rem 2rem 1rem; 
     }
-    .hero-content { max-width: 800px; }
+    .hero-content { max-width: 90%; }
+    
+    .hero-eyebrow {
+      font-size: 0.8rem; 
+      font-weight: 600;
+      color: var(--brand-accent);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem; 
+    }
     .hero-headline {
-      font-size: 4.5rem;
+      font-size: 2.5rem; 
       font-weight: 800;
       color: #ffffff;
-      line-height: 1.1;
-      letter-spacing: -2px;
-      text-shadow: 
-        0 0 8px rgba(255, 255, 255, 0.6),
-        0 0 20px rgba(213, 54, 255, 0.5), 
-        0 0 35px rgba(213, 54, 255, 0.3);
+      line-height: 1.2; 
+      letter-spacing: -1px; 
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.3), 0 0 20px rgba(213, 54, 255, 0.4);
     }
     .hero-tagline {
-      font-size: 1.2rem;
+      font-size: 1rem; 
       font-weight: 400;
       color: rgba(255, 255, 255, 0.85);
-      max-width: 600px; 
-      margin-top: 2rem;
-      line-height: 1.6;
-      margin-left: auto;
-      margin-right: auto;
+      max-width: 90%; 
+      margin: 1.25rem auto 0; /* margin-bottom is 0 here */
+      line-height: 1.5; 
     }
     .hero-cta {
       display: inline-block;
-      margin-top: 2.5rem;
-      padding: 0.9rem 2rem;
-      font-size: 1rem;
+      margin-top: 0.3rem; /* Very tight spacing for mobile */
+      padding: 0.7rem 1.5rem; 
+      font-size: 0.9rem; 
       font-weight: 600;
       color: #fff;
       text-decoration: none;
@@ -102,24 +111,106 @@
       box-shadow: 0 0 30px rgba(213, 54, 255, 0.4);
       transform: translateY(-3px);
     }
+
+    /* --- EXACT ORIGINAL FOOTER STYLES --- */
     .footer {
-      padding: 2rem 1rem; text-align: center; font-size: 0.8rem; color: rgba(255, 255, 255, 0.6);
-      border-top: 1px solid rgba(255, 255, 255, 0.1); flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      font-size: 0.75rem;
+      padding: 1.5rem 1rem 2rem;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      z-index: 10;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      flex-shrink: 0; 
     }
-    .footer a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: color 0.3s ease; }
-    .footer a:hover { color: #ffffff; }
-    .footer .footer-legal-notice { margin-top: 1rem; font-size: 0.75rem; color: rgba(255, 255, 255, 0.5); }
-    .footer .grant-logo-mobile { display: none; margin: 1rem auto 0; max-width: 180px; opacity: 0.9; }
-    #elevenlabs-grant-badge-desktop { position: fixed; bottom: 20px; left: 20px; z-index: 1000; display: block; }
-    #elevenlabs-grant-badge-desktop img { width: 140px; height: auto; opacity: 0.9; transition: opacity 0.3s, transform 0.3s; }
-    #elevenlabs-grant-badge-desktop:hover img { opacity: 1; transform: scale(1.03); }
-    @media (max-width: 768px) {
-      .hero-headline { font-size: 3rem; letter-spacing: -1px; }
-      .hero-tagline { font-size: 1.1rem; }
+    .footer-branding-text {
+      margin-bottom: 0.75rem;
+    }
+    .footer-branding-text a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .footer-branding-text a:hover {
+      color: #ffffff;
+    }
+    .footer-legal-notice {
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.55);
+      text-transform: none;
+      letter-spacing: normal;
+      margin-top: 0.75rem;
+      margin-bottom: 0.75rem;
+      line-height: 1.4;
+      max-width: 90%;
+    }
+    .footer-legal-notice a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: underline;
+      transition: color 0.3s ease;
+    }
+    .footer-legal-notice a:hover {
+      color: #ffffff;
+    }
+    #elevenlabs-grant-link-mobile {
+      display: none;
+      margin-top: 0.75rem;
+    }
+    .grant-logo-mobile {
+      width: 100%;
+      max-width: 180px;
+      height: auto;
+    }
+    #elevenlabs-grant-badge-desktop {
+      position: fixed; bottom: 20px; left: 20px; z-index: 1000; display: block;
+    }
+    #elevenlabs-grant-badge-desktop img {
+      width: 140px; height: auto; opacity: 0.9; transition: opacity 0.3s, transform 0.3s;
+    }
+    #elevenlabs-grant-badge-desktop:hover img {
+      opacity: 1; transform: scale(1.03);
+    }
+
+    /* --- Responsive Design --- */
+    @media (min-width: 768px) {
+      .hero-section {
+        padding-top: 6rem; 
+      }
+      .hero-eyebrow {
+        font-size: 0.875rem; 
+        margin-bottom: 1rem; 
+      }
+      .hero-headline {
+        font-size: 4.5rem; 
+        letter-spacing: -2px; 
+        line-height: 1.15; 
+      }
+      .hero-tagline {
+        font-size: 1.2rem; 
+        max-width: 600px; 
+        margin-top: 1.5rem; 
+        line-height: 1.6; 
+      }
+      .hero-cta {
+        margin-top: 0.75rem; /* <<<--- ADJUSTED FOR TIGHTER DESKTOP SPACING */
+        padding: 0.8rem 1.75rem; 
+        font-size: 1rem; 
+      }
+      .navbar {
+        gap: 3rem;
+      }
     }
     @media (max-width: 600px) {
-      #elevenlabs-grant-badge-desktop { display: none; }
-      .footer .grant-logo-mobile { display: block; }
+      #elevenlabs-grant-badge-desktop {
+        display: none;
+      }
+      #elevenlabs-grant-link-mobile {
+        display: block; 
+      }
     }
   </style>
 </head>
@@ -135,34 +226,40 @@
 
   <main class="hero-section">
     <div class="hero-content">
+      <p class="hero-eyebrow" id="eyebrow">A NEW ERA OF CUSTOMER INTERACTION</p>
       <h1 class="hero-headline" id="headline">Your Brand's Voice, Reimagined.</h1>
       <p class="hero-tagline" id="tagline">
-        The Index Cloud provides intelligent AI agents that deliver truly human-like conversations. Replace frustrating systems with a seamless voice experience that understands your business and delights your customers.
+        Meet The Index Cloud: Intelligent AI voice agents for truly human-like, brand-aligned conversations. We understand your business, automate tasks, delight customers 24/7, and make frustrating phone menus a thing of the past.
       </p>
       <a href="/Contact/" class="hero-cta" id="cta">Explore the Future</a>
     </div>
   </main>
 
   <footer class="footer">
-    <p>Powered by The Index Cloud — Smart conversations made simple.</p>
+    <p class="footer-branding-text">
+      Powered by <a href="#">The Index Cloud</a> — Smart conversations made simple.
+    </p>
     <p class="footer-legal-notice">
       By using this website, you agree to our 
       <a href="/Legal/">Terms of Service and Privacy Policy</a>.
     </p>
-    <a href="https://elevenlabs.io/text-to-speech" target="_blank" rel="noopener noreferrer">
-      <img src="long_footer_logo.png" alt="ElevenLabs Grants Program" class="grant-logo-mobile">
+    <a href="https://elevenlabs.io/text-to-speech" id="elevenlabs-grant-link-mobile" target="_blank" rel="noopener noreferrer" title="Text to Speech by ElevenLabs - Grants Program">
+      <img src="long_footer_logo.png" alt="ElevenLabs Grants Program (Mobile)" class="grant-logo-mobile">
     </a>
   </footer>
 
   <div id="elevenlabs-grant-badge-desktop">
-    <a href="https://elevenlabs.io/text-to-speech" target="_blank" rel="noopener noreferrer">
-      <img src="tall_badge_logo.png" alt="Powered by ElevenLabs Grants">
+    <a href="https://elevenlabs.io/text-to-speech" target="_blank" rel="noopener noreferrer" title="Text to Speech by ElevenLabs">
+      <img src="tall_badge_logo.png" alt="Powered by ElevenLabs Grants (Desktop)">
     </a>
   </div>
   
+  <elevenlabs-convai agent-id="wUQHeWr2N6z1QkUwf0tp" id="aiWidget"></elevenlabs-convai>
+  <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+
   <script>
+    // Entrance animations
     document.addEventListener("DOMContentLoaded", () => {
-      // Entrance animations for the content
       const heroContent = document.querySelector(".hero-content");
       gsap.from(heroContent.children, {
         duration: 1,
@@ -171,27 +268,19 @@
         stagger: 0.2,
         ease: "power3.out"
       });
-    });
-  </script>
-
-  <elevenlabs-convai agent-id="wUQHeWr2N6z1QkUwf0tp" id="aiWidget"></elevenlabs-convai>
-  <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
+      
+      // Widget connection script
       const ctaButton = document.getElementById('cta');
       const aiWidget = document.getElementById('aiWidget');
-
-      // Check if both the button and the widget exist on the page
       if (ctaButton && aiWidget) {
         ctaButton.addEventListener('click', (event) => {
-          // Prevent the button from trying to go to the "/Contact/" page
           event.preventDefault();
-          
-          // Call the widget's built-in open() function
-          // This function is provided by the widget's own script
-          if (aiWidget.open) {
-            aiWidget.open();
+          const shadowRoot = aiWidget.shadowRoot;
+          if (shadowRoot) {
+            const internalButton = shadowRoot.querySelector('button');
+            if (internalButton) {
+              internalButton.click();
+            }
           }
         });
       }
