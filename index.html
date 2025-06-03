@@ -1,817 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-  <!-- Favicon and App Icons -->
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/favicon/web-app-manifest-192x192.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
-<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
-<link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
-<link rel="manifest" href="/favicon/site.webmanifest">
-<meta name="theme-color" content="#1b0231">
-
-<meta property="og:title" content="The Index Cloud">
-<meta property="og:description" content="Smart conversations made simple — Your brand’s voice at scale.">
-<meta property="og:image" content="https://theindexcloud.com/favicon/preview.png">
-<meta property="og:url" content="https://theindexcloud.com/">
-<meta property="og:type" content="website">
-
-	
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Index Cloud - Smart AI Conversations for Your Brand</title>
   <meta name="description" content="The Index Cloud offers intelligent AI voice agents that deliver smart, brand-aligned conversations, replacing frustrating phone menus. Scale your customer interactions simply.">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="/favicon/site.webmanifest">
+  <meta name="theme-color" content="#1b0231">
+  <meta property="og:title" content="The Index Cloud">
+  <meta property="og:description" content="Smart conversations made simple — Your brand’s voice at scale.">
+  <meta property="og:image" content="https://theindexcloud.com/favicon/preview.png">
+  <meta property="og:url" content="https://theindexcloud.com/">
+  <meta property="og:type" content="website">
   <link rel="canonical" href="https://theindexcloud.com/" />
 
-  <!-- Example Google Font -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
   <style>
-
-
-   /* RESET */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    html, body {
+    /* All CSS styles from the previous version remain the same */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { height: 100%; }
+    body {
       height: 100%;
-      overflow-x: hidden;
       font-family: 'Inter', sans-serif;
-      background-color: #1b0231; /* fallback color */
       color: #fff;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      background: 
+        radial-gradient(circle at center, rgba(128,0,192,0.2), transparent 60%),
+        #1b0231;
     }
-  body {
-  /* Flexbox properties for layout */
-  display: flex;
-  flex-direction: column;
-  
-  /* For fixed navbar offset (adjust 4.5rem as needed) */
-  padding-top: 4.5rem;
-  
-  /* For vertical scrolling on mobile if needed */
-  overflow-y: auto;
-  
-  /* --- Properties for STARFIELD BACKGROUND + PURPLE GLOW --- */
-  background:
-    radial-gradient(circle at center, rgba(128,0,192,0.2), transparent 60%), /* This is the central purple glow */
-    #1b0231; /* This is the base dark purple background color */
-  position: relative; /* ESSENTIAL for the ::before and ::after star layers */
-  /* Note: font-family, color, and height: 100% are inherited from the 'html, body' rule, which is good. */
-}
-    body::before,
-    body::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      pointer-events: none;
-      background-repeat: repeat;
-      z-index: 0;
+    .navbar-wrapper {
+      position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 2rem;
+      display: flex; justify-content: center; z-index: 1000;
+      background: rgba(27, 2, 49, 0.15);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-    /* Star layer 1 */
-    body::before {
-      background-image: radial-gradient(#ffffff 1px, transparent 1px);
-      background-size: 2px 2px;
-      opacity: 0.05;
-      animation: starScroll1 90s linear infinite;
+    .navbar { display: flex; gap: 3rem; }
+    .navbar a { text-decoration: none; font-weight: 600; font-size: 1rem; color: rgba(255, 255, 255, 0.85); transition: color 0.3s; position: relative; padding-bottom: 0.3rem; }
+    .navbar a::after { 
+      content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px;
+      background-color: rgba(213, 54, 255, 0.8);
+      transform: scaleX(0); transform-origin: bottom right; transition: transform 0.3s ease-out;
     }
-    @keyframes starScroll1 {
-      0%   { background-position: 0 0; }
-      100% { background-position: 2000px 2000px; }
-    }
-    /* Star layer 2 */
-    body::after {
-      background-image: radial-gradient(#ffffff 1.5px, transparent 1.5px);
-      background-size: 3px 3px;
-      opacity: 0.03;
-      animation: starScroll2 120s linear infinite reverse;
-    }
-    @keyframes starScroll2 {
-      0%   { background-position: 0 0; }
-      100% { background-position: -1500px 2000px; }
-    }
-
-    /* INDEX CLOUD LABEL (TOP LEFT) */
-    .index-cloud-label {
-      position: fixed;
-      top: 0.5rem;
-      left: 1rem;
-      font-size: 1rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.8);
-      z-index: 999;
-    }
-
-    /* MAIN CONTAINER */
-    .center-stage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* height: 100vh; */   /* <-- COMMENT OUT OR DELETE THIS LINE */
-  flex-grow: 1;       /* <-- ADD THIS LINE (makes it fill available vertical space) */
-  text-align: center;
-  z-index: 10;
-  padding: 0;           /* <-- KEEP OR SET THIS LINE TO padding: 0; as per your request */
-}
-
-     /* ORB CONTAINER */
-    .orb-container {
-      width: 160px;
-      height: 160px;
-      position: relative; /* Already has relative position */
-      z-index: 11;
-      cursor: pointer;
-	  -webkit-tap-highlight-color: transparent;
-      animation: appear 0.8s ease-out both; /* Keep animation */
-      top: 3rem; /* <-- ADD THIS LINE */
-    }
-    .orb {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: radial-gradient(circle at center,
-        rgba(213,54,255,1) 0%,
-        rgba(213,54,255,0.8) 40%,
-        rgba(128,0,192,0.3) 70%,
-        rgba(0,0,0,0.6) 100%);
-      box-shadow:
-        0 0 50px rgba(213,54,255,0.6),
-        inset 0 0 25px rgba(213,54,255,0.4);
-      transition: transform 0.4s, box-shadow 0.4s, background-color 0.4s;
-    }
-    .orb.idle {}
-    .orb.listening {
-      background: radial-gradient(circle at center,
-        rgba(30,255,125,0.6) 20%,
-        rgba(30,255,125,0.2) 70%,
-        transparent 100%);
-      box-shadow: 0 0 30px rgba(30,255,125,0.4), inset 0 0 15px rgba(30,255,125,0.2);
-    }
-    .orb.speaking {
-      background: radial-gradient(circle at center,
-        rgba(255,80,80,0.7) 20%,
-        rgba(255,80,80,0.2) 70%,
-        transparent 100%);
-      box-shadow: 0 0 30px rgba(255,80,80,0.4), inset 0 0 15px rgba(255,80,80,0.2);
-    }
-
-    /* Click pulse */
-    .orb-click {
-      animation: orbClick 0.4s ease-out forwards;
-    }
-    @keyframes orbClick {
-      0%   { transform: scale(1); }
-      50%  { transform: scale(1.08); }
-      100% { transform: scale(1); }
-    }
-
-    /* Subtitles / AI Speech or status lines */
-    .subtitle-container {
-      position: relative;
-      width: 80%;
-      max-width: 600px;
-      margin-top: 1rem;
-      color: #e0ddec;
-      text-shadow: 0 0 2px rgba(213,54,255,0.3);
-      overflow: hidden;
-      min-height: 2rem; 
-    }
-    .subtitle-line {
-      opacity: 1;
-      transition: opacity 1s ease-out;
-      margin: 0.4rem 0;
-      font-size: 1rem;
-    }
-    .subtitle-line.fade-out {
-      opacity: 0;
-    }
-
-    /* Type Mode Input */
-    #textInput {
-      display: none;
-      background-color: rgba(255,255,255,0.1);
-      color: #fff;
-      border: 1px solid rgba(213,54,255,0.4);
-      border-radius: 6px;
-      padding: 0.75rem 1rem;
-      width: 60%;
-      max-width: 400px;
+    .navbar a:hover { color: #fff; }
+    .navbar a:hover::after { transform: scaleX(1); transform-origin: bottom left; }
+    .hero-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      box-shadow: 0 0 8px rgba(213,54,255,0.2);
-      outline: none;
-      opacity: 0;
-      transform: scale(0.8);
-      margin-top: 2rem;
+      flex-grow: 1;
+      padding: 6rem 1rem 2rem 1rem;
     }
-    #textInput.show {
-      display: block;
-      animation: popIn 0.4s ease-out forwards;
+    .hero-content { max-width: 800px; }
+    .hero-headline {
+      font-size: 4.5rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.1;
+      letter-spacing: -2px;
+      text-shadow: 
+        0 0 8px rgba(255, 255, 255, 0.6),
+        0 0 20px rgba(213, 54, 255, 0.5), 
+        0 0 35px rgba(213, 54, 255, 0.3);
     }
-    @keyframes popIn {
-      0%   { transform: scale(0.8); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    #textInput:focus {
-      box-shadow: 0 0 10px rgba(213,54,255,0.4);
-      border-color: rgba(213,54,255,0.5);
-    }
-
-    /* FOOTER */
-    .footer {
-    display: flex; /* Use flexbox for better alignment */
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally */
-    text-align: center;
-    font-size: 0.75rem; /* Slightly reduce font size for footer */
-    padding: 1.5rem 1rem 2rem; /* Increase padding, especially top/bottom */
-    color: rgba(255, 255, 255, 0.6); /* Slightly increase default text opacity */
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    z-index: 10;
-    border-top: 1px solid rgba(255, 255, 255, 0.15); /* Add a subtle separator line */
-    /* Optional: subtle background to define footer area more */
-    /* background: rgba(27, 2, 49, 0.2); */
-    /* backdrop-filter: blur(5px); */
-}
-
-.footer-branding-text {
-    margin-bottom: 0.75rem; /* Space between your text and the logo */
-}
-
-.footer-branding-text a { /* Styling links within your branding text */
-    color: rgba(255, 255, 255, 0.75);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-branding-text a:hover {
-    color: #ffffff;
-}
-
-#elevenlabs-grant-link img {
-    width: 180px; /* Or your preferred size */
-    height: auto;
-    display: block;
-    opacity: 1; /* Keep it fully opaque */
-
-    /* --- Experiment with hue-rotate and brightness --- */
-    filter: brightness(1.1) hue-rotate(0deg); /* Start with 0deg (no hue change) */
-    /*
-        EXAMPLES TO TRY FOR hue-rotate:
-        filter: brightness(1.1) hue-rotate(90deg);
-        filter: brightness(1.1) hue-rotate(180deg);
-        filter: brightness(1.1) hue-rotate(-45deg); /* Negative values work too */
-        filter: brightness(1.1) hue-rotate(270deg);
-    */
-
-    transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-#elevenlabs-grant-link:hover img {
-    transform: scale(1.05);
-    filter: brightness(1.15) hue-rotate(0deg); /* Adjust hover hue if desired, or keep it the same */
-    /* Example: Slightly different hue on hover */
-    /* filter: brightness(1.15) hue-rotate(15deg); */
-}
-
-
-	
-	/* Speaking pulse */
-    @keyframes pulseOrb {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-    .orb.pulsing {
-      animation: pulseOrb 1.5s ease-in-out infinite;
-    }
-
-    .orb-caption {
-      margin-top: 1.2rem;
-      font-size: 1.1rem;
-      color: rgba(255, 255, 255, 0.75);
-      text-shadow: 0 0 4px rgba(213, 54, 255, 0.4);
-      animation: fadeIn 2s ease-in;
-    }
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(10px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    /* tsparticles container */
-    #particles-js {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      top: 0;
-      left: 0;
-    }
-	
-	#particles-js canvas {
-  position: absolute !important;
-  width: 100% !important;
-  height: 100% !important;
-  top: 0 !important;
-  left: 0 !important;
-  z-index: 2 !important;   /* Increase to 2 or 3 to layer above the background */
-  opacity: 1 !important;
-  pointer-events: none;
-}
-
-/* === CSS FOR THE GRANT LOGOS (DESKTOP DEFAULTS) === */
-
-        /* Fixed Bottom-Left Badge for Desktop */
-        #elevenlabs-grant-badge-desktop {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 1000;
-            line-height: 0;
-            display: block; /* Visible on desktop by default */
-        }
-
-        #elevenlabs-grant-badge-desktop .grant-logo-desktop {
-            width: 140px; /* Adjust desktop size for the TALL logo if needed */
-            height: auto;
-            display: block;
-            opacity: 0.9;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        #elevenlabs-grant-badge-desktop:hover .grant-logo-desktop {
-            opacity: 1;
-            transform: scale(1.03);
-        }
-
-        /* Main Footer Logo (Mobile Version) - HIDDEN on Desktop */
-        #elevenlabs-grant-link-mobile {
-            display: none; /* Hide this link and its image on desktop */
-            margin-top: 0.75rem; /* Will apply when visible on mobile */
-            text-align: center; /* Helps center the inline-block image below */
-        }
-
-        .grant-logo-mobile { /* Styling for the LONG HORIZONTAL logo, primarily for when it's visible on mobile */
-            display: inline-block; 
-            height: auto;
-            opacity: 0.9;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        #elevenlabs-grant-link-mobile:hover .grant-logo-mobile { /* Hover for the mobile logo */
-            opacity: 1;
-            transform: scale(1.03);
-        }
-
-@media (max-width: 600px) {
-  .orb-container {
-    width: 120px;
-    height: 120px;
-  }
-  .orb-caption {
-    font-size: 1rem;
-    margin-top: 1rem;
-  }
-  .subtitle-line {
-    font-size: 0.9rem;
-  }
-  #textInput {
-    width: 80%;
-    max-width: 90%;
-    padding: 0.6rem 0.8rem;
-  }
-  .index-cloud-label {
-    font-size: 0.85rem;
-    top: 0.3rem;
-    left: 0.6rem;
-  }
-    #elevenlabs-grant-badge-desktop {
-                display: none;
-            }
-
-            /* Show and Style the Main Footer Logo (Mobile Version) */
-            #elevenlabs-grant-link-mobile {
-                display: block; /* Make the link (and thus image) visible */
-            }
-
-            .grant-logo-mobile { /* This is the LONG HORIZONTAL logo for mobile */
-                /* display: inline-block; is inherited from above and fine */
-                width: 100%;     /* Makes it responsive within the padded footer */
-                max-width: 180px;  /* Adjust size for the long logo on mobile (e.g., 160px, 180px, 200px) */
-                /* height, opacity, transition are inherited from general .grant-logo-mobile styles */
-            }
-
-            /* Adjust main .footer padding and font for mobile */
-            .footer { /* This modifies your .footer specifically for mobile */
-                font-size: 0.7rem; 
-                padding: 1rem 15px 20px 15px; /* Mobile footer padding (top, Left/Right, bottom) */
-            }
-}
-
-
-
-/* --- ADDED STANDARD NAVBAR CSS --- */
-.navbar-wrapper {
-  position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 2rem;
-  display: flex; justify-content: center; z-index: 1000; /* High z-index */
-  background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(14px);
-}
-.navbar { display: flex; gap: 3rem; }
-.navbar a { text-decoration: none; font-weight: 600; font-size: 1rem; color: rgba(255, 255, 255, 0.85); transition: color 0.3s; position: relative; padding-bottom: 0.3rem; }
-.navbar a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background-color: rgba(213, 54, 255, 0.8); transform: scaleX(0); transform-origin: bottom right; transition: transform 0.3s ease-out; }
-.navbar a:hover { color: #fff; }
-.navbar a:hover::after { transform: scaleX(1); transform-origin: bottom left; }
-/* --- END STANDARD NAVBAR CSS --- */
-
-.orb-nav a:hover {
-  color: #ffffff;
-  text-shadow: 0 0 10px rgba(213, 54, 255, 0.6);
-}
-
-/* Simple appear animation */
-@keyframes appear {
-  from {
-    opacity: 0;
-    transform: scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Orb appear on page load */
-.orb-container {
-  animation: appear 0.8s ease-out both;
-}
-
-/* Navbar appear on page load */
-.orb-nav {
-  animation: appear 1s ease-out both;
-  animation-delay: 0.3s;
-}
-
- /* --- Orb Prompt Style (Initial State for GSAP) --- */
-    .orb-prompt {
-      visibility: hidden; /* Start hidden */
-      opacity: 0;         /* Start transparent */
-      transform: translateY(10px); /* Start slightly lower */
-      margin-top: 6rem;
+    .hero-tagline {
+      font-size: 1.2rem;
+      font-weight: 400;
       color: rgba(255, 255, 255, 0.85);
+      max-width: 600px; 
+      margin-top: 2rem;
+      line-height: 1.6;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-cta {
+      display: inline-block;
+      margin-top: 2.5rem;
+      padding: 0.9rem 2rem;
       font-size: 1rem;
       font-weight: 600;
-      /* transition: ... REMOVED */
-      z-index: 12;
-      position: relative;
-      cursor: default;
-      display: inline-block;
-      /* will-change removed, GSAP handles optimization */
-	     /* --- ADD THIS LINE FOR SMOOTH HOVER --- */
-  transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.2s ease;
-  /* GSAP handles the initial appearance animation; this CSS transition is for hover states */
+      color: #fff;
+      text-decoration: none;
+      background-color: transparent;
+      border: 1px solid rgba(213, 54, 255, 0.6);
+      border-radius: 8px;
+      transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+      box-shadow: 0 0 20px rgba(213, 54, 255, 0.2);
     }
-    /* REMOVED .orb-prompt.visible rule */
-    /* --- End Orb Prompt Style --- */
-
-/* Add this to your existing CSS */
-/* --- ADD THIS NEW RULE FOR THE .orb-prompt HOVER EFFECT --- */
-.orb-prompt:hover {
-  color: #ffffff; /* Text becomes pure white on hover */
-  text-shadow: 
-    0 0 7px rgba(220, 180, 255, 0.5),  /* A subtle purple glow */
-    0 0 14px rgba(180, 100, 255, 0.3); /* A slightly wider, fainter secondary glow */
-  /* Optional: A very small scale effect. Uncomment if you want to try it. */
-  /* transform: scale(1.015); */ 
-}
-
-.footer-legal-notice {
-    font-size: 0.7rem; /* Slightly smaller for a disclaimer */
-    color: rgba(255, 255, 255, 0.55); /* Adjust opacity for readability */
-    text-transform: none; /* Keep it sentence case, not uppercase */
-    letter-spacing: normal; /* Normal letter spacing */
-    margin-top: 0.75rem; /* Space above this line */
-    margin-bottom: 0.75rem; /* Space below, adjust if needed */
-    line-height: 1.4; /* Adjust line height for readability */
-    max-width: 90%; /* Ensure it wraps nicely on smaller screens if long */
-    text-align: center; /* Already handled by .footer flex settings but good to be explicit */
-}
-
-.footer-legal-notice a {
-    color: rgba(255, 255, 255, 0.75); /* Make link slightly more prominent */
-    text-decoration: underline;
-    text-decoration-style: dotted; /* Optional: subtle underline style */
-    transition: color 0.3s ease;
-}
-
-.footer-legal-notice a:hover {
-    color: #ffffff; /* Brighter on hover */
-    text-decoration-style: solid; /* Optional: solid underline on hover */
-}
-
-/* Adjust existing .footer CSS if needed for spacing */
-/* For example, your existing .footer might already have padding that works well. */
-/* The .footer in your provided snippet was:
-.footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    font-size: 0.75rem;
-    padding: 1.5rem 1rem 2rem;
-    color: rgba(255, 255, 255, 0.6);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    z-index: 10;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-}
-The new .footer-legal-notice will inherit some of these and override others.
-*/
-/*
-  NEW STYLES FOR THE H1 - Replace any previous .center-stage h1 styles with this.
-  Place this within your <style> tags.
-*/
-/* This is the BASE STYLE for your H1 */
-.center-stage h1 {
-  font-family: 'Inter', sans-serif;
-  font-size: 2.2rem;
-  font-weight: 400;
-  color: #e6e0f0;             /* Initial color */
-  text-transform: none;
-  letter-spacing: 0.5px;
-  line-height: 1.3;
-  margin-top: 2rem;
-  margin-bottom: 0rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  text-shadow: 
-    0 0 8px rgba(220, 180, 255, 0.4),  /* Initial shadow */
-    0 0 15px rgba(180, 100, 255, 0.2);
-  opacity: 0; /* For the initial fade-in animation */
-  transform: translateY(-10px); /* For the initial fade-in animation */
-  animation: fadeInH1 1s ease-out 0.3s forwards;
-  
-  /* --- THIS IS THE CRUCIAL LINE FOR SMOOTH HOVER --- */
-  /* Ensure this line is present and correct */
-  transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease; 
-  /* 'transform' is included here in case you decide to use the scale effect on hover */
-
-  cursor: default; 
-}
-
-/* Your @keyframes fadeInH1 rule remains the same */
-@keyframes fadeInH1 {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Your :hover rule remains the same */
-.center-stage h1:hover {
-  color: #ffffff; /* Target color on hover */
-  text-shadow: 
-    0 0 12px rgba(220, 180, 255, 0.6),  /* Target shadow on hover */
-    0 0 22px rgba(180, 100, 255, 0.35);
-  /* Optional: Very subtle scale effect - uncomment the line below if you like it */
-  /* transform: scale(1.01); */ 
-}
-
-/* Your media queries for .center-stage h1 would remain the same */
-/* ... (rest of your H1 media queries) ... */
-
+    .hero-cta:hover {
+      background-color: rgba(213, 54, 255, 0.1);
+      box-shadow: 0 0 30px rgba(213, 54, 255, 0.4);
+      transform: translateY(-3px);
+    }
+    .footer {
+      padding: 2rem 1rem; text-align: center; font-size: 0.8rem; color: rgba(255, 255, 255, 0.6);
+      border-top: 1px solid rgba(255, 255, 255, 0.1); flex-shrink: 0;
+    }
+    .footer a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: color 0.3s ease; }
+    .footer a:hover { color: #ffffff; }
+    .footer .footer-legal-notice { margin-top: 1rem; font-size: 0.75rem; color: rgba(255, 255, 255, 0.5); }
+    .footer .grant-logo-mobile { display: none; margin: 1rem auto 0; max-width: 180px; opacity: 0.9; }
+    #elevenlabs-grant-badge-desktop { position: fixed; bottom: 20px; left: 20px; z-index: 1000; display: block; }
+    #elevenlabs-grant-badge-desktop img { width: 140px; height: auto; opacity: 0.9; transition: opacity 0.3s, transform 0.3s; }
+    #elevenlabs-grant-badge-desktop:hover img { opacity: 1; transform: scale(1.03); }
+    @media (max-width: 768px) {
+      .hero-headline { font-size: 3rem; letter-spacing: -1px; }
+      .hero-tagline { font-size: 1.1rem; }
+    }
+    @media (max-width: 600px) {
+      #elevenlabs-grant-badge-desktop { display: none; }
+      .footer .grant-logo-mobile { display: block; }
+    }
   </style>
- 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
 </head>
 
 <body>
-<div class="navbar-wrapper">
-  <nav class="navbar">
-    <a href="/Info/">What is it?</a>
-    <a href="/Contact/">Lets Talk</a>
-  </nav>
-</div>
 
-  <!-- 2) Container for tsparticles -->
-  <div id="particles-js"></div>
+  <header class="navbar-wrapper">
+    <nav class="navbar">
+      <a href="/Info/">What is it?</a>
+      <a href="/Contact/">Lets Talk</a>
+    </nav>
+  </header>
 
-  <!-- 3) Hidden Convai Widget (optional; if you don’t use it, remove) -->
-  <elevenlabs-convai
-    agent-id="wUQHeWr2N6z1QkUwf0tp"
-    style="display:none;"  id="convaiWidget">    </elevenlabs-convai>
-<script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
-
-  <!-- Main Content -->
-   <div class="center-stage">
-	<h1>The Index Cloud</h1>
-    <!-- Orb -->
-    <div class="orb-container" id="orbContainer">
-      <div class="orb idle" id="orb"></div>
+  <main class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-headline" id="headline">Your Brand's Voice, Reimagined.</h1>
+      <p class="hero-tagline" id="tagline">
+        The Index Cloud provides intelligent AI agents that deliver truly human-like conversations. Replace frustrating systems with a seamless voice experience that understands your business and delights your customers.
+      </p>
+      <a href="/Contact/" class="hero-cta" id="cta">Explore the Future</a>
     </div>
+  </main>
 
-<div id="orb-prompt" class="orb-prompt">You can also talk to me at 844-697-8207!</div>
-
-    <!-- Subtitles / AI Speech or status lines -->
-    <div class="subtitle-container" id="subtitleContainer"></div>
-    
-    <!-- Input for Type mode -->
-    <input type="text" id="textInput" placeholder="Type your prompt here...">
-    <div id="statusText"></div>
-  </div>
-
-  <!-- Footer -->
- <div class="footer">
-    <p class="footer-branding-text"> Powered by <a href="#">The Index Cloud</a> — Smart conversations made simple.
-    </p>
-
+  <footer class="footer">
+    <p>Powered by The Index Cloud — Smart conversations made simple.</p>
     <p class="footer-legal-notice">
-        By using this website, you agree to our 
-        <a href="/Legal/">Terms of Service and Privacy Policy</a>.
+      By using this website, you agree to our 
+      <a href="/Legal/">Terms of Service and Privacy Policy</a>.
     </p>
-    <a href="https://elevenlabs.io/text-to-speech" id="elevenlabs-grant-link-mobile" target="_blank" rel="noopener noreferrer" title="Text to Speech by ElevenLabs - Grants Program">
-        <img src="long_footer_logo.png" alt="ElevenLabs Grants Program (Mobile)" class="grant-logo-mobile">
+    <a href="https://elevenlabs.io/text-to-speech" target="_blank" rel="noopener noreferrer">
+      <img src="long_footer_logo.png" alt="ElevenLabs Grants Program" class="grant-logo-mobile">
     </a>
-    </div>
+  </footer>
 
-
-  <!-- Orb + Convai logic -->
+  <div id="elevenlabs-grant-badge-desktop">
+    <a href="https://elevenlabs.io/text-to-speech" target="_blank" rel="noopener noreferrer">
+      <img src="tall_badge_logo.png" alt="Powered by ElevenLabs Grants">
+    </a>
+  </div>
+  
   <script>
-    const convaiWidget = document.getElementById('convaiWidget');
-    const orbContainer = document.getElementById('orbContainer');
-    const orb = document.getElementById('orb');
-    const textInput = document.getElementById('textInput');
-    const subtitleContainer = document.getElementById('subtitleContainer');
-    const statusText = document.getElementById('statusText');
-
-    let currentMode = 'Talk';
-
-    function updateOrbStatus(status) {
-      orb.classList.remove('idle', 'listening', 'speaking');
-      orb.classList.add(status);
-    }
-
-    orbContainer.addEventListener('click', () => {
-      // Pulse animation
-      orb.classList.add('orb-click');
-      orb.addEventListener('animationend', () => orb.classList.remove('orb-click'), { once: true });
-
-      // Toggle pulsing
-      if (orb.classList.contains('pulsing')) {
-        orb.classList.remove('pulsing');
-        clickConvaiButton("disconnect");
-        // playDeactivationSound(); //
-      } else {
-        orb.classList.add('pulsing');
-        clickConvaiButton("connect now");
-        // playActivationSound(); //
-      }
-    });
-
-    textInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        const userInput = textInput.value.trim();
-        if (userInput) {
-          addSubtitleLine("User typed: " + userInput);
-          textInput.value = '';
-        }
-      }
-    });
-
-    function showTypeInput() {
-      textInput.classList.remove('show'); 
-      textInput.style.display = 'block'; 
-      void textInput.offsetWidth; 
-      textInput.classList.add('show');
-      textInput.focus();
-    }
-
-    function hideTypeInput() {
-      textInput.value = '';
-      textInput.style.display = 'none';
-      textInput.classList.remove('show');
-    }
-
-    function addSubtitleLine(text) {
-      const line = document.createElement('div');
-      line.className = 'subtitle-line';
-      line.innerText = text;
-      subtitleContainer.appendChild(line);
-      setTimeout(() => {
-        line.classList.add('fade-out');
-        setTimeout(() => line.remove(), 1000);
-      }, 3000);
-    }
-
-    function setMode(mode) {
-      currentMode = mode;
-      if (mode === 'Talk') {
-        hideTypeInput();
-      } else {
-        showTypeInput();
-      }
-    }
-    setMode('Talk');
-
-    function clickConvaiButton(buttonText, retries = 10, delay = 500) {
-      const shadowRoot = convaiWidget?.shadowRoot;
-      if (!shadowRoot) {
-        if (retries > 0) {
-          setTimeout(() => clickConvaiButton(buttonText, retries - 1, delay), delay);
-        }
-        return;
-      }
-      const buttons = shadowRoot.querySelectorAll('button');
-      let targetButton = null;
-      buttons.forEach(btn => {
-        if (btn.textContent.trim().toLowerCase().includes(buttonText)) {
-          targetButton = btn;
-        }
+    document.addEventListener("DOMContentLoaded", () => {
+      // Entrance animations for the content
+      const heroContent = document.querySelector(".hero-content");
+      gsap.from(heroContent.children, {
+        duration: 1,
+        y: 40,
+        opacity: 0,
+        stagger: 0.2,
+        ease: "power3.out"
       });
-      if (targetButton) {
-        targetButton.click();
-      } else if (retries > 0) {
-        setTimeout(() => clickConvaiButton(buttonText, retries - 1, delay), delay);
-      }
-    }
-	
-	const orbPrompt = document.getElementById('orb-prompt'); // Prompt element reference
-let promptTimeout; // Variable to hold the timeout
-
-// UPDATED Function to show the prompt using GSAP
-    function showOrbPrompt() {
-       // Check if orb is already active
-       if (!orb.classList.contains('listening') && !orb.classList.contains('speaking')) {
-          // Make element visible right before animation starts
-          orbPrompt.style.visibility = 'visible';
-          // Use GSAP to animate
-          gsap.to(orbPrompt, {
-              duration: 0.8, // Animation duration (seconds)
-              opacity: 1,    // Target opacity
-              y: 0,          // Target vertical position (GSAP alias for translateY(0))
-              ease: "easeOut" // Animation easing
-          });
-       }
-    }
-
-// Function to hide the prompt
-function hideOrbPrompt() {
-    clearTimeout(promptTimeout); // Clear timeout if orb is clicked before 3s
-    orbPrompt.classList.remove('visible');
-}
+    });
   </script>
 
-  <!-- Optional sound effects -->
-  <audio id="activationSound" src="activation-chime.mp3" preload="auto"></audio>
-  <audio id="deactivationSound" src="deactivation-chime.mp3" preload="auto"></audio>
+  <elevenlabs-convai agent-id="wUQHeWr2N6z1QkUwf0tp" id="aiWidget"></elevenlabs-convai>
+  <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
-  <!-- 4) Initialize tsparticles from the local script (repelling absorber) -->
   <script>
-    document.addEventListener("DOMContentLoaded", () => {promptTimeout = setTimeout(showOrbPrompt, 3000);
-    tsParticles.load("particles-js", {
-      fullScreen: { enable: false, zIndex: 0 },
-      fpsLimit: 60,
-      background: { color: "transparent" },
-      particles: {
-        number: {
-          value: 100,
-          density: { enable: true, area: 800 }
-        },
-        color: { value: "#ffffff" },
-        move: {
-          enable: true,
-          speed: 0.5,
-          direction: "none",
-          outModes: { default: "bounce" }
-        },
-        links: {
-          enable: true,
-          distance: 150,
-          color: "#ffffff",
-          opacity: 0.4,
-          width: 1
-        },
-        opacity: {
-          value: 0.5,
-          random: true
-        },
-        size: {
-          value: { min: 1, max: 3 },
-          random: true
-        }
+    document.addEventListener("DOMContentLoaded", () => {
+      const ctaButton = document.getElementById('cta');
+      const aiWidget = document.getElementById('aiWidget');
+
+      // Check if both the button and the widget exist on the page
+      if (ctaButton && aiWidget) {
+        ctaButton.addEventListener('click', (event) => {
+          // Prevent the button from trying to go to the "/Contact/" page
+          event.preventDefault();
+          
+          // Call the widget's built-in open() function
+          // This function is provided by the widget's own script
+          if (aiWidget.open) {
+            aiWidget.open();
+          }
+        });
       }
-    }).then(() => console.log("Particles Loaded"));
-  });
+    });
   </script>
 
-<div id="elevenlabs-grant-badge-desktop">
-        <a href="https://elevenlabs.io/text-to-speech" target="_blank" rel="noopener noreferrer" title="Text to Speech by ElevenLabs">
-            <img src="tall_badge_logo.png" alt="Powered by ElevenLabs Grants (Desktop)" class="grant-logo-desktop">
-        </a>
-    </div>
 </body>
 </html>
