@@ -353,7 +353,7 @@
                  if (shadowRoot) {
                      console.log('[TryItScript] Convai widget shadow DOM found.');
                      
-                     const connectButtonSelector = 'button[title="Connect Now"]';
+                     const connectButtonSelector = 'button[aria-label="Connect Now"]';
                      const connectButton = shadowRoot.querySelector(connectButtonSelector);
 
                      if (connectButton) {
