@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Page Meta Information -->
+    <title>The Index Cloud — The All-in-One Realtor System</title>
+    <meta name="description" content="The All-in-One System that turns ad clicks into booked appointments. We manage your ads, deploy your 24/7 AI, and guarantee results.">
+    <meta name="robots" content="noindex"> 
+    <link rel="canonical" href="https://theindexcloud.com/realtor-system/" />
+
+    <!-- Your Favicons and Brand Colors -->
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
+    <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
+    <meta name="theme-color" content="#1b0231">
+
+    <!-- Fonts and Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+            background: radial-gradient(ellipse at center, rgba(128,0,192,0.2), transparent 60%), #1b0231;
+            position: relative;
+        }
+        body::before, body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            background-repeat: repeat;
+            z-index: -1;
+        }
+        body::before {
+            background-image: radial-gradient(#ffffff 1px, transparent 1px);
+            background-size: 2px 2px;
+            opacity: 0.05;
+        }
+        body::after {
+            background-image: radial-gradient(#ffffff 1.5px, transparent 1.5px);
+            background-size: 3px 3px;
+            opacity: 0.03;
+        }
+        @keyframes pulseGlow { 0%, 100% { text-shadow: 0 0 8px rgba(213,54,255,0.35); } 50% { text-shadow: 0 0 16px rgba(213,54,255,0.6); } }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 5rem 1.5rem;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            animation: pulseGlow 4s ease-in-out infinite;
+            margin-bottom: 1rem;
+        }
+        .sub-headline {
+            font-size: 1.2rem;
+            max-width: 550px;
+            margin: 0 auto 3rem auto;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+        .offer-box {
+            background: rgba(255,255,255,0.05);
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: left;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin: 3rem 0;
+        }
+        .offer-box h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+        .offer-box ul { list-style: none; padding: 0; }
+        .offer-box ul li {
+            font-size: 1.1rem;
+            margin-bottom: 1.25rem;
+            padding-left: 2.2rem;
+            position: relative;
+            line-height: 1.5;
+        }
+        .offer-box ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: #d536ff;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        .form-section {
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .form-section h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .form-section p {
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 2.5rem;
+            color: rgba(255,255,255,0.7);
+        }
+        .form-group {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+        }
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            background-color: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            color: #fff;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: rgba(213,54,255,0.8);
+            box-shadow: 0 0 10px rgba(213,54,255,0.3);
+        }
+        textarea.form-input {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .submit-button {
+            display: inline-block;
+            width: 100%;
+            padding: 1rem 2.5rem;
+            background-color: rgba(213,54,255,0.9);
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(213,54,255,0.5);
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        .submit-button:hover {
+            transform: scale(1.03);
+            background-color: rgba(223, 74, 255, 1);
+            box-shadow: 0 0 30px rgba(213,54,255,0.7);
+        }
+        footer { 
+            text-align: center; 
+            color: rgba(255,255,255,0.4); 
+            padding: 4rem 1rem 2rem 1rem; 
+            font-size: 0.9rem; 
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Stop Losing Leads. Start Closing Deals.</h1>
+    <p class="sub-headline">
+        The All-in-One System for ambitious realtors that turns ad clicks into booked appointments, guaranteed.
+    </p>
+
+    <div class="offer-box">
+        <h2>The All-in-One System Includes:</h2>
+        <ul>
+            <li><strong>Strategic Ad Management:</strong> The system includes targeted ad campaigns, created and managed to generate a consistent flow of high-quality leads.</li>
+            <li><strong>Your Dedicated AI Receptionist:</strong> At the core of the system is a voice agent, trained on your brand, that instantly answers and qualifies every single lead call, 24/7.</li>
+            <li><strong>A Fully Automated Pipeline:</strong> The system is deployed to turn every lead into a booked call, placed directly onto your calendar without manual effort.</li>
+            <li><strong>The 5-Booking Guarantee:</strong> We guarantee a minimum of 5 qualified appointments in your first 90 days, or our service continues free of charge until we deliver.</li>
+        </ul>
+    </div>
+
+    <div class="form-section">
+        <h2>Apply to Get Started</h2>
+        <p>Due to the hands-on nature of this integrated service, we can only accept a limited number of new clients. Fill out the application below to see if we're a good fit.</p>
+        
+        <form id="facade-form">
+            <div class="form-group">
+                <label for="facade_full_name">Full Name</label>
+                <input class="form-input" type="text" id="facade_full_name" placeholder="e.g., Jane Doe" required>
+            </div>
+            <div class="form-group">
+                <label for="facade_email">Email Address</label>
+                <input class="form-input" type="email" id="facade_email" placeholder="e.g., jane.doe@realtypro.com" required>
+            </div>
+            <div class="form-group">
+                <label for="facade_phone">Phone Number</label>
+                <input class="form-input" type="tel" id="facade_phone" placeholder="(555) 123-4567" required>
+            </div>
+            <div class="form-group">
+                <label for="facade_challenge">Your Biggest Challenge</label>
+                <textarea class="form-input" id="facade_challenge" placeholder="Briefly describe your biggest challenge with lead follow-up." required></textarea>
+            </div>
+            <button type="submit" class="submit-button">Apply Now</button>
+        </form>
+        
+        <div id="mautic-form-wrapper" style="display: none; visibility: hidden;">
+            <script type="text/javascript" src="//go.theindexcloud.com/form/generate.js?id=1"></script>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2025 The Index Cloud. All Rights Reserved.</p>
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const facadeForm = document.getElementById('facade-form');
+        
+        if (facadeForm) {
+            facadeForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const fieldMapping = {
+                    'facade_full_name': 'firstname',
+                    'facade_email': 'email',
+                    'facade_phone': 'phone',
+                    'facade_challenge': 'business_challenge'
+                };
+
+                let mauticFormFound = false;
+                
+                for (const facadeId in fieldMapping) {
+                    const mauticAlias = fieldMapping[facadeId];
+                    const facadeElement = document.getElementById(facadeId);
+                    const mauticElement = document.querySelector(`[name="mauticform[${mauticAlias}]"]`);
+
+                    if (facadeElement && mauticElement) {
+                        mauticElement.value = facadeElement.value;
+                        mauticFormFound = true; 
+                    } else {
+                        console.error(`Could not find Mautic field for alias: ${mauticAlias}`);
+                    }
+                }
+
+                if (mauticFormFound) {
+                    const realMauticForm = document.querySelector('#mautic-form-wrapper form');
+                    if (realMauticForm) {
+                        realMauticForm.requestSubmit();
+                    } else {
+                        console.error("Mautic form could not be found to submit.");
+                    }
+                } else {
+                    alert("An error occurred. Please try again.");
+                }
+            });
+        }
+    });
+</script>
+
+</body>
+</html>
