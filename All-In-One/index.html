@@ -1,21 +1,29 @@
+Of course. Here is the complete, fully-fixed code for your landing page.
+
+This version incorporates all the changes we've discussed:
+
+1.  The `noindex` tag has been removed so search engines can find your page.
+2.  The old Mautic script and hidden form have been removed.
+3.  The new HubSpot API script has been added, with your specific Portal ID and Form ID already included.
+4.  The necessary `id` attributes have been added to the HTML for the new script to work.
+
+You can copy and paste this entire block of code into your HTML file.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Page Meta Information -->
     <title>The Index Cloud — The All-in-One Realtor System</title>
     <meta name="description" content="The All-in-One System that turns ad clicks into booked appointments. We manage your ads, deploy your 24/7 AI, and guarantee results.">
-    <meta name="robots" content="noindex"> 
     <link rel="canonical" href="https://theindexcloud.com/realtor-system/" />
 
-    <!-- Your Favicons and Brand Colors -->
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
     <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
     <meta name="theme-color" content="#1b0231">
 
-    <!-- Fonts and Styles -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -197,7 +205,7 @@
         </ul>
     </div>
 
-    <div class="form-section">
+    <div class="form-section" id="form-section">
         <h2>Apply to Get Started</h2>
         <p>Due to the hands-on nature of this integrated service, we can only accept a limited number of new clients. Fill out the application below to see if we're a good fit.</p>
         
@@ -220,10 +228,6 @@
             </div>
             <button type="submit" class="submit-button">Apply Now</button>
         </form>
-        
-        <div id="mautic-form-wrapper" style="display: none; visibility: hidden;">
-            <script type="text/javascript" src="https://go.theindexcloud.com/form/generate.js?id=1"></script>
-        </div>
     </div>
 
 </div>
@@ -234,44 +238,58 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const facadeForm = document.getElementById('facade-form');
-        
-        if (facadeForm) {
-            facadeForm.addEventListener('submit', function(e) {
-                e.preventDefault();
+        const applyForm = document.getElementById('facade-form');
 
-                const fieldMapping = {
-                    'facade_full_name': 'firstname',
-                    'facade_email': 'email',
-                    'facade_phone': 'phone',
-                    'facade_challenge': 'business_challenge'
+        if (applyForm) {
+            applyForm.addEventListener('submit', function(e) {
+                e.preventDefault(); // Stop the form from submitting normally
+
+                // --- 1. Your HubSpot Details ---
+                const portalId = '243194016';
+                const formGuid = '94080afa-9a22-47b4-ac2d-1213f28531ed';
+
+                // --- 2. Collect the data from your form fields ---
+                const fullName = document.getElementById('facade_full_name').value;
+                const email = document.getElementById('facade_email').value;
+                const phone = document.getElementById('facade_phone').value;
+                const challenge = document.getElementById('facade_challenge').value;
+
+                // --- 3. Package the data for HubSpot's API ---
+                // Note: The 'name' must match the *internal* property name in HubSpot.
+                const submissionData = {
+                    fields: [
+                        { name: 'firstname', value: fullName },
+                        { name: 'email', value: email },
+                        { name: 'phone', value: phone },
+                        { name: 'business_challenge', value: challenge }
+                    ]
                 };
 
-                let mauticFormFound = false;
-                
-                for (const facadeId in fieldMapping) {
-                    const mauticAlias = fieldMapping[facadeId];
-                    const facadeElement = document.getElementById(facadeId);
-                    const mauticElement = document.querySelector(`[name="mauticform[${mauticAlias}]"]`);
-
-                    if (facadeElement && mauticElement) {
-                        mauticElement.value = facadeElement.value;
-                        mauticFormFound = true; 
+                // --- 4. Send the data to HubSpot ---
+                fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(submissionData)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // --- 5. SUCCESS! Show thank you and redirect ---
+                        const formContainer = document.getElementById('form-section');
+                        formContainer.innerHTML = '<h2>✅ Thank You!</h2><p>Your application has been received. Redirecting you to book your discovery call...</p>';
+                        setTimeout(() => { 
+                            // --- IMPORTANT: REPLACE WITH YOUR ACTUAL CALENDLY LINK ---
+                            window.location.href = 'https://calendly.com/your-booking-link'; 
+                        }, 2500); // Redirect after 2.5 seconds
                     } else {
-                        console.error(`Could not find Mautic field for alias: ${mauticAlias}`);
+                        // If there's an error, log it and alert the user
+                        response.json().then(data => console.error("HubSpot Submission Error:", data));
+                        alert('An error occurred while submitting your application. Please try again.');
                     }
-                }
-
-                if (mauticFormFound) {
-                    const realMauticForm = document.querySelector('#mautic-form-wrapper form');
-                    if (realMauticForm) {
-                        realMauticForm.requestSubmit();
-                    } else {
-                        console.error("Mautic form could not be found to submit.");
-                    }
-                } else {
-                    alert("An error occurred. Please try again.");
-                }
+                })
+                .catch(error => {
+                    console.error('Network Error:', error);
+                    alert('A network error occurred. Please try again.');
+                });
             });
         }
     });
@@ -279,3 +297,4 @@
 
 </body>
 </html>
+```
