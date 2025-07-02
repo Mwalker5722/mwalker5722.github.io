@@ -15,163 +15,32 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body {
-            width: 100%;
-            overflow-x: hidden;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            color: #fff;
-            background: radial-gradient(ellipse at center, rgba(128,0,192,0.2), transparent 60%), #1b0231;
-            position: relative;
-        }
-        body::before, body::after {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            pointer-events: none;
-            background-repeat: repeat;
-            z-index: -1;
-        }
-        body::before {
-            background-image: radial-gradient(#ffffff 1px, transparent 1px);
-            background-size: 2px 2px;
-            opacity: 0.05;
-        }
-        body::after {
-            background-image: radial-gradient(#ffffff 1.5px, transparent 1.5px);
-            background-size: 3px 3px;
-            opacity: 0.03;
-        }
+        html, body { width: 100%; overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; color: #fff; background: radial-gradient(ellipse at center, rgba(128,0,192,0.2), transparent 60%), #1b0231; position: relative; }
+        body::before, body::after { content: ""; position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; background-repeat: repeat; z-index: -1; }
+        body::before { background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 2px 2px; opacity: 0.05; }
+        body::after { background-image: radial-gradient(#ffffff 1.5px, transparent 1.5px); background-size: 3px 3px; opacity: 0.03; }
         @keyframes pulseGlow { 0%, 100% { text-shadow: 0 0 8px rgba(213,54,255,0.35); } 50% { text-shadow: 0 0 16px rgba(213,54,255,0.6); } }
-
-        .container {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 5rem 1.5rem;
-            text-align: center;
-        }
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            line-height: 1.2;
-            animation: pulseGlow 4s ease-in-out infinite;
-            margin-bottom: 1rem;
-        }
-        .sub-headline {
-            font-size: 1.2rem;
-            max-width: 550px;
-            margin: 0 auto 3rem auto;
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.6;
-        }
-        .offer-box {
-            background: rgba(255,255,255,0.05);
-            padding: 2.5rem;
-            border-radius: 15px;
-            text-align: left;
-            border: 1px solid rgba(255,255,255,0.1);
-            margin: 3rem 0;
-        }
-        .offer-box h2 {
-            text-align: center;
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
-        }
+        .container { max-width: 700px; margin: 0 auto; padding: 5rem 1.5rem; text-align: center; }
+        h1 { font-size: 2.5rem; font-weight: 700; line-height: 1.2; animation: pulseGlow 4s ease-in-out infinite; margin-bottom: 1rem; }
+        .sub-headline { font-size: 1.2rem; max-width: 550px; margin: 0 auto 3rem auto; color: rgba(255, 255, 255, 0.9); line-height: 1.6; }
+        .offer-box { background: rgba(255,255,255,0.05); padding: 2.5rem; border-radius: 15px; text-align: left; border: 1px solid rgba(255,255,255,0.1); margin: 3rem 0; }
+        .offer-box h2 { text-align: center; font-size: 1.8rem; margin-bottom: 2rem; }
         .offer-box ul { list-style: none; padding: 0; }
-        .offer-box ul li {
-            font-size: 1.1rem;
-            margin-bottom: 1.25rem;
-            padding-left: 2.2rem;
-            position: relative;
-            line-height: 1.5;
-        }
-        .offer-box ul li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            top: 2px;
-            color: #d536ff;
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-        .form-section {
-            margin-top: 3rem;
-            padding-top: 3rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-        .form-section h2 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-        .form-section p {
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 2.5rem;
-            color: rgba(255,255,255,0.7);
-        }
-        .form-group {
-            text-align: left;
-            margin-bottom: 1.5rem;
-        }
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.8);
-        }
-        .form-input {
-            width: 100%;
-            padding: 1rem;
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            background-color: rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 8px;
-            color: #fff;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        .form-input:focus {
-            outline: none;
-            border-color: rgba(213,54,255,0.8);
-            box-shadow: 0 0 10px rgba(213,54,255,0.3);
-        }
-        textarea.form-input {
-            min-height: 100px;
-            resize: vertical;
-        }
-        .submit-button {
-            display: inline-block;
-            width: 100%;
-            padding: 1rem 2.5rem;
-            background-color: rgba(213,54,255,0.9);
-            color: white;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(213,54,255,0.5);
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-            border: none;
-            cursor: pointer;
-            margin-top: 1rem;
-        }
-        .submit-button:hover {
-            transform: scale(1.03);
-            background-color: rgba(223, 74, 255, 1);
-            box-shadow: 0 0 30px rgba(213,54,255,0.7);
-        }
-        footer { 
-            text-align: center; 
-            color: rgba(255,255,255,0.4); 
-            padding: 4rem 1rem 2rem 1rem; 
-            font-size: 0.9rem; 
-        }
-        @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-        }
+        .offer-box ul li { font-size: 1.1rem; margin-bottom: 1.25rem; padding-left: 2.2rem; position: relative; line-height: 1.5; }
+        .offer-box ul li::before { content: '✓'; position: absolute; left: 0; top: 2px; color: #d536ff; font-size: 1.2rem; font-weight: 700; }
+        .form-section { margin-top: 3rem; padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        .form-section h2 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .form-section p { max-width: 500px; margin-left: auto; margin-right: auto; margin-bottom: 2.5rem; color: rgba(255,255,255,0.7); }
+        .form-group { text-align: left; margin-bottom: 1.5rem; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; color: rgba(255,255,255,0.8); }
+        .form-input { width: 100%; padding: 1rem; font-family: 'Inter', sans-serif; font-size: 1rem; background-color: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: #fff; transition: border-color 0.3s, box-shadow 0.3s; }
+        .form-input:focus { outline: none; border-color: rgba(213,54,255,0.8); box-shadow: 0 0 10px rgba(213,54,255,0.3); }
+        textarea.form-input { min-height: 100px; resize: vertical; }
+        .submit-button { display: inline-block; width: 100%; padding: 1rem 2.5rem; background-color: rgba(213,54,255,0.9); color: white; font-weight: 600; text-decoration: none; border-radius: 8px; box-shadow: 0 0 20px rgba(213,54,255,0.5); transition: all 0.3s ease; font-size: 1.1rem; border: none; cursor: pointer; margin-top: 1rem; }
+        .submit-button:hover { transform: scale(1.03); background-color: rgba(223, 74, 255, 1); box-shadow: 0 0 30px rgba(213,54,255,0.7); }
+        footer { text-align: center; color: rgba(255,255,255,0.4); padding: 4rem 1rem 2rem 1rem; font-size: 0.9rem; }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } }
     </style>
 </head>
 <body>
@@ -230,30 +99,26 @@
 
         if (applyForm) {
             applyForm.addEventListener('submit', function(e) {
-                e.preventDefault(); // Stop the form from submitting normally
+                e.preventDefault(); 
 
-                // --- 1. Your HubSpot Details ---
                 const portalId = '243194016';
                 const formGuid = '94080afa-9a22-47b4-ac2d-1213f28531ed';
 
-                // --- 2. Collect the data from your form fields ---
                 const fullName = document.getElementById('facade_full_name').value;
                 const email = document.getElementById('facade_email').value;
                 const phone = document.getElementById('facade_phone').value;
                 const challenge = document.getElementById('facade_challenge').value;
 
-                // --- 3. Package the data for HubSpot's API ---
-                // Note: The 'name' must match the *internal* property name in HubSpot.
+                // This block now uses the CORRECT internal names from HubSpot
                 const submissionData = {
                     fields: [
-                        { name: 'firstname', value: fullName },
+                        { name: 'full_name', value: fullName },
                         { name: 'email', value: email },
                         { name: 'phone', value: phone },
-                        { name: 'business_challenge', value: challenge }
+                        { name: 'business_challenge', value: challenge } // Make sure you create this custom property in HubSpot!
                     ]
                 };
 
-                // --- 4. Send the data to HubSpot ---
                 fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -261,15 +126,13 @@
                 })
                 .then(response => {
                     if (response.ok) {
-                        // --- 5. SUCCESS! Show thank you and redirect ---
                         const formContainer = document.getElementById('form-section');
                         formContainer.innerHTML = '<h2>✅ Thank You!</h2><p>Your application has been received. Redirecting you to book your discovery call...</p>';
                         setTimeout(() => { 
                             // --- IMPORTANT: REPLACE WITH YOUR ACTUAL CALENDLY LINK ---
                             window.location.href = 'https://calendly.com/your-booking-link'; 
-                        }, 2500); // Redirect after 2.5 seconds
+                        }, 2500);
                     } else {
-                        // If there's an error, log it and alert the user
                         response.json().then(data => console.error("HubSpot Submission Error:", data));
                         alert('An error occurred while submitting your application. Please try again.');
                     }
