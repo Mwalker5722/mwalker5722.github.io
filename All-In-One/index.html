@@ -36,7 +36,6 @@
         .form-group label { display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; color: rgba(255,255,255,0.8); }
         .form-input { width: 100%; padding: 1rem; font-family: 'Inter', sans-serif; font-size: 1rem; background-color: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: #fff; transition: border-color 0.3s, box-shadow 0.3s; }
         .form-input:focus { outline: none; border-color: rgba(213,54,255,0.8); box-shadow: 0 0 10px rgba(213,54,255,0.3); }
-        textarea.form-input { min-height: 100px; resize: vertical; }
         .submit-button { display: inline-block; width: 100%; padding: 1rem 2.5rem; background-color: rgba(213,54,255,0.9); color: white; font-weight: 600; text-decoration: none; border-radius: 8px; box-shadow: 0 0 20px rgba(213,54,255,0.5); transition: all 0.3s ease; font-size: 1.1rem; border: none; cursor: pointer; margin-top: 1rem; }
         .submit-button:hover { transform: scale(1.03); background-color: rgba(223, 74, 255, 1); box-shadow: 0 0 30px rgba(213,54,255,0.7); }
         footer { text-align: center; color: rgba(255,255,255,0.4); padding: 4rem 1rem 2rem 1rem; font-size: 0.9rem; }
@@ -68,20 +67,20 @@
         
         <form id="facade-form">
             <div class="form-group">
-                <label for="facade_full_name">Full Name</label>
+                <label for="facade_full_name">Your Name</label>
                 <input class="form-input" type="text" id="facade_full_name" placeholder="e.g., Jane Doe" required>
             </div>
             <div class="form-group">
-                <label for="facade_email">Email Address</label>
+                <label for="facade_email">Email</label>
                 <input class="form-input" type="email" id="facade_email" placeholder="e.g., jane.doe@realtypro.com" required>
             </div>
             <div class="form-group">
-                <label for="facade_phone">Phone Number</label>
+                <label for="facade_phone">Phone</label>
                 <input class="form-input" type="tel" id="facade_phone" placeholder="(555) 123-4567" required>
             </div>
             <div class="form-group">
-                <label for="facade_challenge">Your Biggest Challenge</label>
-                <textarea class="form-input" id="facade_challenge" placeholder="Briefly describe your biggest challenge with lead follow-up." required></textarea>
+                <label for="facade_company">Company</label>
+                <input class="form-input" type="text" id="facade_company" placeholder="e.g., Awesome Realty Group" required>
             </div>
             <button type="submit" class="submit-button">Apply Now</button>
         </form>
@@ -107,15 +106,14 @@
                 const fullName = document.getElementById('facade_full_name').value;
                 const email = document.getElementById('facade_email').value;
                 const phone = document.getElementById('facade_phone').value;
-                const challenge = document.getElementById('facade_challenge').value;
+                const company = document.getElementById('facade_company').value;
 
-                // This block now uses the CORRECT internal names from HubSpot
                 const submissionData = {
                     fields: [
                         { name: 'full_name', value: fullName },
                         { name: 'email', value: email },
                         { name: 'phone', value: phone },
-                        { name: 'business_challenge', value: challenge } // Make sure you create this custom property in HubSpot!
+                        { name: 'company', value: company }
                     ]
                 };
 
@@ -130,7 +128,7 @@
                         formContainer.innerHTML = '<h2>✅ Thank You!</h2><p>Your application has been received. Redirecting you to book your discovery call...</p>';
                         setTimeout(() => { 
                             // --- IMPORTANT: REPLACE WITH YOUR ACTUAL CALENDLY LINK ---
-                            window.location.href = 'https://calendly.com/theindexcloud/20-minute-realtor-system-demo'; 
+                            window.location.href = 'https://calendly.com/your-booking-link'; 
                         }, 2500);
                     } else {
                         response.json().then(data => console.error("HubSpot Submission Error:", data));
