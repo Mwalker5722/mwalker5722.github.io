@@ -6,7 +6,7 @@
     
     <title>The Index Cloud — The All-in-One Realtor System</title>
     <meta name="description" content="The All-in-One System that turns ad clicks into booked appointments. We manage your ads, deploy your 24/7 AI, and guarantee results.">
-    <link rel="canonical" href="https://theindexcloud.com/realtor-system/" />
+    <link rel="canonical" href="https://theindexcloud.com/All-In-One/" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
     <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
@@ -22,6 +22,21 @@
         body::after { background-image: radial-gradient(#ffffff 1.5px, transparent 1.5px); background-size: 3px 3px; opacity: 0.03; }
         @keyframes pulseGlow { 0%, 100% { text-shadow: 0 0 8px rgba(213,54,255,0.35); } 50% { text-shadow: 0 0 16px rgba(213,54,255,0.6); } }
         .container { max-width: 700px; margin: 0 auto; padding: 5rem 1.5rem; text-align: center; }
+        
+        /* --- Video Styles --- */
+        .video-container {
+            margin-bottom: 3rem;
+            border-radius: 15px;
+            overflow: hidden; /* Ensures the video corners are rounded */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        .video-container video {
+            width: 100%;
+            display: block; /* Removes any extra space below the video */
+        }
+        /* --- End Video Styles --- */
+
         h1 { font-size: 2.5rem; font-weight: 700; line-height: 1.2; animation: pulseGlow 4s ease-in-out infinite; margin-bottom: 1rem; }
         .sub-headline { font-size: 1.2rem; max-width: 550px; margin: 0 auto 3rem auto; color: rgba(255, 255, 255, 0.9); line-height: 1.6; }
         .offer-box { background: rgba(255,255,255,0.05); padding: 2.5rem; border-radius: 15px; text-align: left; border: 1px solid rgba(255,255,255,0.1); margin: 3rem 0; }
@@ -45,6 +60,12 @@
 <body>
 
 <div class="container">
+
+    <!-- Start of Video Section -->
+    <div class="video-container">
+        <video src="promo-video.mp4" autoplay muted loop playsinline></video>
+    </div>
+    <!-- End of Video Section -->
 
     <h1>Stop Losing Leads. Start Closing Deals.</h1>
     <p class="sub-headline">
