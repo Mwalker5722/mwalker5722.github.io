@@ -53,7 +53,14 @@
         .form-input:focus { outline: none; border-color: rgba(213,54,255,0.8); box-shadow: 0 0 10px rgba(213,54,255,0.3); }
         .submit-button { display: inline-block; width: 100%; padding: 1rem 2.5rem; background-color: rgba(213,54,255,0.9); color: white; font-weight: 600; text-decoration: none; border-radius: 8px; box-shadow: 0 0 20px rgba(213,54,255,0.5); transition: all 0.3s ease; font-size: 1.1rem; border: none; cursor: pointer; margin-top: 1rem; }
         .submit-button:hover { transform: scale(1.03); background-color: rgba(223, 74, 255, 1); box-shadow: 0 0 30px rgba(213,54,255,0.7); }
+        
+        /* --- Footer Styles --- */
         footer { text-align: center; color: rgba(255,255,255,0.4); padding: 4rem 1rem 2rem 1rem; font-size: 0.9rem; }
+        .footer-links { margin-top: 1rem; }
+        .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; margin: 0 0.75rem; transition: color 0.3s; }
+        .footer-links a:hover { color: #fff; text-decoration: underline; }
+        /* --- End Footer Styles --- */
+
         @media (max-width: 768px) { h1 { font-size: 2rem; } }
     </style>
 </head>
@@ -61,12 +68,9 @@
 
 <div class="container">
 
-    <!-- Start of Video Section -->
     <div class="video-container">
         <video src="https://res.cloudinary.com/dnvtoineu/video/upload/v1755567633/Welcome_This_page_provides_a_detailed_breakdown_of_how_the_1_gaon2u.mp4" controls playsinline></video>
     </div>
-    <!-- End of Video Section -->
-
     <h1>Stop Losing Leads. Start Closing Deals.</h1>
     <p class="sub-headline">
         The All-in-One System for ambitious realtors that turns ad clicks into booked appointments, guaranteed.
@@ -111,7 +115,11 @@
 
 <footer>
     <p>© 2025 The Index Cloud. All Rights Reserved.</p>
-</footer>
+    <div class="footer-links">
+        <a href="legal.html" target="_blank">Terms of Service</a>
+        <a href="legal.html" target="_blank">Privacy Policy</a>
+    </div>
+    </footer>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
