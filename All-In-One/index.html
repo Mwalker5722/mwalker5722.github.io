@@ -63,7 +63,23 @@
 
         @media (max-width: 768px) { h1 { font-size: 2rem; } }
     </style>
-</head>
+
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1075179674597419');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1075179674597419&ev=PageView&noscript=1"
+    /></noscript>
+    </head>
 <body>
 
 <div class="container">
@@ -153,6 +169,11 @@
                 })
                 .then(response => {
                     if (response.ok) {
+                        
+                        // --- FIRE THE LEAD EVENT FOR THE META PIXEL ---
+                        fbq('track', 'Lead');
+                        // ---------------------------------------------
+
                         const formContainer = document.getElementById('form-section');
                         formContainer.innerHTML = '<h2>✅ Thank You!</h2><p>Your application has been received. Redirecting you to book your discovery call...</p>';
                         setTimeout(() => { 
@@ -173,7 +194,7 @@
     });
 </script>
 
-<elevenlabs-convai agent-id="agent_7201k1hawrkyfshrae9x3xze37h2"></elevenlabs-convai>
+<elevenlabs-convai agent-id="agent_7201k1hawrkyfshrae9x3xze3h2"></elevenlabs-convai>
 <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
 </body>
