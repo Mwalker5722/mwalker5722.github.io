@@ -23,7 +23,7 @@
         @keyframes pulseGlow { 0%, 100% { text-shadow: 0 0 8px rgba(213,54,255,0.35); } 50% { text-shadow: 0 0 16px rgba(213,54,255,0.6); } }
         .container { max-width: 700px; margin: 0 auto; padding: 5rem 1.5rem; text-align: center; }
         
-        /* --- MODIFICATION: Video Wrapper Styles --- */
+        /* --- Video Wrapper Styles --- */
         .video-wrapper {
             position: relative;
             margin-bottom: 3rem;
@@ -31,7 +31,6 @@
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-            cursor: pointer;
         }
         .video-wrapper video {
             width: 100%;
@@ -53,6 +52,7 @@
             pointer-events: none; /* Clicks go "through" to the wrapper */
             opacity: 1;
             transition: opacity 0.3s ease;
+            cursor: pointer;
         }
         .unmute-overlay.hidden {
             opacity: 0;
@@ -136,7 +136,7 @@
 
     <div class="video-wrapper">
         <video id="header-video" src="https://res.cloudinary.com/dnvtoineu/video/upload/v1755567633/Welcome_This_page_provides_a_detailed_breakdown_of_how_the_1_gaon2u.mp4" autoplay muted loop controls playsinline></video>
-        <div class="unmute-overlay">🔇</div>
+        <div class="unmute-overlay">🔈</div>
     </div>
 
     <h1>Stop Losing Leads. Start Closing Deals.</h1>
@@ -227,18 +227,25 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
 
-        // --- MODIFICATION: Logic for Tap to Unmute ---
+        // --- MODIFICATION: Device-aware video controls ---
+        const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
         const videoWrapper = document.querySelector('.video-wrapper');
-        if (videoWrapper) {
+        const unmuteOverlay = document.querySelector('.unmute-overlay');
+        
+        if (isTouchDevice && videoWrapper) {
+            // On touch devices, enable tap-to-unmute
             const video = document.getElementById('header-video');
-            const unmuteOverlay = document.querySelector('.unmute-overlay');
+            videoWrapper.style.cursor = 'pointer';
             
             videoWrapper.addEventListener('click', function() {
                 if (video.muted) {
                     video.muted = false;
                     unmuteOverlay.classList.add('hidden');
                 }
-            });
+            }, { once: true }); // Use { once: true } so this only fires the first time
+        } else if (unmuteOverlay) {
+            // On non-touch devices (PCs), hide the overlay
+            unmuteOverlay.style.display = 'none';
         }
         // --- End of new logic ---
 
