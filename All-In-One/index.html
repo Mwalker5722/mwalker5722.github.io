@@ -13,6 +13,25 @@
     <meta name="theme-color" content="#1b0231">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1075179674597419');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1075179674597419&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { width: 100%; overflow-x: hidden; }
@@ -133,6 +152,29 @@
     document.addEventListener("DOMContentLoaded", function() {
         const applyForm = document.getElementById('facade-form');
 
+        // Function to get cookies for fbp and fbc
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        // Function to send data to our serverless function
+        async function sendServerConversion(data) {
+            try {
+                await fetch('/api/send-conversion', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+                console.log('Server-side conversion event sent.');
+            } catch (error) {
+                console.error('Failed to send server-side conversion event:', error);
+            }
+        }
+
         if (applyForm) {
             applyForm.addEventListener('submit', function(e) {
                 e.preventDefault(); 
@@ -145,7 +187,7 @@
                 const phone = document.getElementById('facade_phone').value;
                 const company = document.getElementById('facade_company').value;
 
-                const submissionData = {
+                const hubspotSubmissionData = {
                     fields: [
                         { name: 'full_name', value: fullName },
                         { name: 'email', value: email },
@@ -157,16 +199,27 @@
                 fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(submissionData)
+                    body: JSON.stringify(hubspotSubmissionData)
                 })
                 .then(response => {
                     if (response.ok) {
                         const formContainer = document.getElementById('form-section');
                         formContainer.innerHTML = '<h2>✅ Thank You!</h2><p>Your application has been received. Redirecting you to book your discovery call...</p>';
+                        
+                        // Prepare and send data for CAPI
+                        const capiData = {
+                            email: email,
+                            phone: phone,
+                            fullName: fullName,
+                            fbp: getCookie('_fbp') || null,
+                            fbc: getCookie('_fbc') || null,
+                        };
+                        sendServerConversion(capiData);
+
                         setTimeout(() => { 
-                            // The real Calendly link is now here!
-                            window.location.href = 'https://calendly.com/theindexcloud/20-minute-realtor-system-demo'; 
+                            window.location.href = 'https://calendly.com/theindexcloud/20-minute-realty-system-demo'; 
                         }, 2500);
+
                     } else {
                         response.json().then(data => console.error("HubSpot Submission Error:", data));
                         alert('An error occurred while submitting your application. Please try again.');
