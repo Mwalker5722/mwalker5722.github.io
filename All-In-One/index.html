@@ -16,10 +16,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { width: 100%; overflow-x: hidden; }
-        body { font-family: 'Inter', sans-serif; color: #fff; background-color: #1b0231; background-image: radial-gradient(ellipse at center, rgba(128,0,192,0.2) 0%, #1b0231 70%); position: relative; }
-        body::before, body::after { content: ""; position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; background-repeat: repeat; z-index: -1; }
-        body::before { background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 2px 2px; opacity: 0.05; }
-        body::after { background-image: radial-gradient(#ffffff 1.5px, transparent 1.5px); background-size: 3px 3px; opacity: 0.03; }
+        body { font-family: 'Inter', sans-serif; color: #fff; background-color: #1b0231; position: relative; }
         @keyframes pulseGlow { 0%, 100% { text-shadow: 0 0 8px rgba(213,54,255,0.35); } 50% { text-shadow: 0 0 16px rgba(213,54,255,0.6); } }
         .container { max-width: 700px; margin: 0 auto; padding: 5rem 1.5rem; text-align: center; }
         
@@ -295,7 +292,7 @@
                         const formContainer = document.getElementById('form-section');
                         formContainer.innerHTML = '<h2>✅ Thank You!</h2><p>Your application has been received. <a href="https://calendly.com/theindexcloud/20-minute-realtor-system-demo" style="color: #fff; text-decoration: underline;">Click here to book your discovery call</a>, or you will be redirected automatically.</p>';
                         setTimeout(() => { 
-                            window.location.href = 'https://calendly.com/theindexcloud/20-minute-realtor-system-demo'; 
+                            window..href = 'https://calendly.com/theindexcloud/20-minute-realtor-system-demo'; 
                         }, 2500);
                     } else {
                         response.json().then(data => console.error("HubSpot Submission Error:", data));
