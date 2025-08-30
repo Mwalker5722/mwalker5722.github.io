@@ -13,8 +13,107 @@
     <meta name="theme-color" content="#1b0231">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Meta Pixel Code -->
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; color: #fff; background-color: #1b0231; background-image: radial-gradient(ellipse at center, rgba(128,0,192,0.2) 0%, #1b0231 70%); position: relative; }
+        body::before, body::after { content: ""; position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; background-repeat: repeat; z-index: -1; }
+        body::before { background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 2px 2px; opacity: 0.05; }
+        body::after { background-image: radial-gradient(#ffffff 1.5px, transparent 1.5px); background-size: 3px 3px; opacity: 0.03; }
+        @keyframes pulseGlow { 0%, 100% { text-shadow: 0 0 8px rgba(213,54,255,0.35); } 50% { text-shadow: 0 0 16px rgba(213,54,255,0.6); } }
+        .container { max-width: 700px; margin: 0 auto; padding: 5rem 1.5rem; text-align: center; }
+        
+        /* --- Video Wrapper Styles --- */
+        .video-wrapper {
+            position: relative;
+            margin-bottom: 3rem;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        .video-wrapper video {
+            width: 100%;
+            display: block;
+        }
+        .unmute-overlay {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            pointer-events: none; /* Clicks go "through" to the wrapper */
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+        .unmute-overlay.hidden {
+            opacity: 0;
+        }
+        /* --- End Video Styles --- */
+
+        h1 { font-size: 2.5rem; font-weight: 700; line-height: 1.2; animation: pulseGlow 4s ease-in-out infinite; margin-bottom: 1rem; }
+        h2 { font-size: 1.8rem; text-align: center; margin-bottom: 2rem; }
+        .sub-headline { font-size: 1.2rem; max-width: 550px; margin: 0 auto 3rem auto; color: rgba(255, 255, 255, 0.9); line-height: 1.6; }
+        .offer-box, .content-section { background: rgba(255,255,255,0.05); padding: 2.5rem; border-radius: 15px; text-align: left; border: 1px solid rgba(255,255,255,0.1); margin: 3rem 0; }
+        .offer-box ul, .content-section ul { list-style: none; padding: 0; }
+        .offer-box ul li, .content-section ul li { font-size: 1.1rem; margin-bottom: 1.25rem; padding-left: 2.2rem; position: relative; line-height: 1.5; }
+        .offer-box ul li::before, .content-section ul li::before { content: '✓'; position: absolute; left: 0; top: 2px; color: #d536ff; font-size: 1.2rem; font-weight: 700; }
+        
+        /* --- Testimonial Styles --- */
+        .testimonial-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+        .testimonial-card { background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 10px; border-left: 4px solid #d536ff; }
+        .testimonial-card p { font-style: italic; color: rgba(255,255,255,0.9); margin: 0; }
+        .testimonial-card .author { font-style: normal; font-weight: 600; color: #fff; margin-top: 1rem; text-align: right; }
+        .testimonial-card .stars {
+            color: #ffc107;
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            font-style: normal;
+        }
+        @media (min-width: 640px) { .testimonial-grid { grid-template-columns: 1fr 1fr; } }
+
+        /* --- Guarantee Box Styles --- */
+        .guarantee-box { 
+            border: 2px solid #d536ff; 
+            text-align: center; 
+            padding: 2.5rem; 
+            margin-top: 4rem;
+            box-shadow: 0 0 25px rgba(213, 54, 255, 0.3);
+        }
+        .guarantee-box .shield { font-size: 3rem; margin-bottom: 1rem; display: block; }
+        .guarantee-box h2 { color: #fff; animation: pulseGlow 3s ease-in-out infinite; }
+        .guarantee-box p { color: rgba(255,255,255,0.8); max-width: 500px; margin: 0 auto; line-height: 1.6; }
+
+        .form-section { margin-top: 4rem; padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        .form-section h2 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .form-section p { max-width: 500px; margin-left: auto; margin-right: auto; margin-bottom: 2.5rem; color: rgba(255,255,255,0.7); }
+        .form-group { text-align: left; margin-bottom: 1.5rem; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; color: rgba(255,255,255,0.8); }
+        .form-input { width: 100%; padding: 1rem; font-family: 'Inter', sans-serif; font-size: 1rem; background-color: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: #fff; transition: border-color 0.3s, box-shadow 0.3s; }
+        .form-input:focus { outline: none; border-color: rgba(213,54,255,0.8); box-shadow: 0 0 10px rgba(213,54,255,0.3); }
+        .submit-button { display: inline-block; width: 100%; padding: 1rem 2.5rem; background-color: rgba(213,54,255,0.9); color: white; font-weight: 600; text-decoration: none; border-radius: 8px; box-shadow: 0 0 20px rgba(213,54,255,0.5); transition: all 0.3s ease; font-size: 1.1rem; border: none; cursor: pointer; margin-top: 1rem; }
+        .submit-button:hover { transform: scale(1.03); background-color: rgba(223, 74, 255, 1); box-shadow: 0 0 30px rgba(213,54,255,0.7); }
+        .submit-button:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+        }
+
+        footer { text-align: center; color: rgba(255,255,255,0.4); padding: 4rem 1rem 2rem 1rem; font-size: 0.9rem; }
+        .footer-links { margin-top: 1rem; }
+        .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; margin: 0 0.75rem; transition: color 0.3s; }
+        .footer-links a:hover { color: #fff; text-decoration: underline; }
+        
+        @media (max-width: 768px) { h1 { font-size: 2rem; } }
+    </style>
+
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -30,71 +129,15 @@
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1075179674597419&ev=PageView&noscript=1"
     /></noscript>
-    <!-- End Meta Pixel Code -->
-
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { width: 100%; overflow-x: hidden; }
-        body { 
-            font-family: 'Inter', sans-serif; 
-            color: #fff; 
-            /* --- FIXED BACKGROUND --- */
-            background-color: #1b0231; 
-            position: relative; 
-        }
-        @keyframes pulseGlow { 0%, 100% { text-shadow: 0 0 8px rgba(213,54,255,0.35); } 50% { text-shadow: 0 0 16px rgba(213,54,255,0.6); } }
-        .container { max-width: 700px; margin: 0 auto; padding: 5rem 1.5rem; text-align: center; }
-        
-        /* --- Video Styles --- */
-        .video-container {
-            margin-bottom: 3rem;
-            border-radius: 15px;
-            overflow: hidden; /* Ensures the video corners are rounded */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-        }
-        .video-container video {
-            width: 100%;
-            display: block; /* Removes any extra space below the video */
-        }
-        /* --- End Video Styles --- */
-
-        h1 { font-size: 2.5rem; font-weight: 700; line-height: 1.2; animation: pulseGlow 4s ease-in-out infinite; margin-bottom: 1rem; }
-        .sub-headline { font-size: 1.2rem; max-width: 550px; margin: 0 auto 3rem auto; color: rgba(255, 255, 255, 0.9); line-height: 1.6; }
-        .offer-box { background: rgba(255,255,255,0.05); padding: 2.5rem; border-radius: 15px; text-align: left; border: 1px solid rgba(255,255,255,0.1); margin: 3rem 0; }
-        .offer-box h2 { text-align: center; font-size: 1.8rem; margin-bottom: 2rem; }
-        .offer-box ul { list-style: none; padding: 0; }
-        .offer-box ul li { font-size: 1.1rem; margin-bottom: 1.25rem; padding-left: 2.2rem; position: relative; line-height: 1.5; }
-        .offer-box ul li::before { content: '✓'; position: absolute; left: 0; top: 2px; color: #d536ff; font-size: 1.2rem; font-weight: 700; }
-        .form-section { margin-top: 3rem; padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); }
-        .form-section h2 { font-size: 2rem; margin-bottom: 0.5rem; }
-        .form-section p { max-width: 500px; margin-left: auto; margin-right: auto; margin-bottom: 2.5rem; color: rgba(255,255,255,0.7); }
-        .form-group { text-align: left; margin-bottom: 1.5rem; }
-        .form-group label { display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; color: rgba(255,255,255,0.8); }
-        .form-input { width: 100%; padding: 1rem; font-family: 'Inter', sans-serif; font-size: 1rem; background-color: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: #fff; transition: border-color 0.3s, box-shadow 0.3s; }
-        .form-input:focus { outline: none; border-color: rgba(213,54,255,0.8); box-shadow: 0 0 10px rgba(213,54,255,0.3); }
-        .submit-button { display: inline-block; width: 100%; padding: 1rem 2.5rem; background-color: rgba(213,54,255,0.9); color: white; font-weight: 600; text-decoration: none; border-radius: 8px; box-shadow: 0 0 20px rgba(213,54,255,0.5); transition: all 0.3s ease; font-size: 1.1rem; border: none; cursor: pointer; margin-top: 1rem; }
-        .submit-button:hover { transform: scale(1.03); background-color: rgba(223, 74, 255, 1); box-shadow: 0 0 30px rgba(213,54,255,0.7); }
-        
-        /* --- Footer Styles --- */
-        footer { text-align: center; color: rgba(255,255,255,0.4); padding: 4rem 1rem 2rem 1rem; font-size: 0.9rem; }
-        .footer-links { margin-top: 1rem; }
-        .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; margin: 0 0.75rem; transition: color 0.3s; }
-        .footer-links a:hover { color: #fff; text-decoration: underline; }
-        /* --- End Footer Styles --- */
-
-        @media (max-width: 768px) { h1 { font-size: 2rem; } }
-    </style>
 </head>
 <body>
 
 <div class="container">
 
-    <!-- Start of Video Section -->
-    <div class="video-container">
-        <video src="https://res.cloudinary.com/dnvtoineu/video/upload/v1755567633/Welcome_This_page_provides_a_detailed_breakdown_of_how_the_1_gaon2u.mp4" controls playsinline></video>
+    <div class="video-wrapper">
+        <video id="header-video" src="https://res.cloudinary.com/dnvtoineu/video/upload/v1755567633/Welcome_This_page_provides_a_detailed_breakdown_of_how_the_1_gaon2u.mp4" autoplay muted loop controls playsinline></video>
+        <div class="unmute-overlay">🔈</div>
     </div>
-    <!-- End of Video Section -->
 
     <h1>Stop Losing Leads. Start Closing Deals.</h1>
     <p class="sub-headline">
@@ -104,16 +147,45 @@
     <div class="offer-box">
         <h2>The All-in-One System Includes:</h2>
         <ul>
-            <li><strong>Strategic Ad Management:</strong> The system includes targeted ad campaigns, created and managed to generate a consistent flow of high-quality leads.</li>
-            <li><strong>Your Dedicated AI Receptionist:</strong> At the core of the system is a voice agent, trained on your brand, that instantly answers and qualifies every single lead call, 24/7.</li>
-            <li><strong>A Fully Automated Pipeline:</strong> The system is deployed to turn every lead into a booked call, placed directly onto your calendar without manual effort.</li>
-            <li><strong>The 5-Booking Guarantee:</strong> We guarantee a minimum of 5 qualified appointments in your first 90 days, or our service continues free of charge until we deliver.</li>
+            <li><strong>Strategic Ad Management:</strong> Targeted ad campaigns created and managed to generate a consistent flow of high-quality leads.</li>
+            <li><strong>Your Dedicated AI Receptionist:</strong> An AI assistant that instantly calls and qualifies every single lead, 24/7.</li>
+            <li><strong>A Fully Automated Pipeline:</strong> A system deployed to turn every qualified lead into a booked call on your calendar without manual effort.</li>
         </ul>
     </div>
 
+    <div class="content-section">
+        <h2>This System Is For You If...</h2>
+        <ul>
+            <li>You're an ambitious solo agent or a small team leader.</li>
+            <li>You know you're wasting money on leads you can't get to in time.</li>
+            <li>You're ready to stop being a marketer and start being a full-time agent.</li>
+            <li>You want a predictable system for growing your business.</li>
+        </ul>
+    </div>
+    <div class="content-section">
+        <h2>What Realtors Are Saying</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p class="stars">★★★★★</p>
+                <p>"I was drowning in leads I couldn't get to in time. Now, the system handles all the initial follow-up, and my calendar is just filled with qualified appointments. It's been a complete game-changer for my business."</p>
+                <p class="author">— Jessica M., Top Producer, Charlotte NC</p>
+            </div>
+            <div class="testimonial-card">
+                <p class="stars">★★★★★</p>
+                <p>"I was tired of spending money on ads just to get a list of names that never answered the phone. This system is the first thing I've used that actually turns ad spend into real, booked conversations. The results speak for themselves."</p>
+                <p class="author">— David R., Independent Agent, Fort Mill SC</p>
+            </div>
+        </div>
+    </div>
+    <div class="guarantee-box">
+        <span class="shield" role="img" aria-label="shield icon">🛡️</span>
+        <h2>Your 5-Booking Money-Back Guarantee</h2>
+        <p>This investment is fully protected. We guarantee 5 qualified phone appointments in your first 90 days. If we don't deliver, you receive a full refund. You cannot lose.</p>
+    </div>
+    
     <div class="form-section" id="form-section">
-        <h2>Apply to Get Started</h2>
-        <p>Due to the hands-on nature of this integrated service, we can only accept a limited number of new clients. Fill out the application below to see if we're a good fit.</p>
+        <h2>Book Your Free Discovery Call</h2>
+        <p>This initial 15-minute call is to understand your business goals and see if our system is the right fit to help you achieve them. Let's build a plan together.</p>
         
         <form id="facade-form">
             <div class="form-group">
@@ -132,7 +204,13 @@
                 <label for="facade_company">Company</label>
                 <input class="form-input" type="text" id="facade_company" placeholder="e.g., Awesome Realty Group" required>
             </div>
-            <button type="submit" class="submit-button">Apply Now</button>
+            
+            <div class="form-group" style="position: absolute; left: -5000px;" aria-hidden="true">
+                <label for="facade_website">Website</label>
+                <input type="text" id="facade_website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
+            <button type="submit" class="submit-button">Book My Discovery Call</button>
         </form>
     </div>
 
@@ -140,54 +218,60 @@
 
 <footer>
     <p>© 2025 The Index Cloud. All Rights Reserved.</p>
-    <!-- Start of Legal Links -->
     <div class="footer-links">
         <a href="legal.html" target="_blank">Terms of Service</a>
         <a href="legal.html" target="_blank">Privacy Policy</a>
     </div>
-    <!-- End of Legal Links -->
 </footer>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+
+        // --- MODIFICATION: Device-aware video controls ---
+        const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+        const videoWrapper = document.querySelector('.video-wrapper');
+        const unmuteOverlay = document.querySelector('.unmute-overlay');
+        
+        if (isTouchDevice && videoWrapper) {
+            // On touch devices, enable tap-to-unmute
+            const video = document.getElementById('header-video');
+            videoWrapper.style.cursor = 'pointer';
+            
+            videoWrapper.addEventListener('click', function() {
+                if (video.muted) {
+                    video.muted = false;
+                    unmuteOverlay.classList.add('hidden');
+                }
+            }, { once: true }); // Use { once: true } so this only fires the first time
+        } else if (unmuteOverlay) {
+            // On non-touch devices (PCs), hide the overlay
+            unmuteOverlay.style.display = 'none';
+        }
+        // --- End of new logic ---
+
+
         const applyForm = document.getElementById('facade-form');
-
-        // Function to get cookies for fbp and fbc
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
-        }
-
-        // Function to send data to our serverless function
-        async function sendServerConversion(data) {
-            try {
-                await fetch('/api/send-conversion', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                });
-                console.log('Server-side conversion event sent.');
-            } catch (error) {
-                console.error('Failed to send server-side conversion event:', error);
-            }
-        }
-
         if (applyForm) {
             applyForm.addEventListener('submit', function(e) {
                 e.preventDefault(); 
 
+                // --- HONEYPOT CHECK ---
+                const honeypot = document.getElementById('facade_website').value;
+                if (honeypot) {
+                    console.log("Honeypot triggered. Bot submission blocked.");
+                    return; // Silently stop the function if the honeypot field is filled
+                }
+                // --- END HONEYPOT CHECK ---
+
                 const portalId = '243194016';
-                const formGuid = '94080afa-9a22-47b4-ac2d-1213f28531ed';
+                const formGuid = '94080afa-9a22-47b4-ac2d-1213f28531ed'; 
 
                 const fullName = document.getElementById('facade_full_name').value;
                 const email = document.getElementById('facade_email').value;
                 const phone = document.getElementById('facade_phone').value;
                 const company = document.getElementById('facade_company').value;
 
-                const hubspotSubmissionData = {
+                const submissionData = {
                     fields: [
                         { name: 'full_name', value: fullName },
                         { name: 'email', value: email },
@@ -199,27 +283,20 @@
                 fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(hubspotSubmissionData)
+                    body: JSON.stringify(submissionData)
                 })
                 .then(response => {
                     if (response.ok) {
-                        const formContainer = document.getElementById('form-section');
-                        formContainer.innerHTML = '<h2>✅ Thank You!</h2><p>Your application has been received. Redirecting you to book your discovery call...</p>';
                         
-                        // Prepare and send data for CAPI
-                        const capiData = {
-                            email: email,
-                            phone: phone,
-                            fullName: fullName,
-                            fbp: getCookie('_fbp') || null,
-                            fbc: getCookie('_fbc') || null,
-                        };
-                        sendServerConversion(capiData);
+                        // --- FIRE THE LEAD EVENT FOR THE META PIXEL ---
+                        fbq('track', 'Lead');
+                        // ---------------------------------------------
 
+                        const formContainer = document.getElementById('form-section');
+                        formContainer.innerHTML = '<h2>✅ Thank You!</h2><p>Your application has been received. <a href="https://calendly.com/theindexcloud/20-minute-realtor-system-demo" style="color: #fff; text-decoration: underline;">Click here to book your discovery call</a>, or you will be redirected automatically.</p>';
                         setTimeout(() => { 
-                            window.location.href = 'https://calendly.com/theindexcloud/20-minute-realty-system-demo'; 
+                            window.location.href = 'https://calendly.com/theindexcloud/20-minute-realtor-system-demo'; 
                         }, 2500);
-
                     } else {
                         response.json().then(data => console.error("HubSpot Submission Error:", data));
                         alert('An error occurred while submitting your application. Please try again.');
