@@ -64,19 +64,6 @@
         .offer-box ul li, .content-section ul li { font-size: 1.1rem; margin-bottom: 1.25rem; padding-left: 2.2rem; position: relative; line-height: 1.5; }
         .offer-box ul li::before, .content-section ul li::before { content: '✓'; position: absolute; left: 0; top: 2px; color: #d536ff; font-size: 1.2rem; font-weight: 700; }
         
-        /* --- Testimonial Styles --- */
-        .testimonial-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
-        .testimonial-card { background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 10px; border-left: 4px solid #d536ff; }
-        .testimonial-card p { font-style: italic; color: rgba(255,255,255,0.9); margin: 0; }
-        .testimonial-card .author { font-style: normal; font-weight: 600; color: #fff; margin-top: 1rem; text-align: right; }
-        .testimonial-card .stars {
-            color: #ffc107;
-            font-size: 1.2rem;
-            margin-bottom: 0.75rem;
-            font-style: normal;
-        }
-        @media (min-width: 640px) { .testimonial-grid { grid-template-columns: 1fr 1fr; } }
-
         /* --- Guarantee Box Styles --- */
         .guarantee-box { 
             border: 2px solid #d536ff; 
@@ -159,21 +146,7 @@
             <li>You want a predictable system for growing your business.</li>
         </ul>
     </div>
-    <div class="content-section">
-        <h2>What Realtors Are Saying</h2>
-        <div class="testimonial-grid">
-            <div class="testimonial-card">
-                <p class="stars">★★★★★</p>
-                <p>"I was drowning in leads I couldn't get to in time. Now, the system handles all the initial follow-up, and my calendar is just filled with qualified appointments. It's been a complete game-changer for my business."</p>
-                <p class="author">— Jessica M., Top Producer, Charlotte NC</p>
-            </div>
-            <div class="testimonial-card">
-                <p class="stars">★★★★★</p>
-                <p>"I was tired of spending money on ads just to get a list of names that never answered the phone. This system is the first thing I've used that actually turns ad spend into real, booked conversations. The results speak for themselves."</p>
-                <p class="author">— David R., Independent Agent, Fort Mill SC</p>
-            </div>
-        </div>
-    </div>
+
     <div class="guarantee-box">
         <span class="shield" role="img" aria-label="shield icon">🛡️</span>
         <h2>Your 5-Booking Money-Back Guarantee</h2>
@@ -292,7 +265,7 @@
                         const formContainer = document.getElementById('form-section');
                         formContainer.innerHTML = '<h2>✅ Thank You!</h2><p>Your application has been received. <a href="https://calendly.com/theindexcloud/20-minute-realtor-system-demo" style="color: #fff; text-decoration: underline;">Click here to book your discovery call</a>, or you will be redirected automatically.</p>';
                         setTimeout(() => { 
-                            window..href = 'https://calendly.com/theindexcloud/20-minute-realtor-system-demo'; 
+                            window.location.href = 'https://calendly.com/theindexcloud/20-minute-realtor-system-demo'; 
                         }, 2500);
                     } else {
                         response.json().then(data => console.error("HubSpot Submission Error:", data));
