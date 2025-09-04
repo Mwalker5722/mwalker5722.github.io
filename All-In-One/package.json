@@ -1,7 +1,0 @@
-{
-  "name": "the-index-cloud-api",
-  "version": "1.0.0",
-  "dependencies": {
-    "twilio": "^5.2.0"
-  }
-}
