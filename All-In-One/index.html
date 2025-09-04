@@ -263,8 +263,11 @@
                         if(typeof fbq === 'function') {
                             fbq('track', 'Lead');
                         }
-                        // Redirect to Calendly on success
-                        window.location.href = 'https://calendly.com/theindexcloud/20-minute-realtor-system-demo';
+                        
+                        // Display the Thank You message without redirecting
+                        const formContainer = document.getElementById('form-section');
+                        formContainer.innerHTML = '<h2>✅ Thank You!</h2><p>Your submission has been received. Please click the link below to book your discovery call.</p><p><a href="https://calendly.com/theindexcloud/20-minute-realtor-system-demo" style="color: #fff; font-weight: bold; text-decoration: underline;">Click here to book your discovery call on my calendar.</a></p>';
+
                     } else {
                          // Handle errors if the API call fails
                         alert('An error occurred. Please try again.');
