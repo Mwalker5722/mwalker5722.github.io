@@ -266,6 +266,7 @@
                         
                         const formContainer = document.getElementById('form-section');
                         let thankYouMessage = '';
+                        const calendlyLink = 'https://calendly.com/theindexcloud/20-minute-realtor-system-demo';
 
                         if (smsConsent) {
                             // Message for users who CONSENTED to SMS
@@ -277,7 +278,9 @@
                                         <br>
                                         A text message with a direct booking link is on its way to your phone now.
                                     </p>
-                                    <a href="https://calendly.com/theindexcloud/20-minute-realtor-system-demo" style="color: #fff; font-weight: bold; text-decoration: underline;">Or, click here to book now.</a>
+                                    <form action="${calendlyLink}" method="get" target="_blank" style="max-width: 400px; margin: 0 auto;">
+                                        <button type="submit" class="submit-button">Or, click here to book now</button>
+                                    </form>
                                 </div>
                             `;
                         } else {
@@ -288,9 +291,11 @@
                                     <p style="margin-bottom: 1.5rem; line-height: 1.6;">
                                         Thanks for your interest, we've received your information.
                                         <br>
-                                        Please click the link below to schedule your discovery call.
+                                        Please click the button below to schedule your discovery call.
                                     </p>
-                                    <a href="https://calendly.com/theindexcloud/20-minute-realtor-system-demo" style="color: #fff; font-weight: bold; text-decoration: underline;">Click here to book your call on my calendar.</a>
+                                     <form action="${calendlyLink}" method="get" target="_blank" style="max-width: 400px; margin: 0 auto;">
+                                        <button type="submit" class="submit-button">Click here to book your call on my calendar</button>
+                                    </form>
                                 </div>
                             `;
                         }
