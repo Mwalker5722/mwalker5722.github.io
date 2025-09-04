@@ -264,9 +264,19 @@
                             fbq('track', 'Lead');
                         }
                         
-                        // Display the Thank You message without redirecting
+                        // --- DYNAMIC THANK YOU MESSAGE ---
                         const formContainer = document.getElementById('form-section');
-                        formContainer.innerHTML = '<h2>✅ Thank You!</h2><p>Your submission has been received. Please click the link below to book your discovery call.</p><p><a href="https://calendly.com/theindexcloud/20-minute-realtor-system-demo" style="color: #fff; font-weight: bold; text-decoration: underline;">Click here to book your discovery call on my calendar.</a></p>';
+                        let thankYouMessage = '';
+
+                        if (smsConsent) {
+                            // Message for users who CONSENTED to SMS
+                            thankYouMessage = '<h2>✅ Thank You!</h2><p>Your submission has been received. You will receive a text message with a link to book your discovery call in a moment.</p><p><a href="https://calendly.com/theindexcloud/20-minute-realtor-system-demo" style="color: #fff; font-weight: bold; text-decoration: underline;">Or, click here to book now.</a></p>';
+                        } else {
+                            // Message for users who DID NOT consent to SMS
+                            thankYouMessage = '<h2>✅ Thank You!</h2><p>Your submission has been received. Please click the link below to book your discovery call.</p><p><a href="https://calendly.com/theindexcloud/20-minute-realtor-system-demo" style="color: #fff; font-weight: bold; text-decoration: underline;">Click here to book your discovery call on my calendar.</a></p>';
+                        }
+                        
+                        formContainer.innerHTML = thankYouMessage;
 
                     } else {
                          // Handle errors if the API call fails
