@@ -55,6 +55,9 @@
         .submit-button:disabled { background-color: #8e6d9e; cursor: not-allowed; transform: none; box-shadow: none; }
         .submit-button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 
+        /* --- NEW STYLE FOR NOTE --- */
+        .submit-note { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 1.5rem; text-align: center; }
+
         footer { text-align: center; color: rgba(255,255,255,0.4); padding: 4rem 1rem 2rem 1rem; font-size: 0.9rem; }
         .footer-links { margin-top: 1rem; }
         .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; margin: 0 0.75rem; transition: color 0.3s; }
@@ -125,12 +128,10 @@
                 <input class="form-input" type="tel" id="facade_phone" placeholder="(555) 123-4567" required>
             </div>
 
-            <!-- START: CONSENT TEXT UPDATED -->
             <div class="form-group consent-group">
                 <input type="checkbox" id="sms_consent" name="sms_consent">
                 <label for="sms_consent">By checking this box, you provide express written consent to receive automated phone calls and text messages from The Index Cloud at the number provided. Message & data rates may apply. Your consent is not a condition of purchase.</label>
             </div>
-            <!-- END: CONSENT TEXT UPDATED -->
 
             <div class="form-group">
                 <label for="facade_company">Company</label>
@@ -141,6 +142,11 @@
                 <input type="text" id="facade_website" name="website" tabindex="-1" autocomplete="off">
             </div>
             <button type="submit" class="submit-button">Book My Discovery Call</button>
+            
+            <!-- START: NOTE ADDED -->
+            <p class="submit-note">After submitting, you will receive an instant text and a call from our AI assistant to connect you with our team.</p>
+            <!-- END: NOTE ADDED -->
+
         </form>
     </div>
 </div>
@@ -154,7 +160,6 @@
 </footer>
 
 <script>
-    // --- NO CHANGES TO JAVASCRIPT ---
     document.addEventListener("DOMContentLoaded", function() {
         // ... (video logic is unchanged)
         const applyForm = document.getElementById('facade-form');
@@ -187,27 +192,31 @@
                         
                         const formContainer = document.getElementById('form-section');
                         const calendlyLink = 'https://calendly.com/theindexcloud/20-minute-realtor-system-demo';
+                        
+                        // --- START: THANK YOU MESSAGE UPDATED ---
                         let thankYouMessage = smsConsent ? `
                             <div style="text-align: center;">
                                 <h2>✅ Submission Received!</h2>
                                 <p style="margin-bottom: 1.5rem; line-height: 1.6;">
-                                    Thanks for your interest, we've received your information.<br>
-                                    A text message with a direct booking link is on its way to your phone now.
+                                    Thanks for your interest! We've received your information.<br>
+                                    You will receive a text with a booking link and a brief call from our AI assistant shortly.
                                 </p>
                                 <form action="${calendlyLink}" method="get" target="_blank" style="max-width: 400px; margin: 0 auto;">
-                                    <button type="submit" class="submit-button">Or, click here to book now</button>
+                                    <button type="submit" class="submit-button">Or, Book Your Call Now</button>
                                 </form>
                             </div>` : `
                             <div style="text-align: center;">
                                 <h2>✅ Submission Received!</h2>
                                 <p style="margin-bottom: 1.5rem; line-height: 1.6;">
-                                    Thanks for your interest, we've received your information.<br>
+                                    Thanks for your interest! We've received your information.<br>
                                     Please click the button below to schedule your discovery call.
                                 </p>
                                 <form action="${calendlyLink}" method="get" target="_blank" style="max-width: 400px; margin: 0 auto;">
                                     <button type="submit" class="submit-button">Book Your Discovery Call</button>
                                 </form>
                             </div>`;
+                        // --- END: THANK YOU MESSAGE UPDATED ---
+                        
                         formContainer.innerHTML = thankYouMessage;
                     } else {
                         alert('An error occurred. Please try again.');
