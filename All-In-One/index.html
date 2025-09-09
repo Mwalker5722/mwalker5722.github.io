@@ -88,9 +88,9 @@
         .consent-group input[type="checkbox"] { margin-top: 4px; margin-right: 10px; flex-shrink: 0; width: 16px; height: 16px; }
         .consent-group label { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.5; font-weight: 400; }
 
-        .submit-button { display: inline-block; width: 100%; padding: 1rem 2.5rem; background-color: rgba(213,54,255,0.9); color: white; font-weight: 600; text-decoration: none; border-radius: 8px; box-shadow: 0 0 20px rgba(213,54,255,0.5); transition: all 0.3s ease; font-size: 1.1rem; border: none; cursor: pointer; margin-top: 1rem; }
-        .submit-button:hover { transform: scale(1.03); background-color: rgba(223, 74, 255, 1); box-shadow: 0 0 30px rgba(213,54,255,0.7); }
-        .submit-button:disabled { background-color: #8e6d9e; cursor: not-allowed; transform: none; box-shadow: none; }
+        .submit-button { display: inline-block; width: 100%; padding: 1rem 2.5rem; background-color: #ff6f47; color: white; font-weight: 600; text-decoration: none; border-radius: 8px; box-shadow: 0 0 20px rgba(255, 111, 71, 0.5); transition: all 0.3s ease; font-size: 1.1rem; border: none; cursor: pointer; margin-top: 1rem; }
+        .submit-button:hover { transform: scale(1.03); background-color: #ff8566; box-shadow: 0 0 30px rgba(255, 111, 71, 0.7); }
+        .submit-button:disabled { background-color: #d39e8f; cursor: not-allowed; transform: none; box-shadow: none; }
         .submit-button:focus-visible {
             outline: 2px solid #fff;
             outline-offset: 2px;
@@ -165,16 +165,25 @@
         
         <form id="facade-form">
             <div class="form-group">
-                <label for="facade_full_name">Your Name</label>
-                <input class="form-input" type="text" id="facade_full_name" placeholder="e.g., Jane Doe" required>
+                <label for="facade_first_name">First name</label>
+                <input class="form-input" type="text" id="facade_first_name" placeholder="e.g., Jane" required>
+            </div>
+            <div class="form-group">
+                <label for="facade_last_name">Last name</label>
+                <input class="form-input" type="text" id="facade_last_name" placeholder="e.g., Doe" required>
             </div>
             <div class="form-group">
                 <label for="facade_email">Email</label>
                 <input class="form-input" type="email" id="facade_email" placeholder="e.g., jane.doe@realtypro.com" required>
             </div>
             <div class="form-group">
-                <label for="facade_phone">Phone</label>
+                <label for="facade_phone">Phone number</label>
                 <input class="form-input" type="tel" id="facade_phone" placeholder="(555) 123-4567" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="facade_company">Company name</label>
+                <input class="form-input" type="text" id="facade_company" placeholder="e.g., Awesome Realty Group" required>
             </div>
             
             <div class="form-group consent-group">
@@ -182,17 +191,12 @@
                 <label for="sms_consent">By checking this box, you agree to receive text messages from The Index Cloud at the number provided. Message and data rates may apply.</label>
             </div>
             
-            <div class="form-group">
-                <label for="facade_company">Company</label>
-                <input class="form-input" type="text" id="facade_company" placeholder="e.g., Awesome Realty Group" required>
-            </div>
-            
             <div class="form-group" style="position: absolute; left: -5000px;" aria-hidden="true">
                 <label for="facade_website">Website</label>
                 <input type="text" id="facade_website" name="website" tabindex="-1" autocomplete="off">
             </div>
 
-            <button type="submit" class="submit-button">Book My Discovery Call</button>
+            <button type="submit" class="submit-button">Submit</button>
         </form>
     </div>
 
@@ -237,14 +241,18 @@
                     return;
                 }
                 
+                // START: JAVASCRIPT CHANGE
                 // Get form values
-                const fullName = document.getElementById('facade_full_name').value;
+                const firstName = document.getElementById('facade_first_name').value;
+                const lastName = document.getElementById('facade_last_name').value;
                 const email = document.getElementById('facade_email').value;
                 const phone = document.getElementById('facade_phone').value;
                 const company = document.getElementById('facade_company').value;
                 const smsConsent = document.getElementById('sms_consent').checked;
 
-                const submissionData = { fullName, email, phone, company, smsConsent };
+                const submissionData = { firstName, lastName, email, phone, company, smsConsent };
+                // END: JAVASCRIPT CHANGE
+                
                 const submitButton = e.target.querySelector('.submit-button');
 
                 // Disable button to prevent multiple submissions
@@ -306,14 +314,14 @@
                          // Handle errors if the API call fails
                         alert('An error occurred. Please try again.');
                         submitButton.disabled = false;
-                        submitButton.textContent = 'Book My Discovery Call';
+                        submitButton.textContent = 'Submit';
                     }
                 })
                 .catch(error => {
                     console.error('Network Error:', error);
                     alert('A network error occurred. Please try again.');
                     submitButton.disabled = false;
-                    submitButton.textContent = 'Book My Discovery Call';
+                    submitButton.textContent = 'Submit';
                 });
             });
         }
