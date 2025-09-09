@@ -11,22 +11,25 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { fullName, email, phone, company, smsConsent } = req.body;
-    console.log('Received form data:', { fullName, email, phone, company, smsConsent });
+    // --- LOGIC UPDATED: Destructure firstName and lastName ---
+    const { firstName, lastName, email, phone, company, smsConsent } = req.body;
+    console.log('Received form data:', { firstName, lastName, email, phone, company, smsConsent });
 
     // --- Task 1: Forward the Lead to HubSpot ---
     try {
       console.log('Attempting to send data to HubSpot...');
       const hubspotData = {
         fields: [
-          { name: 'full_name', value: fullName },
+          // --- LOGIC UPDATED: Send separate fields to HubSpot ---
+          { name: 'firstname', value: firstName },
+          { name: 'lastname', value: lastName },
           { name: 'email', value: email },
           { name: 'phone', value: phone },
           { name: 'company', value: company },
           { name: 'hs_sms_consent', value: smsConsent }
         ]
       };
-      // Safely access HubSpot credentials from Environment Variables
+      
       const portalId = process.env.HUBSPOT_PORTAL_ID;
       const formGuid = process.env.HUBSPOT_FORM_GUID;
       
@@ -53,7 +56,6 @@ export default async function handler(req, res) {
     if (smsConsent && phone) {
       try {
         console.log('Attempting to send SMS via Twilio...');
-        // Safely access Twilio credentials from Environment Variables
         const accountSid = process.env.TWILIO_ACCOUNT_SID;
         const authToken = process.env.TWILIO_AUTH_TOKEN;
         const twilioPhone = process.env.TWILIO_PHONE_NUMBER;
@@ -64,7 +66,7 @@ export default async function handler(req, res) {
 
         const client = twilio(accountSid, authToken);
 
-        const firstName = fullName.split(' ')[0];
+        // --- LOGIC UPDATED: Use firstName directly ---
         const messageBody = `Hi ${firstName}, Matthew from The Index Cloud here. Thanks for your interest! As promised, here's the direct link to book your 20-min demo: https://calendly.com/theindexcloud/20-minute-realtor-system-demo`;
 
         await client.messages.create({
