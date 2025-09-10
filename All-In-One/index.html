@@ -19,8 +19,22 @@
         body { font-family: 'Inter', sans-serif; color: #fff; background-color: #1b0231; position: relative; }
         @keyframes pulseGlow { 0%, 100% { text-shadow: 0 0 8px rgba(213,54,255,0.35); } 50% { text-shadow: 0 0 16px rgba(213,54,255,0.6); } }
         .container { max-width: 700px; margin: 0 auto; padding: 5rem 1.5rem; text-align: center; }
-        .video-wrapper { position: relative; margin-bottom: 3rem; border-radius: 15px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
-        .video-wrapper video { width: 100%; display: block; }
+        
+        /* --- Video Wrapper Styles --- */
+        .video-wrapper {
+            position: relative;
+            margin-bottom: 3rem;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        .video-wrapper video {
+            width: 100%;
+            display: block;
+        }
+        /* --- End Video Styles --- */
+
         h1 { font-size: 2.5rem; font-weight: 700; line-height: 1.2; animation: pulseGlow 4s ease-in-out infinite; margin-bottom: 1rem; }
         h2 { font-size: 1.8rem; text-align: center; margin-bottom: 2rem; }
         .sub-headline { font-size: 1.2rem; max-width: 550px; margin: 0 auto 3rem auto; color: rgba(255, 255, 255, 0.9); line-height: 1.6; }
@@ -28,10 +42,19 @@
         .offer-box ul, .content-section ul { list-style: none; padding: 0; }
         .offer-box ul li, .content-section ul li { font-size: 1.1rem; margin-bottom: 1.25rem; padding-left: 2.2rem; position: relative; line-height: 1.5; }
         .offer-box ul li::before, .content-section ul li::before { content: '✓'; position: absolute; left: 0; top: 2px; color: #d536ff; font-size: 1.2rem; font-weight: 700; }
-        .guarantee-box { border: 2px solid #d536ff; text-align: center; padding: 2.5rem; margin-top: 4rem; box-shadow: 0 0 25px rgba(213, 54, 255, 0.3); }
+        
+        /* --- Guarantee Box Styles --- */
+        .guarantee-box { 
+            border: 2px solid #d536ff; 
+            text-align: center; 
+            padding: 2.5rem; 
+            margin-top: 4rem;
+            box-shadow: 0 0 25px rgba(213, 54, 255, 0.3);
+        }
         .guarantee-box .shield { font-size: 3rem; margin-bottom: 1rem; display: block; }
         .guarantee-box h2 { color: #fff; animation: pulseGlow 3s ease-in-out infinite; }
         .guarantee-box p { color: rgba(255,255,255,0.8); max-width: 500px; margin: 0 auto; line-height: 1.6; }
+
         .form-section { margin-top: 4rem; padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); }
         .form-section h2 { font-size: 2rem; margin-bottom: 0.5rem; }
         .form-section p { max-width: 500px; margin-left: auto; margin-right: auto; margin-bottom: 2.5rem; color: rgba(255,255,255,0.7); }
@@ -39,15 +62,19 @@
         .form-group label { display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; color: rgba(255,255,255,0.8); }
         .form-input { width: 100%; padding: 1rem; font-family: 'Inter', sans-serif; font-size: 1rem; background-color: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: #fff; transition: border-color 0.3s, box-shadow 0.3s; }
         .form-input:focus { outline: none; border-color: rgba(213,54,255,0.8); box-shadow: 0 0 10px rgba(213,54,255,0.3); }
+        
         .consent-group { display: flex; align-items: flex-start; text-align: left; margin-top: -0.5rem; margin-bottom: 1.5rem; }
         .consent-group input[type="checkbox"] { margin-top: 4px; margin-right: 10px; flex-shrink: 0; width: 16px; height: 16px; }
         .consent-group label { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.5; font-weight: 400; }
+
         .submit-button { display: inline-block; width: 100%; padding: 1rem 2.5rem; background-color: rgba(213,54,255,0.9); color: white; font-weight: 600; text-decoration: none; border-radius: 8px; box-shadow: 0 0 20px rgba(213,54,255,0.5); transition: all 0.3s ease; font-size: 1.1rem; border: none; cursor: pointer; margin-top: 1rem; }
         .submit-button:hover { transform: scale(1.03); background-color: rgba(223, 74, 255, 1); box-shadow: 0 0 30px rgba(213,54,255,0.7); }
         .submit-button:disabled { background-color: #8e6d9e; cursor: not-allowed; transform: none; box-shadow: none; }
+        
         footer { text-align: center; color: rgba(255,255,255,0.4); padding: 4rem 1rem 2rem 1rem; font-size: 0.9rem; }
         .footer-links { margin-top: 1rem; }
         .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; margin: 0 0.75rem; }
+        
         @media (max-width: 768px) { h1 { font-size: 2rem; } }
     </style>
 
@@ -70,14 +97,53 @@
 <body>
 
 <div class="container">
+
+    <div class="video-wrapper">
+        <video id="header-video" src="https://res.cloudinary.com/dnvtoineu/video/upload/v1755567633/Welcome_This_page_provides_a_detailed_breakdown_of_how_the_1_gaon2u.mp4" autoplay muted loop controls playsinline></video>
+    </div>
+
     <h1>Stop Losing Leads. Start Closing Deals.</h1>
-    <p class="sub-headline">The All-in-One System for ambitious realtors that turns ad clicks into booked appointments, guaranteed.</p>
+    <p class="sub-headline">
+        The All-in-One System for ambitious realtors that turns ad clicks into booked appointments, guaranteed.
+    </p>
+
+    <div class="offer-box">
+        <h2>The All-in-One System Includes:</h2>
+        <ul>
+            <li><strong>Strategic Ad Management:</strong> Targeted ad campaigns created and managed to generate a consistent flow of high-quality leads.</li>
+            <li><strong>Your Dedicated AI Receptionist:</strong> An AI assistant that instantly calls and qualifies every single lead, 24/7.</li>
+            <li><strong>A Fully Automated Pipeline:</strong> A system deployed to turn every qualified lead into a booked call on your calendar without manual effort.</li>
+        </ul>
+    </div>
+
+    <div class="content-section">
+        <h2>This System Is For You If...</h2>
+        <ul>
+            <li>You're an ambitious solo agent or a small team leader.</li>
+            <li>You know you're wasting money on leads you can't get to in time.</li>
+            <li>You're ready to stop being a marketer and start being a full-time agent.</li>
+            <li>You want a predictable system for growing your business.</li>
+        </ul>
+    </div>
+
+    <div class="guarantee-box">
+        <span class="shield" role="img" aria-label="shield icon">🛡️</span>
+        <h2>Your 5-Booking Money-Back Guarantee</h2>
+        <p>This investment is fully protected. We guarantee 5 qualified phone appointments in your first 90 days. If we don't deliver, you receive a full refund. You cannot lose.</p>
+    </div>
+    
     <div class="form-section" id="form-section">
         <h2>Book Your Free Discovery Call</h2>
+        <p>This initial 20-minute call is to understand your business goals and see if our system is the right fit to help you achieve them. Let's build a plan together.</p>
+        
         <form id="facade-form">
             <div class="form-group">
-                <label for="facade_full_name">Your Name</label>
-                <input class="form-input" type="text" id="facade_full_name" required>
+                <label for="facade_first_name">First Name</label>
+                <input class="form-input" type="text" id="facade_first_name" required>
+            </div>
+             <div class="form-group">
+                <label for="facade_last_name">Last Name</label>
+                <input class="form-input" type="text" id="facade_last_name" required>
             </div>
             <div class="form-group">
                 <label for="facade_email">Email</label>
@@ -89,7 +155,7 @@
             </div>
             <div class="form-group consent-group">
                 <input type="checkbox" id="sms_consent" name="sms_consent">
-                <label for="sms_consent">By checking this box, you agree to receive text messages...</label>
+                <label for="sms_consent">By checking this box, you provide express written consent to receive automated phone calls and text messages from The Index Cloud at the number provided. Message & data rates may apply. Your consent is not a condition of purchase.</label>
             </div>
             <div class="form-group">
                 <label for="facade_company">Company</label>
@@ -98,17 +164,24 @@
             <div class="form-group" style="position: absolute; left: -5000px;" aria-hidden="true">
                 <input type="text" id="facade_website" name="website" tabindex="-1" autocomplete="off">
             </div>
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7); text-align: center; margin-top: 1.5rem;">After submitting, you will receive an instant text and a call from our AI assistant to connect you with our team.</p>
             <button type="submit" class="submit-button">Book My Discovery Call</button>
         </form>
     </div>
+
 </div>
 
 <footer>
-    </footer>
+    <p>© 2025 The Index Cloud. All Rights Reserved.</p>
+    <div class="footer-links">
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+    </div>
+</footer>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // ... (Your video control logic) ...
+        // ... (video control logic can go here if needed) ...
 
         const applyForm = document.getElementById('facade-form');
         if (applyForm) {
@@ -126,15 +199,17 @@
                 }
 
                 // Get form values
-                const fullName = document.getElementById('facade_full_name').value;
+                const firstName = document.getElementById('facade_first_name').value;
+                const lastName = document.getElementById('facade_last_name').value;
+                const fullName = `${firstName} ${lastName}`;
                 const email = document.getElementById('facade_email').value;
                 const phone = document.getElementById('facade_phone').value;
                 const company = document.getElementById('facade_company').value;
                 const smsConsent = document.getElementById('sms_consent').checked;
-                const fbp = getCookie('_fbp'); // Get the _fbp cookie
-                const fbc = getCookie('_fbc'); // Get the _fbc cookie
+                const fbp = getCookie('_fbp');
+                const fbc = getCookie('_fbc');
 
-                const submissionData = { fullName, email, phone, company, smsConsent, fbp, fbc };
+                const submissionData = { fullName, firstName, lastName, email, phone, company, smsConsent, fbp, fbc };
                 const submitButton = e.target.querySelector('.submit-button');
 
                 submitButton.disabled = true;
@@ -148,7 +223,7 @@
                 })
                 .then(response => {
                     if (response.ok) {
-                        // The browser-side pixel fires here, BEFORE the CAPI call
+                        // The browser-side pixel fires here
                         if(typeof fbq === 'function') {
                             fbq('track', 'Lead');
                         }
@@ -156,10 +231,10 @@
                         // Your Thank You message logic
                         const formContainer = document.getElementById('form-section');
                         let thankYouMessage = '';
-                        if (smsConsent) {
-                            thankYouMessage = `<div style="text-align: center;"><h2>✅ Submission Received!</h2><p>...</p></div>`;
+                         if (smsConsent) {
+                            thankYouMessage = `<div style="text-align: center;"><h2>✅ Submission Received!</h2><p style="margin-bottom: 1.5rem; line-height: 1.6;">Thanks for your interest, we've received your information.<br>A text message with a direct booking link is on its way to your phone now.</p><form action="https://calendly.com/theindexcloud/20-minute-realtor-system-demo" method="get" target="_blank" style="max-width: 400px; margin: 0 auto;"><button type="submit" class="submit-button">Or, click here to book now</button></form></div>`;
                         } else {
-                            thankYouMessage = `<div style="text-align: center;"><h2>✅ Submission Received!</h2><p>...</p></div>`;
+                            thankYouMessage = `<div style="text-align: center;"><h2>✅ Submission Received!</h2><p style="margin-bottom: 1.5rem; line-height: 1.6;">Thanks for your interest, we've received your information.<br>Please click the button below to schedule your discovery call.</p><form action="https://calendly.com/theindexcloud/20-minute-realtor-system-demo" method="get" target="_blank" style="max-width: 400px; margin: 0 auto;"><button type="submit" class="submit-button">Click here to book your call on my calendar</button></form></div>`;
                         }
                         formContainer.innerHTML = thankYouMessage;
 
