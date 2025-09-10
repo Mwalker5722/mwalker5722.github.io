@@ -1,5 +1,3 @@
-// This is your updated serverless function: /api/send-conversion.js
-
 import crypto from 'crypto';
 
 export default async function handler(req, res) {
@@ -10,10 +8,7 @@ export default async function handler(req, res) {
   try {
     const PIXEL_ID = process.env.FACEBOOK_PIXEL_ID;
     const ACCESS_TOKEN = process.env.FACEBOOK_CAPI_TOKEN;
-
-    // IMPORTANT: Get the Test Event Code from Facebook's "Test Events" tab and add it as a new Environment Variable in Vercel.
-    // Name the variable: FACEBOOK_TEST_CODE
-    const TEST_CODE = process.env.FACEBOOK_TEST_CODE;
+    const TEST_CODE = process.env.FACEBOOK_TEST_CODE; // Optional for testing
 
     const { email, phone, fullName, fbp, fbc } = req.body;
     const clientIpAddress = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
@@ -38,37 +33,28 @@ export default async function handler(req, res) {
           },
         },
       ],
-      // NEW: Add the test_event_code to the payload if it exists
       ...(TEST_CODE && { test_event_code: TEST_CODE }),
     };
-
-    // NEW: Log the data we are about to send for better debugging
-    console.log('Sending this payload to Facebook:', JSON.stringify(eventData, null, 2));
 
     const url = `https://graph.facebook.com/v19.0/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`;
 
     const response = await fetch(url, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(eventData),
     });
 
     const responseData = await response.json();
-
     if (!response.ok) {
       console.error('Facebook CAPI Error:', responseData);
       throw new Error('Failed to send conversion to Facebook');
     }
     
-    // NEW: Log the successful response from Facebook
     console.log('Facebook responded successfully:', responseData);
-
-    res.status(200).json({ message: 'Conversion sent successfully', fbResponse: responseData });
+    res.status(200).json({ message: 'Conversion sent successfully' });
 
   } catch (error) {
-    console.error('Server Error in function:', error.message);
+    console.error('Server Error in CAPI function:', error.message);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 }
