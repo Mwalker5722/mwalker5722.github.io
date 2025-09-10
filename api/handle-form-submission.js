@@ -56,8 +56,14 @@ export default async function handler(req, res) {
 
     // --- Task 3: Trigger the Facebook Conversions API ---
     try {
-        // Construct the full URL for the API call
-        const capiUrl = `${process.env.VERCEL_URL}/api/send-conversion`;
+        // --- NEW: Dynamically construct the full URL ---
+        const protocol = req.headers['x-forwarded-proto'] || 'http';
+        const host = req.headers.host;
+        const capiUrl = `${protocol}://${host}/api/send-conversion`;
+        // --- End of New Code ---
+        
+        console.log(`Triggering CAPI function at: ${capiUrl}`); // For debugging
+
         await fetch(capiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
