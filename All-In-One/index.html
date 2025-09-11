@@ -70,11 +70,7 @@
         .submit-button { display: inline-block; width: 100%; padding: 1rem 2.5rem; background-color: rgba(213,54,255,0.9); color: white; font-weight: 600; text-decoration: none; border-radius: 8px; box-shadow: 0 0 20px rgba(213,54,255,0.5); transition: all 0.3s ease; font-size: 1.1rem; border: none; cursor: pointer; margin-top: 1rem; }
         .submit-button:hover { transform: scale(1.03); background-color: rgba(223, 74, 255, 1); box-shadow: 0 0 30px rgba(213,54,255,0.7); }
         .submit-button:disabled { background-color: #8e6d9e; cursor: not-allowed; transform: none; box-shadow: none; }
-        .submit-button:focus-visible {
-            outline: 2px solid #fff;
-            outline-offset: 2px;
-        }
-
+        
         footer { text-align: center; color: rgba(255,255,255,0.4); padding: 4rem 1rem 2rem 1rem; font-size: 0.9rem; }
         .footer-links { margin-top: 1rem; }
         .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; margin: 0 0.75rem; }
@@ -101,15 +97,12 @@
 <body>
 
 <div class="container">
-
     <div class="video-wrapper">
         <video id="header-video" src="https://res.cloudinary.com/dnvtoineu/video/upload/v1755567633/Welcome_This_page_provides_a_detailed_breakdown_of_how_the_1_gaon2u.mp4" autoplay muted loop controls playsinline></video>
     </div>
 
     <h1>Stop Losing Leads. Start Closing Deals.</h1>
-    <p class="sub-headline">
-        The All-in-One System for ambitious realtors that turns ad clicks into booked appointments, guaranteed.
-    </p>
+    <p class="sub-headline">The All-in-One System for ambitious realtors that turns ad clicks into booked appointments, guaranteed.</p>
 
     <div class="offer-box">
         <h2>The All-in-One System Includes:</h2>
@@ -155,11 +148,15 @@
             </div>
             <div class="form-group">
                 <label for="facade_phone">Phone</label>
-                <input class="form-input" type="tel" id="facde_phone" required>
+                <input class="form-input" type="tel" id="facade_phone" required>
             </div>
             <div class="form-group consent-group">
                 <input type="checkbox" id="sms_consent" name="sms_consent">
                 <label for="sms_consent">By checking this box, you provide express written consent to receive automated phone calls and text messages from The Index Cloud at the number provided. Message & data rates may apply. Your consent is not a condition of purchase.</label>
+            </div>
+            <div class="form-group consent-group">
+                <input type="checkbox" id="text_only_preference" name="text_only_preference">
+                <label for="text_only_preference">I prefer to receive a text message only (no call).</label>
             </div>
             <div class="form-group">
                 <label for="facade_company">Company</label>
@@ -185,61 +182,70 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        // Video control logic
+        const video = document.getElementById('header-video');
+        if (video) {
+            video.parentElement.addEventListener('click', () => {
+                if(video.muted) { video.muted = false; }
+            });
+        }
+
         // Form submission logic
         const applyForm = document.getElementById('facade-form');
         if (applyForm) {
             applyForm.addEventListener('submit', function(e) {
                 e.preventDefault();
 
-                // Honeypot check
                 if (document.getElementById('facade_website').value) { return; }
                 
-                // Function to get a cookie by name
-                function getCookie(name) {
-                    const value = `; ${document.cookie}`;
-                    const parts = value.split(`; ${name}=`);
-                    if (parts.length === 2) return parts.pop().split(';').shift();
-                }
-
                 // Get form values
                 const firstName = document.getElementById('facade_first_name').value;
                 const lastName = document.getElementById('facade_last_name').value;
-                const fullName = `${firstName} ${lastName}`;
                 const email = document.getElementById('facade_email').value;
                 const phone = document.getElementById('facade_phone').value;
                 const company = document.getElementById('facade_company').value;
                 const smsConsent = document.getElementById('sms_consent').checked;
-                const fbp = getCookie('_fbp');
-                const fbc = getCookie('_fbc');
+                const textOnlyPreference = document.getElementById('text_only_preference').checked;
 
-                const submissionData = { fullName, firstName, lastName, email, phone, company, smsConsent, fbp, fbc };
+                const submissionData = {
+                    fields: [
+                        { name: 'firstname', value: firstName },
+                        { name: 'lastname', value: lastName },
+                        { name: 'email', value: email },
+                        { name: 'phone', value: phone },
+                        { name: 'company', value: company },
+                        { name: 'hs_sms_consent', value: smsConsent },
+                        // NEW FIELD FOR ZAPIER
+                        { name: 'text_only_preference', value: textOnlyPreference } 
+                    ]
+                };
+                
                 const submitButton = e.target.querySelector('.submit-button');
-
                 submitButton.disabled = true;
                 submitButton.textContent = 'Submitting...';
 
-                // Send the data to your Vercel API endpoint
-                fetch(`/api/handle-form-submission`, {
+                // Send the data to HubSpot
+                fetch(`https://api.hsforms.com/submissions/v3/integration/submit/243194016/94080afa-9a22-47b4-ac2d-1213f28531ed`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(submissionData)
                 })
                 .then(response => {
                     if (response.ok) {
-                        // The browser-side pixel fires here
-                        if(typeof fbq === 'function') {
-                            fbq('track', 'Lead');
-                        }
+                        if(typeof fbq === 'function') { fbq('track', 'Lead'); }
                         
                         const formContainer = document.getElementById('form-section');
                         let thankYouMessage = '';
                         const calendlyLink = 'https://calendly.com/theindexcloud/20-minute-realtor-system-demo';
 
-                         if (smsConsent) {
-                            thankYouMessage = `<div style="text-align: center;"><h2>✅ Submission Received!</h2><p style="margin-bottom: 1.5rem; line-height: 1.6;">Thanks for your interest, we've received your information.<br>A text message with a direct booking link is on its way to your phone now.</p><form action="${calendlyLink}" method="get" target="_blank" style="max-width: 400px; margin: 0 auto;"><button type="submit" class="submit-button">Or, click here to book now</button></form></div>`;
+                        if (smsConsent && textOnlyPreference) {
+                             thankYouMessage = `<div style="text-align: center;"><h2>✅ Submission Received!</h2><p style="margin-bottom: 1.5rem; line-height: 1.6;">Thanks for your interest! We've received your information.<br>A text message with a direct booking link is on its way to your phone now.</p><form action="${calendlyLink}" method="get" target="_blank" style="max-width: 400px; margin: 0 auto;"><button type="submit" class="submit-button">Or, click here to book now</button></form></div>`;
+                        } else if (smsConsent) {
+                            thankYouMessage = `<div style="text-align: center;"><h2>✅ Submission Received!</h2><p style="margin-bottom: 1.5rem; line-height: 1.6;">Thanks for your interest! We've received your information.<br>You'll receive an instant call and text from our AI assistant in a moment.</p><form action="${calendlyLink}" method="get" target="_blank" style="max-width: 400px; margin: 0 auto;"><button type="submit" class="submit-button">Or, click here to book now</button></form></div>`;
                         } else {
-                            thankYouMessage = `<div style="text-align: center;"><h2>✅ Submission Received!</h2><p style="margin-bottom: 1.5rem; line-height: 1.6;">Thanks for your interest, we've received your information.<br>Please click the button below to schedule your discovery call.</p><form action="${calendlyLink}" method="get" target="_blank" style="max-width: 400px; margin: 0 auto;"><button type="submit" class="submit-button">Click here to book your call on my calendar</button></form></div>`;
+                            thankYouMessage = `<div style="text-align: center;"><h2>✅ Submission Received!</h2><p style="margin-bottom: 1.5rem; line-height: 1.6;">Thanks for your interest! We've received your information.<br>Please click the button below to schedule your discovery call.</p><form action="${calendlyLink}" method="get" target="_blank" style="max-width: 400px; margin: 0 auto;"><button type="submit" class="submit-button">Click here to book your call on my calendar</button></form></div>`;
                         }
+                        
                         formContainer.innerHTML = thankYouMessage;
 
                     } else {
