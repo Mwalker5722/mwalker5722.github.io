@@ -63,9 +63,15 @@
         .form-input { width: 100%; padding: 1rem; font-family: 'Inter', sans-serif; font-size: 1rem; background-color: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: #fff; transition: border-color 0.3s, box-shadow 0.3s; }
         .form-input:focus { outline: none; border-color: rgba(213,54,255,0.8); box-shadow: 0 0 10px rgba(213,54,255,0.3); }
         
-        .consent-group { display: flex; align-items: flex-start; text-align: left; margin-top: -0.5rem; margin-bottom: 1.5rem; }
+        .consent-group { display: flex; align-items: flex-start; text-align: left; margin-top: -0.5rem; margin-bottom: 1.5rem; transition: opacity 0.3s ease-in-out; }
         .consent-group input[type="checkbox"] { margin-top: 4px; margin-right: 10px; flex-shrink: 0; width: 16px; height: 16px; }
         .consent-group label { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.5; font-weight: 400; }
+        
+        /* New style for the disabled state */
+        .consent-group.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
 
         .submit-button { display: inline-block; width: 100%; padding: 1rem 2.5rem; background-color: rgba(213,54,255,0.9); color: white; font-weight: 600; text-decoration: none; border-radius: 8px; box-shadow: 0 0 20px rgba(213,54,255,0.5); transition: all 0.3s ease; font-size: 1.1rem; border: none; cursor: pointer; margin-top: 1rem; }
         .submit-button:hover { transform: scale(1.03); background-color: rgba(223, 74, 255, 1); box-shadow: 0 0 30px rgba(213,54,255,0.7); }
@@ -75,15 +81,14 @@
         .footer-links { margin-top: 1rem; }
         .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; margin: 0 0.75rem; }
         
-        /* New styles for dynamic text */
         #dynamic-cta-text { 
             font-size: 0.9rem; 
             color: rgba(255,255,255,0.7); 
             text-align: center; 
             margin-top: 1.5rem; 
-            margin-bottom: 0; /* Removed bottom margin */
-            min-height: 2.7rem; /* Prevents layout jump */
-            transition: opacity 0.3s ease-in-out; /* Smooth fade transition */
+            margin-bottom: 0;
+            min-height: 2.7rem; 
+            transition: opacity 0.3s ease-in-out;
         }
         
         @media (max-width: 768px) { h1 { font-size: 2rem; } }
@@ -166,9 +171,9 @@
             </div>
             <div class="form-group consent-group">
                 <input type="checkbox" id="sms_consent" name="sms_consent">
-                <label for="sms_consent">By checking this box, you provide express written consent to receive automated phone calls and text messages from The Index Cloud at the number provided. Message & data rates may apply. Your consent is not a condition of purchase.</label>
+                <label for="sms_consent">By checking this box, you provide express written consent to receive automated phone calls and text messages from The Index Cloud at the number provided. Message & data rates may apply. Your consent is not a condition of purchase. (Optional)</label>
             </div>
-            <div class="form-group consent-group">
+            <div class="form-group consent-group" id="text-only-wrapper">
                 <input type="checkbox" id="text_only_preference" name="text_only_preference">
                 <label for="text_only_preference">I prefer to receive a text message only (no call).</label>
             </div>
@@ -198,13 +203,13 @@
     document.addEventListener("DOMContentLoaded", function() {
         const smsConsentCheck = document.getElementById('sms_consent');
         const textOnlyCheck = document.getElementById('text_only_preference');
+        const textOnlyWrapper = document.getElementById('text-only-wrapper');
         const ctaText = document.getElementById('dynamic-cta-text');
 
         function updateCtaText() {
             const smsConsented = smsConsentCheck.checked;
             const textOnly = textOnlyCheck.checked;
 
-            // Set default state to transparent
             ctaText.style.opacity = '0';
 
             setTimeout(() => {
@@ -213,19 +218,32 @@
                 } else if (smsConsented) {
                     ctaText.innerHTML = "After submitting, you will receive an instant text and a call from our AI assistant to connect you with our team.";
                 } else {
-                    ctaText.innerHTML = ""; // Hide text if no consent is given
+                    ctaText.innerHTML = "";
                 }
                  if(ctaText.innerHTML) {
                     ctaText.style.opacity = '1';
                 }
-            }, 150); // Delay matches CSS transition for a smooth effect
+            }, 150);
         }
 
-        // Add event listeners to update the text on change
-        smsConsentCheck.addEventListener('change', updateCtaText);
+        function handleConsentChange() {
+            if (smsConsentCheck.checked) {
+                textOnlyCheck.disabled = false;
+                textOnlyWrapper.classList.remove('disabled');
+            } else {
+                textOnlyCheck.checked = false;
+                textOnlyCheck.disabled = true;
+                textOnlyWrapper.classList.add('disabled');
+            }
+            updateCtaText();
+        }
+
+        // Add event listeners to update the logic on change
+        smsConsentCheck.addEventListener('change', handleConsentChange);
         textOnlyCheck.addEventListener('change', updateCtaText);
+        
         // Set the initial state on page load
-        updateCtaText();
+        handleConsentChange();
 
         const applyForm = document.getElementById('facade-form');
         if (applyForm) {
@@ -308,3 +326,4 @@
 
 </body>
 </html>
+
