@@ -75,7 +75,16 @@
         .footer-links { margin-top: 1rem; }
         .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; margin: 0 0.75rem; }
         
-        #dynamic-cta-text { font-size: 0.9rem; color: rgba(255,255,255,0.7); text-align: center; margin-top: 1.5rem; min-height: 2.7rem; /* Prevents layout shift */ }
+        /* New styles for dynamic text */
+        #dynamic-cta-text { 
+            font-size: 0.9rem; 
+            color: rgba(255,255,255,0.7); 
+            text-align: center; 
+            margin-top: 1.5rem; 
+            margin-bottom: 0; /* Removed bottom margin */
+            min-height: 2.7rem; /* Prevents layout jump */
+            transition: opacity 0.3s ease-in-out; /* Smooth fade transition */
+        }
         
         @media (max-width: 768px) { h1 { font-size: 2rem; } }
     </style>
@@ -157,7 +166,7 @@
             </div>
             <div class="form-group consent-group">
                 <input type="checkbox" id="sms_consent" name="sms_consent">
-                <label for="sms_consent">By checking this box, you provide express written consent to receive automated phone calls and text messages from The Index Cloud at the number provided. Message & data rates may apply. Your consent is not a condition of purchase. (Optional)</label>
+                <label for="sms_consent">By checking this box, you provide express written consent to receive automated phone calls and text messages from The Index Cloud at the number provided. Message & data rates may apply. Your consent is not a condition of purchase.</label>
             </div>
             <div class="form-group consent-group">
                 <input type="checkbox" id="text_only_preference" name="text_only_preference">
@@ -195,13 +204,21 @@
             const smsConsented = smsConsentCheck.checked;
             const textOnly = textOnlyCheck.checked;
 
-            if (smsConsented && textOnly) {
-                ctaText.innerHTML = "After submitting, you will receive an instant text from our AI assistant to connect you with our team.";
-            } else if (smsConsented) {
-                ctaText.innerHTML = "After submitting, you will receive an instant text and a call from our AI assistant to connect you with our team.";
-            } else {
-                ctaText.innerHTML = ""; // Hide text if no consent is given
-            }
+            // Set default state to transparent
+            ctaText.style.opacity = '0';
+
+            setTimeout(() => {
+                if (smsConsented && textOnly) {
+                    ctaText.innerHTML = "After submitting, you will receive an instant text from our AI assistant to connect you with our team.";
+                } else if (smsConsented) {
+                    ctaText.innerHTML = "After submitting, you will receive an instant text and a call from our AI assistant to connect you with our team.";
+                } else {
+                    ctaText.innerHTML = ""; // Hide text if no consent is given
+                }
+                 if(ctaText.innerHTML) {
+                    ctaText.style.opacity = '1';
+                }
+            }, 150); // Delay matches CSS transition for a smooth effect
         }
 
         // Add event listeners to update the text on change
@@ -275,14 +292,14 @@
                     } else {
                         alert('An error occurred. Please try again.');
                         submitButton.disabled = false;
-                        submitButton.textContent = 'Book My Discovery Call';
+                        submitButton.textContent = 'Book My Strategy Meeting';
                     }
                 })
                 .catch(error => {
                     console.error('Network Error:', error);
                     alert('A network error occurred. Please try again.');
                     submitButton.disabled = false;
-                    submitButton.textContent = 'Book My Discovery Call';
+                    submitButton.textContent = 'Book My Strategy Meeting';
                 });
             });
         }
