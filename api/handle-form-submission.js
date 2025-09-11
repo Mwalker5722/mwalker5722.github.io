@@ -7,17 +7,23 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { fullName, email, phone, company, smsConsent, fbp, fbc } = req.body;
+    // --- FIX: Receive firstName and lastName from the request body ---
+    const { firstName, lastName, email, phone, company, smsConsent, textOnlyPreference, fbp, fbc } = req.body;
+
+    // --- FIX: Combine them to create the fullName variable ---
+    const fullName = `${firstName} ${lastName}`;
 
     // --- Task 1: Forward the Lead to HubSpot ---
     try {
       const hubspotData = {
         fields: [
-          { name: 'full_name', value: fullName },
+          { name: 'firstname', value: firstName },
+          { name: 'lastname', value: lastName },
           { name: 'email', value: email },
           { name: 'phone', value: phone },
           { name: 'company', value: company },
-          { name: 'hs_sms_consent', value: smsConsent }
+          { name: 'hs_sms_consent', value: smsConsent },
+          { name: 'text_only_preference', value: textOnlyPreference }
         ]
       };
       const portalId = process.env.HUBSPOT_PORTAL_ID;
@@ -34,13 +40,13 @@ export default async function handler(req, res) {
     }
 
     // --- Task 2: Send the Instant SMS via Twilio ---
-    if (smsConsent && phone) {
+    if (smsConsent && phone && !textOnlyPreference) { // Added !textOnlyPreference check here too
       try {
         const accountSid = process.env.TWILIO_ACCOUNT_SID;
         const authToken = process.env.TWILIO_AUTH_TOKEN;
         const twilioPhone = process.env.TWILIO_PHONE_NUMBER;
         const client = twilio(accountSid, authToken);
-        const firstName = fullName.split(' ')[0];
+        
         const messageBody = `Hi ${firstName}, Matthew from The Index Cloud here. Thanks for your interest! As promised, here's the direct link to book your 20-min demo: https://calendly.com/theindexcloud/20-minute-realtor-system-demo`;
 
         await client.messages.create({
@@ -56,18 +62,14 @@ export default async function handler(req, res) {
 
     // --- Task 3: Trigger the Facebook Conversions API ---
     try {
-        // --- NEW: Dynamically construct the full URL ---
         const protocol = req.headers['x-forwarded-proto'] || 'http';
         const host = req.headers.host;
         const capiUrl = `${protocol}://${host}/api/send-conversion`;
-        // --- End of New Code ---
-        
-        console.log(`Triggering CAPI function at: ${capiUrl}`); // For debugging
 
         await fetch(capiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, phone, fullName, fbp, fbc })
+            body: JSON.stringify({ email, phone, fullName, fbp, fbc }) // Now fullName is correctly defined
         });
         console.log('CAPI function triggered successfully.');
     } catch (capiError) {
