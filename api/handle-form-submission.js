@@ -7,10 +7,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    // --- FIX: Receive firstName and lastName from the request body ---
     const { firstName, lastName, email, phone, company, smsConsent, textOnlyPreference, fbp, fbc } = req.body;
-
-    // --- FIX: Combine them to create the fullName variable ---
     const fullName = `${firstName} ${lastName}`;
 
     // --- Task 1: Forward the Lead to HubSpot ---
@@ -40,7 +37,8 @@ export default async function handler(req, res) {
     }
 
     // --- Task 2: Send the Instant SMS via Twilio ---
-    if (smsConsent && phone && !textOnlyPreference) { // Added !textOnlyPreference check here too
+    // --- THIS IS THE CORRECTED LOGIC ---
+    if (smsConsent && phone) { 
       try {
         const accountSid = process.env.TWILIO_ACCOUNT_SID;
         const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -69,7 +67,7 @@ export default async function handler(req, res) {
         await fetch(capiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, phone, fullName, fbp, fbc }) // Now fullName is correctly defined
+            body: JSON.stringify({ email, phone, fullName, fbp, fbc })
         });
         console.log('CAPI function triggered successfully.');
     } catch (capiError) {
