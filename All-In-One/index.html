@@ -70,7 +70,11 @@
         .submit-button { display: inline-block; width: 100%; padding: 1rem 2.5rem; background-color: rgba(213,54,255,0.9); color: white; font-weight: 600; text-decoration: none; border-radius: 8px; box-shadow: 0 0 20px rgba(213,54,255,0.5); transition: all 0.3s ease; font-size: 1.1rem; border: none; cursor: pointer; margin-top: 1rem; }
         .submit-button:hover { transform: scale(1.03); background-color: rgba(223, 74, 255, 1); box-shadow: 0 0 30px rgba(213,54,255,0.7); }
         .submit-button:disabled { background-color: #8e6d9e; cursor: not-allowed; transform: none; box-shadow: none; }
-        
+        .submit-button:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+        }
+
         footer { text-align: center; color: rgba(255,255,255,0.4); padding: 4rem 1rem 2rem 1rem; font-size: 0.9rem; }
         .footer-links { margin-top: 1rem; }
         .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; margin: 0 0.75rem; }
@@ -151,7 +155,7 @@
             </div>
             <div class="form-group">
                 <label for="facade_phone">Phone</label>
-                <input class="form-input" type="tel" id="facade_phone" required>
+                <input class="form-input" type="tel" id="facde_phone" required>
             </div>
             <div class="form-group consent-group">
                 <input type="checkbox" id="sms_consent" name="sms_consent">
@@ -181,8 +185,7 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // ... (video control logic can go here if needed) ...
-
+        // Form submission logic
         const applyForm = document.getElementById('facade-form');
         if (applyForm) {
             applyForm.addEventListener('submit', function(e) {
@@ -228,13 +231,14 @@
                             fbq('track', 'Lead');
                         }
                         
-                        // Your Thank You message logic
                         const formContainer = document.getElementById('form-section');
                         let thankYouMessage = '';
+                        const calendlyLink = 'https://calendly.com/theindexcloud/20-minute-realtor-system-demo';
+
                          if (smsConsent) {
-                            thankYouMessage = `<div style="text-align: center;"><h2>✅ Submission Received!</h2><p style="margin-bottom: 1.5rem; line-height: 1.6;">Thanks for your interest, we've received your information.<br>A text message with a direct booking link is on its way to your phone now.</p><form action="https://calendly.com/theindexcloud/20-minute-realtor-system-demo" method="get" target="_blank" style="max-width: 400px; margin: 0 auto;"><button type="submit" class="submit-button">Or, click here to book now</button></form></div>`;
+                            thankYouMessage = `<div style="text-align: center;"><h2>✅ Submission Received!</h2><p style="margin-bottom: 1.5rem; line-height: 1.6;">Thanks for your interest, we've received your information.<br>A text message with a direct booking link is on its way to your phone now.</p><form action="${calendlyLink}" method="get" target="_blank" style="max-width: 400px; margin: 0 auto;"><button type="submit" class="submit-button">Or, click here to book now</button></form></div>`;
                         } else {
-                            thankYouMessage = `<div style="text-align: center;"><h2>✅ Submission Received!</h2><p style="margin-bottom: 1.5rem; line-height: 1.6;">Thanks for your interest, we've received your information.<br>Please click the button below to schedule your discovery call.</p><form action="https://calendly.com/theindexcloud/20-minute-realtor-system-demo" method="get" target="_blank" style="max-width: 400px; margin: 0 auto;"><button type="submit" class="submit-button">Click here to book your call on my calendar</button></form></div>`;
+                            thankYouMessage = `<div style="text-align: center;"><h2>✅ Submission Received!</h2><p style="margin-bottom: 1.5rem; line-height: 1.6;">Thanks for your interest, we've received your information.<br>Please click the button below to schedule your discovery call.</p><form action="${calendlyLink}" method="get" target="_blank" style="max-width: 400px; margin: 0 auto;"><button type="submit" class="submit-button">Click here to book your call on my calendar</button></form></div>`;
                         }
                         formContainer.innerHTML = thankYouMessage;
 
