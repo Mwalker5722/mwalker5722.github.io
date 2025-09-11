@@ -75,6 +75,8 @@
         .footer-links { margin-top: 1rem; }
         .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; margin: 0 0.75rem; }
         
+        #dynamic-cta-text { font-size: 0.9rem; color: rgba(255,255,255,0.7); text-align: center; margin-top: 1.5rem; min-height: 2.7rem; /* Prevents layout shift */ }
+        
         @media (max-width: 768px) { h1 { font-size: 2rem; } }
     </style>
 
@@ -133,8 +135,8 @@
     </div>
     
     <div class="form-section" id="form-section">
-        <h2>Book Your Free Discovery Call</h2>
-        <p>This initial 20-minute call is to understand your business goals and see if our system is the right fit to help you achieve them. Let's build a plan together.</p>
+        <h2>Book Your Free Strategy Meeting</h2>
+        <p>This initial 20-minute meeting is to understand your business goals and see if our system is the right fit to help you achieve them. Let's build a plan together.</p>
         
         <form id="facade-form">
             <div class="form-group">
@@ -168,7 +170,7 @@
             <div class="form-group" style="position: absolute; left: -5000px;" aria-hidden="true">
                 <input type="text" id="facade_website" name="website" tabindex="-1" autocomplete="off">
             </div>
-            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7); text-align: center; margin-top: 1.5rem;">After submitting, you will receive an instant text and a call from our AI assistant to connect you with our team.</p>
+            <p id="dynamic-cta-text"></p>
             <button type="submit" class="submit-button">Book My Discovery Call</button>
         </form>
     </div>
@@ -185,35 +187,52 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // ... (your video logic can go here if needed) ...
+        const smsConsentCheck = document.getElementById('sms_consent');
+        const textOnlyCheck = document.getElementById('text_only_preference');
+        const ctaText = document.getElementById('dynamic-cta-text');
+
+        function updateCtaText() {
+            const smsConsented = smsConsentCheck.checked;
+            const textOnly = textOnlyCheck.checked;
+
+            if (smsConsented && textOnly) {
+                ctaText.innerHTML = "After submitting, you will receive an instant text from our AI assistant to connect you with our team.";
+            } else if (smsConsented) {
+                ctaText.innerHTML = "After submitting, you will receive an instant text and a call from our AI assistant to connect you with our team.";
+            } else {
+                ctaText.innerHTML = ""; // Hide text if no consent is given
+            }
+        }
+
+        // Add event listeners to update the text on change
+        smsConsentCheck.addEventListener('change', updateCtaText);
+        textOnlyCheck.addEventListener('change', updateCtaText);
+        // Set the initial state on page load
+        updateCtaText();
 
         const applyForm = document.getElementById('facade-form');
         if (applyForm) {
             applyForm.addEventListener('submit', function(e) {
                 e.preventDefault();
 
-                // Honeypot check
                 if (document.getElementById('facade_website').value) { return; }
                 
-                // Function to get a cookie by name
                 function getCookie(name) {
                     const value = `; ${document.cookie}`;
                     const parts = value.split(`; ${name}=`);
                     if (parts.length === 2) return parts.pop().split(';').shift();
                 }
 
-                // Get form values
                 const firstName = document.getElementById('facade_first_name').value;
                 const lastName = document.getElementById('facade_last_name').value;
                 const email = document.getElementById('facade_email').value;
                 const phone = document.getElementById('facade_phone').value;
                 const company = document.getElementById('facade_company').value;
-                const smsConsent = document.getElementById('sms_consent').checked;
-                const textOnlyPreference = document.getElementById('text_only_preference').checked;
+                const smsConsent = smsConsentCheck.checked;
+                const textOnlyPreference = textOnlyCheck.checked;
                 const fbp = getCookie('_fbp');
                 const fbc = getCookie('_fbc');
 
-                // This object is sent to your Vercel API
                 const submissionData = { 
                     firstName, 
                     lastName, 
@@ -230,7 +249,6 @@
                 submitButton.disabled = true;
                 submitButton.textContent = 'Submitting...';
 
-                // Send the data to your Vercel API endpoint
                 fetch(`/api/handle-form-submission`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -238,12 +256,8 @@
                 })
                 .then(response => {
                     if (response.ok) {
-                        // The browser-side pixel fires here
-                        if(typeof fbq === 'function') {
-                            fbq('track', 'Lead');
-                        }
+                        if(typeof fbq === 'function') { fbq('track', 'Lead'); }
                         
-                        // Your Thank You message logic
                         const formContainer = document.getElementById('form-section');
                         let thankYouMessage = '';
                         const calendlyLink = 'https://calendly.com/theindexcloud/20-minute-realtor-system-demo';
@@ -255,6 +269,7 @@
                         } else {
                             thankYouMessage = `<div style="text-align: center;"><h2>✅ Submission Received!</h2><p style="margin-bottom: 1.5rem; line-height: 1.6;">Thanks for your interest! We've received your information.<br>Please click the button below to schedule your discovery call.</p><form action="${calendlyLink}" method="get" target="_blank" style="max-width: 400px; margin: 0 auto;"><button type="submit" class="submit-button">Click here to book your call on my calendar</button></form></div>`;
                         }
+                        
                         formContainer.innerHTML = thankYouMessage;
 
                     } else {
