@@ -185,7 +185,7 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // ... (video control logic can go here if needed) ...
+        // ... (your video logic can go here if needed) ...
 
         const applyForm = document.getElementById('facade-form');
         if (applyForm) {
@@ -205,7 +205,6 @@
                 // Get form values
                 const firstName = document.getElementById('facade_first_name').value;
                 const lastName = document.getElementById('facade_last_name').value;
-                const fullName = `${firstName} ${lastName}`;
                 const email = document.getElementById('facade_email').value;
                 const phone = document.getElementById('facade_phone').value;
                 const company = document.getElementById('facade_company').value;
@@ -214,9 +213,20 @@
                 const fbp = getCookie('_fbp');
                 const fbc = getCookie('_fbc');
 
-                const submissionData = { fullName, firstName, lastName, email, phone, company, smsConsent, textOnlyPreference, fbp, fbc };
+                // This object is sent to your Vercel API
+                const submissionData = { 
+                    firstName, 
+                    lastName, 
+                    email, 
+                    phone, 
+                    company, 
+                    smsConsent, 
+                    textOnlyPreference, 
+                    fbp, 
+                    fbc 
+                };
+                
                 const submitButton = e.target.querySelector('.submit-button');
-
                 submitButton.disabled = true;
                 submitButton.textContent = 'Submitting...';
 
@@ -237,6 +247,7 @@
                         const formContainer = document.getElementById('form-section');
                         let thankYouMessage = '';
                         const calendlyLink = 'https://calendly.com/theindexcloud/20-minute-realtor-system-demo';
+
                         if (smsConsent && textOnlyPreference) {
                              thankYouMessage = `<div style="text-align: center;"><h2>✅ Submission Received!</h2><p style="margin-bottom: 1.5rem; line-height: 1.6;">Thanks for your interest! We've received your information.<br>A text message with a direct booking link is on its way to your phone now.</p><form action="${calendlyLink}" method="get" target="_blank" style="max-width: 400px; margin: 0 auto;"><button type="submit" class="submit-button">Or, click here to book now</button></form></div>`;
                         } else if (smsConsent) {
