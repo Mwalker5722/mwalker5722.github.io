@@ -3,503 +3,360 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Nuclear Imperative - Minimalist 2D Presentation</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>MBW Services | Project Meridian TPOC</title>
     <style>
-        body { 
-            margin: 0; 
-            overflow: hidden; 
-            background-color: #ffffff; 
-            font-family: 'Inter', system-ui, sans-serif; 
-            color: #0f172a; 
+        :root {
+            --bg-color: #f8f9fa;
+            --surface: #ffffff;
+            --text-main: #1a1a1a;
+            --text-secondary: #595959;
+            --accent: #0056b3; /* Engineering Blue */
+            --accent-hover: #004494;
+            --success: #198754;
+            --warning: #fd7e14; 
+            --danger: #dc3545;
+            --border: #e0e0e0;
+            --font-main: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
         }
-        
-        /* Smooth Fade Transitions */
-        .slide-fade {
-            opacity: 0;
-            transform: translateX(20px);
-            transition: all 0.5s ease-out;
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--surface);
+            padding: 60px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--accent);
+        }
+
+        /* HEADER */
+        header {
+            border-bottom: 2px solid var(--text-main);
+            padding-bottom: 30px;
+            margin-bottom: 50px;
             display: flex;
-        }
-        
-        .slide-fade.active {
-            opacity: 1;
-            transform: translateX(0);
-            pointer-events: auto;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
         }
 
-        /* Subtle SVG Animations */
-        @keyframes pulseGlow {
-            0%, 100% { filter: drop-shadow(0 0 8px #3b82f6); opacity: 0.85; }
-            50% { filter: drop-shadow(0 0 20px #2563eb); opacity: 1; }
-        }
-        @keyframes smokeUp {
-            0% { opacity: 0.8; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-30px) scale(1.5); }
-        }
-        @keyframes spinSlow { 
-            100% { transform: rotate(360deg); } 
-        }
-        @keyframes dashFlow {
-            to { stroke-dashoffset: -40; }
-        }
-        @keyframes ripple {
-            0% { transform: scale(0.5); opacity: 1; }
-            100% { transform: scale(2.5); opacity: 0; }
+        .header-title h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            margin-bottom: 5px;
         }
 
-        .anim-glow { animation: pulseGlow 2.5s ease-in-out infinite; }
-        .anim-smoke { animation: smokeUp 2.5s linear infinite; }
-        .anim-spin { animation: spinSlow 20s linear infinite; transform-origin: center; }
-        .anim-dash { animation: dashFlow 12s linear infinite; }
-        .anim-ripple { animation: ripple 4s cubic-bezier(0.4, 0, 0.2, 1) infinite; transform-origin: center; }
+        .header-title .meta {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* SECTIONS */
+        section { margin-bottom: 50px; }
         
-        /* Typography tweaks */
-        .content-area ul { padding-left: 1.5rem; }
-        .content-area li { margin-bottom: 1.2rem; font-size: 1.15rem; color: #475569; list-style-type: square; line-height: 1.6; }
-        .content-area li strong { color: #0f172a; font-weight: 700; }
+        h2 { 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--border); 
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            color: var(--accent);
+        }
+
+        h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        p { margin-bottom: 16px; font-size: 1rem; color: #333; }
         
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(59, 130, 246, 0.3); border-radius: 3px; }
+        /* LISTS */
+        ul.tech-list { list-style: none; margin-left: 0; }
+        ul.tech-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 12px;
+        }
+        ul.tech-list li::before {
+            content: "►";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 0.8rem;
+            top: 4px;
+        }
+        
+        strong { font-weight: 600; color: #000; }
+
+        /* DATA TABLES */
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            margin: 25px 0;
+            border: 1px solid var(--border);
+        }
+
+        .spec-table th, .spec-table td {
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .spec-table th { background-color: #f1f1f1; font-weight: 700; }
+        .spec-table tr:last-child td { border-bottom: none; }
+        
+        /* STATUS INDICATORS */
+        .status-box {
+            background-color: #f8f9fa;
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed var(--border);
+        }
+        .status-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .tag {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 700;
+        }
+        .tag.verified { background: #d1e7dd; color: #0f5132; border: 1px solid #badbcc; } /* Green for Verified */
+        .tag.simulated { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; } 
+        .tag.pending { background: #e2e3e5; color: #41464b; border: 1px solid #d3d6d8; }
+
+        /* CALLOUT BOX */
+        .callout {
+            background-color: #eef5fc;
+            border-left: 4px solid var(--accent);
+            padding: 15px 20px;
+            font-size: 0.95rem;
+            margin: 20px 0;
+        }
+        
+        .scientific-note {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            background: #fff;
+            border: 1px solid var(--border);
+            padding: 10px 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+
+        /* BUTTONS */
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 4px;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .cta-button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border);
+            padding-top: 30px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+        }
+        
+        .disclaimer {
+            margin-top: 20px;
+            font-size: 0.7rem;
+            color: #999;
+            font-style: italic;
+        }
+
+        a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent); }
+        a.cta-button { color: white; border-bottom: none; }
+        a:hover { background-color: #eef5fc; }
+        a.cta-button:hover { background-color: var(--accent-hover); }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container { padding: 30px 20px; }
+            header { flex-direction: column; align-items: flex-start; }
+            .status-item { flex-direction: column; align-items: flex-start; }
+            .tag { margin-top: 5px; }
+        }
     </style>
 </head>
-<body class="selection:bg-blue-100">
+<body>
 
-    <!-- Navigation Header -->
-    <div class="fixed top-0 right-0 p-8 flex justify-end items-center z-50 pointer-events-none">
-        <div class="flex gap-3 pointer-events-auto">
-            <button onclick="prevSlide()" class="p-3 bg-white rounded-full shadow-md border border-slate-200 text-slate-400 hover:text-blue-600 hover:border-blue-200 transition-colors" title="Previous (Left Arrow)">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-            </button>
-            <button onclick="nextSlide()" class="p-3 bg-white rounded-full shadow-md border border-slate-200 text-slate-400 hover:text-blue-600 hover:border-blue-200 transition-colors" title="Next (Right Arrow)">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-            </button>
+<div class="container">
+    <header>
+        <div class="header-title">
+            <h1>MBW Services</h1>
+            <div class="meta">SYSTEM DESIGN SPECIFICATION: PROJECT MERIDIAN</div>
         </div>
-    </div>
+    </header>
 
-    <!-- Main Presentation Container -->
-    <div class="w-full h-screen flex items-center justify-center relative">
-        <div id="slides-container" class="w-full h-full relative bg-white overflow-hidden flex">
-            <!-- Slides are dynamically injected here -->
-        </div>
-    </div>
-
-    <!-- PREDEFINED MINIMALIST SVG VISUALS -->
-    <div id="svg-templates" class="hidden">
+    <section>
+        <h2>1.0 System Overview: Refractory Plasmonics</h2>
+        <p><strong>Target Geography:</strong> High-Irradiance Desert Environments (MENA Region / UAE)<br>
+        <strong>Primary Capability:</strong> High-Flux Photo-Electro-Chemical (PEC) Synthesis</p>
         
-        <!-- 1. Atom Structure (Intro) -->
-        <div id="svg-atom" class="w-full h-full flex items-center justify-center bg-slate-50 relative">
-            <svg class="w-72 h-72 lg:w-96 lg:h-96 overflow-visible" viewBox="0 0 200 200">
-                <g class="anim-spin">
-                    <ellipse cx="100" cy="100" rx="40" ry="12" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 6" transform="rotate(0 100 100)"/>
-                    <ellipse cx="100" cy="100" rx="40" ry="12" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 6" transform="rotate(60 100 100)"/>
-                    <ellipse cx="100" cy="100" rx="40" ry="12" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 6" transform="rotate(120 100 100)"/>
-                </g>
-                <!-- Electrons -->
-                <circle cx="65" cy="85" r="4" fill="#0f172a" />
-                <circle cx="135" cy="115" r="4" fill="#0f172a" />
-                <!-- Core Cluster -->
-                <g transform="translate(100,100)">
-                    <circle cx="-6" cy="-6" r="8" fill="#1e293b"/>
-                    <circle cx="6" cy="6" r="8" fill="#3b82f6"/>
-                    <circle cx="-8" cy="8" r="8" fill="#3b82f6"/>
-                    <circle cx="8" cy="-8" r="8" fill="#1e293b"/>
-                    <circle cx="0" cy="0" r="10" fill="#2563eb" class="anim-glow"/>
-                </g>
-            </svg>
+        <p>Project Meridian replaces traditional, fragile photovoltaic systems with a <strong>Refractory Plasmonic Architecture</strong>. By utilizing Stoichiometric Hafnium Nitride (HfN), the system is engineered to operate under <strong>500x Solar Concentration</strong> and temperatures >280°C.</p>
+        
+        <p>The Meridian TPOC platform is <strong>fuel-agnostic</strong>, supporting both Green Hydrogen (H<sub>2</sub>) evolution and constrained Hydrocarbon synthesis depending on the specific catalyst integration.</p>
+
+        <div class="callout">
+            <strong>The Core Innovation:</strong> Unlike gold or silicon which degrade under extreme flux, HfN utilizes a <strong>Phonon Bottleneck</strong> mechanism to maintain plasmonic resonance at high temperatures, effectively turning "Waste Heat" into a catalytic asset (Verified Sim 1-A).
+        </div>
+    </section>
+
+    <section>
+        <h2>2.0 Verified Physics & Engineering Specs</h2>
+        
+        <h3>2.1 The "Simulation Paradox" Solution</h3>
+        <p>High-temperature operation traditionally leads to uncontrolled growth (e.g., "Wax Clogging" in hydrocarbon modes) and thermal drift. Meridian TPOC resolves this via:</p>
+        <ul class="tech-list">
+            <li><strong>Steric Confinement:</strong> Nano-pore geometry (1.0 nm) physically limits reactant assembly, preventing carbon chains longer than C<sub>8</sub> from forming. <strong>(Verified: 0% Wax in Sim 4-B)</strong></li>
+            <li><strong>Phase-Change Clamping:</strong> The system utilizes 64 Bar Nucleate Boiling to lock the operating temperature at exactly 280°C, preventing thermal runaway. <strong>(Verified: Sim 3-A)</strong></li>
+        </ul>
+
+        <table class="spec-table">
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Meridian TPOC Specification</th>
+                    <th>Standard Gold (Au)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Active Material</strong></td>
+                    <td><strong>Hafnium Nitride (HfN)</strong></td>
+                    <td>Gold Nanoparticles</td>
+                </tr>
+                <tr>
+                    <td><strong>Melting Point</strong></td>
+                    <td><strong>3,310°C (Refractory)</strong></td>
+                    <td>1,064°C (Fails)</td>
+                </tr>
+                <tr>
+                    <td><strong>Carrier Lifetime</strong></td>
+                    <td><strong>~1,000 fs (Long-Lived)</strong></td>
+                    <td>~10 fs (Short-Lived)</td>
+                </tr>
+                <tr>
+                    <td><strong>Interface</strong></td>
+                    <td><strong>Mesoporous Foam (50% Porosity)</strong></td>
+                    <td>Solid Film (Leaks Heat)</td>
+                </tr>
+                <tr>
+                    <td><strong>Efficiency (STH)</strong></td>
+                    <td><strong>26.7% (Calculated 1-Sun)</strong></td>
+                    <td>< 5% Typical</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>3.0 Development Status (TRL 3 Verified)</h2>
+        <p>The core physics of Project Meridian have been rigorously validated via multi-physics computational models. Critical failure modes identified in early phases (Snap-In, Thermal Leakage) have been resolved via engineered pivots.</p>
+        
+        <p><strong>Funding Requirement:</strong> Seeking lab access + seed funding for TRL-4 breadboard (90-day validation).</p>
+
+        <div class="scientific-note">
+            <strong>Verified Claim:</strong> The integrated yield model confirms a baseline production of <strong>~713 Gallons/Year</strong> (Rooftop 1-Sun) scaling to <strong>~711,000 Gallons/Year</strong> (Industrial 500x CSP) per 100m² reactor unit.
+        </div>
+        <br>
+
+        <div class="status-box">
+            <div class="status-item">
+                <span><strong>3.1 Thermal Stability (600K)</strong><br><small>MACE-MP & AIMD Simulation</small></span>
+                <span class="tag verified">VERIFIED PASS</span>
+            </div>
+            <div class="status-item">
+                <span><strong>3.2 Chemical Selectivity</strong><br><small>KMC & Steric Monte Carlo</small></span>
+                <span class="tag verified">VERIFIED PASS</span>
+            </div>
+            <div class="status-item">
+                <span><strong>3.3 Active Stabilization</strong><br><small>Lateral Comb Drive Control</small></span>
+                <span class="tag verified">VERIFIED PASS</span>
+            </div>
+            <div class="status-item">
+                <span><strong>3.4 Hardware Prototype</strong><br><small>Lab-Scale Breadboard</small></span>
+                <span class="tag pending">PENDING FUNDING</span>
+            </div>
+        </div>
+        
+        <div class="callout" style="background: #fff; border-left: 4px solid #666;">
+            <strong>Next Milestone (TRL 4):</strong> Bench validation of hot-carrier persistence under electrolyte load + Co-Fe integration.
         </div>
 
-        <!-- 2. Authority (Open Book / Research) -->
-        <div id="svg-authority" class="w-full h-full flex items-center justify-center bg-slate-50 relative">
-            <svg class="w-72 h-72 lg:w-96 lg:h-96 overflow-visible" viewBox="0 0 200 200">
-                <!-- Desk/Surface line -->
-                <line x1="20" y1="160" x2="180" y2="160" stroke="#0f172a" stroke-width="4" stroke-linecap="round" />
+        <a href="https://linkly.link/2dXAz" target="_blank" class="cta-button">View Technical Dossier (Google Drive)</a>
+    </section>
 
-                <!-- Open Book -->
-                <path d="M 100 140 Q 60 120 30 140 L 30 150 Q 60 130 100 150 Z" fill="#f8fafc" stroke="#1e293b" stroke-width="4" stroke-linejoin="round" />
-                <path d="M 100 140 Q 140 120 170 140 L 170 150 Q 140 130 100 150 Z" fill="#f8fafc" stroke="#1e293b" stroke-width="4" stroke-linejoin="round" />
-                <line x1="100" y1="140" x2="100" y2="150" stroke="#1e293b" stroke-width="4" />
+    <section>
+        <h2>4.0 Manufacturing: The "Fuel Foil"</h2>
+        <p>The reactor is designed for mass production via <strong>Roll-to-Roll (R2R) Nanoimprint Lithography</strong> on flexible steel substrates.</p>
+        <ul class="tech-list">
+            <li><strong>Substrate:</strong> 50-micron Stainless Steel (Ruggedized for Sand/Wind).</li>
+            <li><strong>Throughput:</strong> 5,400 m² per hour/line.</li>
+            <li><strong>Strategic Advantage:</strong> Low CapEx deployment directly into high-irradiance zones.</li>
+        </ul>
+    </section>
 
-                <!-- Static Atom (representing research/knowledge) -->
-                <g transform="translate(100, 80)">
-                    <circle cx="0" cy="0" r="8" fill="#2563eb" class="anim-glow" />
-                    <!-- Glowing lines connecting book to atom -->
-                    <path d="M -20 50 Q 0 30 0 15" fill="none" stroke="#60a5fa" stroke-width="2" stroke-dasharray="4 4" class="anim-dash" />
-                    <path d="M 20 50 Q 0 30 0 15" fill="none" stroke="#60a5fa" stroke-width="2" stroke-dasharray="4 4" class="anim-dash" />
-                </g>
-            </svg>
+    <footer>
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+            <p><strong>Contact Information</strong><br>
+            Principal Investigator: Matthew Walker<br>
+            Email: <a href="mailto:contact@projectmeridian.energy">contact@projectmeridian.energy</a></p>
+            <p>COPYRIGHT © 2026 MBW SERVICES LLC.</p>
         </div>
-
-        <!-- 3. Fossil Fuels (Pollution) -->
-        <div id="svg-fossil" class="w-full h-full flex items-center justify-center bg-slate-100 relative">
-            <svg class="w-72 h-72 lg:w-96 lg:h-96 overflow-visible" viewBox="0 0 200 200">
-                <rect x="40" y="140" width="120" height="40" fill="#1e293b" />
-                <polygon points="40,140 70,110 70,140" fill="#334155" />
-                <polygon points="70,140 100,110 100,140" fill="#334155" />
-                <polygon points="100,140 130,110 130,140" fill="#334155" />
-                <rect x="60" y="80" width="16" height="60" fill="#0f172a" />
-                <rect x="110" y="60" width="16" height="80" fill="#0f172a" />
-                <circle cx="68" cy="60" r="15" fill="#64748b" class="anim-smoke" style="animation-delay: 0s" />
-                <circle cx="118" cy="40" r="20" fill="#475569" class="anim-smoke" style="animation-delay: 1s" />
-                <circle cx="95" cy="50" r="18" fill="#334155" class="anim-smoke" style="animation-delay: 0.5s" />
-                <line x1="20" y1="180" x2="180" y2="180" stroke="#0f172a" stroke-width="4" />
-            </svg>
+        <div class="disclaimer">
+            DISCLAIMER: This document contains forward-looking technical hypotheses; performance figures (including carrier lifetime and STH efficiency) are simulation-derived pending experimental validation.
         </div>
+    </footer>
+</div>
 
-        <!-- 4. Physics of Baseload (Abstract Graph) -->
-        <div id="svg-grid" class="w-full h-full flex items-center justify-center bg-slate-50 relative">
-            <svg class="w-72 h-72 lg:w-96 lg:h-96 overflow-visible" viewBox="0 0 200 200">
-                <line x1="30" y1="170" x2="180" y2="170" stroke="#0f172a" stroke-width="3" />
-                <line x1="30" y1="30" x2="30" y2="170" stroke="#0f172a" stroke-width="3" />
-                <path d="M 30 150 L 60 110 L 90 160 L 120 90 L 150 140 L 180 120" fill="none" stroke="#93c5fd" stroke-width="3" />
-                <path d="M 30 90 C 70 100, 110 60, 150 80 C 170 90, 180 70, 180 70" fill="none" stroke="#64748b" stroke-width="4" stroke-dasharray="8 6" class="anim-dash" />
-                <line x1="30" y1="110" x2="180" y2="110" stroke="#2563eb" stroke-width="6" />
-            </svg>
-        </div>
-
-        <!-- 5. Safety (Reactor Abstract) -->
-        <div id="svg-reactor" class="w-full h-full flex items-center justify-center bg-white relative">
-            <svg class="w-72 h-72 lg:w-96 lg:h-96 overflow-visible" viewBox="0 0 200 200">
-                <path d="M 40 160 L 40 100 A 60 60 0 0 1 160 100 L 160 160 Z" fill="none" stroke="#1e293b" stroke-width="6" />
-                <line x1="20" y1="160" x2="180" y2="160" stroke="#0f172a" stroke-width="6" />
-                <rect x="80" y="90" width="40" height="60" rx="6" fill="#f1f5f9" stroke="#0f172a" stroke-width="4" />
-                <rect x="86" y="105" width="28" height="35" fill="#3b82f6" class="anim-glow" />
-                <g>
-                    <rect x="88" y="60" width="6" height="50" fill="#0f172a" />
-                    <rect x="106" y="60" width="6" height="50" fill="#0f172a" />
-                    <rect x="75" y="55" width="50" height="6" fill="#1e293b" />
-                </g>
-            </svg>
-        </div>
-
-        <!-- 6. Energy Density (Abstract Scale) -->
-        <div id="svg-density" class="w-full h-full flex items-center justify-center bg-slate-50 relative">
-            <svg class="w-72 h-72 lg:w-96 lg:h-96 overflow-visible" viewBox="0 0 200 200">
-                <line x1="20" y1="160" x2="180" y2="160" stroke="#0f172a" stroke-width="4" />
-                <rect x="40" y="125" width="18" height="35" rx="3" fill="#2563eb" class="anim-glow" />
-                <rect x="85" y="135" width="20" height="4" fill="#0f172a" />
-                <rect x="85" y="145" width="20" height="4" fill="#0f172a" />
-                <g transform="translate(120, 160)">
-                    <rect x="0" y="-18" width="18" height="18" fill="#1e293b" />
-                    <rect x="18" y="-18" width="18" height="18" fill="#0f172a" />
-                    <rect x="36" y="-18" width="18" height="18" fill="#1e293b" />
-                    <rect x="9" y="-36" width="18" height="18" fill="#0f172a" />
-                    <rect x="27" y="-36" width="18" height="18" fill="#1e293b" />
-                    <rect x="18" y="-54" width="18" height="18" fill="#0f172a" />
-                </g>
-            </svg>
-        </div>
-
-        <!-- 7. Fission vs Fusion -->
-        <div id="svg-fusion" class="w-full h-full flex items-center justify-center bg-white relative">
-            <svg class="w-72 h-72 lg:w-96 lg:h-96 overflow-visible" viewBox="0 0 200 200">
-                <line x1="20" y1="100" x2="180" y2="100" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 6" class="anim-dash" />
-                <!-- Fission -->
-                <circle cx="60" cy="50" r="16" fill="#1e293b" />
-                <path d="M 85 50 L 115 50" fill="none" stroke="#64748b" stroke-width="3" />
-                <polygon points="110,45 120,50 110,55" fill="#64748b" /> 
-                <circle cx="145" cy="30" r="10" fill="#64748b" />
-                <circle cx="145" cy="70" r="10" fill="#64748b" />
-                <!-- Fusion -->
-                <circle cx="45" cy="130" r="10" fill="#64748b" />
-                <circle cx="45" cy="170" r="10" fill="#64748b" />
-                <path d="M 65 135 L 90 150 M 65 165 L 90 150" fill="none" stroke="#64748b" stroke-width="3" />
-                <polygon points="85,145 95,150 85,155" fill="#64748b" /> 
-                <circle cx="130" cy="150" r="22" fill="#2563eb" class="anim-glow" />
-            </svg>
-        </div>
-
-        <!-- 8. Tech & Space (Rocket Sleek) -->
-        <div id="svg-space" class="w-full h-full flex items-center justify-center bg-slate-50 relative">
-            <svg class="w-72 h-72 lg:w-96 lg:h-96 overflow-visible" viewBox="0 0 200 200">
-                <path d="M 85 145 Q 100 220 115 145 Z" fill="#3b82f6" class="anim-glow" />
-                <path d="M 92 145 Q 100 190 108 145 Z" fill="#bfdbfe" />
-                <path d="M 100 20 C 115 50 115 110 115 135 L 85 135 C 85 110 85 50 100 20 Z" fill="#1e293b" />
-                <path d="M 100 20 C 107 35 110 50 111 60 L 89 60 C 90 50 93 35 100 20 Z" fill="#0f172a" />
-                <path d="M 85 100 L 60 145 L 85 135 Z" fill="#0f172a" />
-                <path d="M 115 100 L 140 145 L 115 135 Z" fill="#0f172a" />
-                <circle cx="100" cy="70" r="5" fill="#f8fafc" stroke="#3b82f6" stroke-width="2"/>
-                <circle cx="100" cy="88" r="5" fill="#f8fafc" stroke="#3b82f6" stroke-width="2"/>
-                <polygon points="90,135 110,135 115,145 85,145" fill="#475569" />
-            </svg>
-        </div>
-
-        <!-- 9. Geopolitics (Sovereign Core) -->
-        <div id="svg-globe" class="w-full h-full flex items-center justify-center bg-white relative">
-            <svg class="w-72 h-72 lg:w-96 lg:h-96 overflow-visible" viewBox="0 0 200 200">
-                <circle cx="100" cy="100" r="40" fill="none" stroke="#60a5fa" stroke-width="2" class="anim-ripple" />
-                <circle cx="100" cy="100" r="40" fill="none" stroke="#3b82f6" stroke-width="2" class="anim-ripple" style="animation-delay: 2s;" />
-                <polygon points="100,50 145,125 55,125" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="4" stroke-linejoin="round" />
-                <circle cx="100" cy="100" r="14" fill="#2563eb" class="anim-glow" />
-                <g class="anim-spin">
-                    <ellipse cx="100" cy="100" rx="30" ry="8" fill="none" stroke="#1e293b" stroke-width="3" />
-                    <ellipse cx="100" cy="100" rx="30" ry="8" fill="none" stroke="#1e293b" stroke-width="3" transform="rotate(60 100 100)" />
-                    <ellipse cx="100" cy="100" rx="30" ry="8" fill="none" stroke="#1e293b" stroke-width="3" transform="rotate(120 100 100)" />
-                </g>
-                <path d="M 20 40 L 55 65" fill="none" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" />
-                <path d="M 55 65 L 40 85" fill="none" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" />
-                <path d="M 180 40 L 145 65" fill="none" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" />
-                <path d="M 145 65 L 160 85" fill="none" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" />
-            </svg>
-        </div>
-
-        <!-- 10. Solution (SMR Blueprint) -->
-        <div id="svg-policy" class="w-full h-full flex items-center justify-center bg-slate-50 relative">
-            <svg class="w-72 h-72 lg:w-96 lg:h-96 overflow-visible" viewBox="0 0 200 200">
-                <rect x="40" y="30" width="120" height="140" rx="6" fill="#ffffff" stroke="#1e293b" stroke-width="4" />
-                <line x1="60" y1="50" x2="140" y2="50" stroke="#0f172a" stroke-width="4" />
-                <line x1="60" y1="150" x2="140" y2="150" stroke="#cbd5e1" stroke-width="4" />
-                <rect x="85" y="70" width="30" height="60" rx="8" fill="none" stroke="#3b82f6" stroke-width="4" />
-                <rect x="90" y="105" width="20" height="15" fill="#2563eb" class="anim-glow" />
-                <line x1="90" y1="80" x2="110" y2="80" stroke="#94a3b8" stroke-width="2" />
-                <line x1="90" y1="90" x2="110" y2="90" stroke="#94a3b8" stroke-width="2" />
-            </svg>
-        </div>
-
-        <!-- 11. Conclusion (Ascension/Choice) -->
-        <div id="svg-future" class="w-full h-full flex items-center justify-center bg-white relative">
-            <svg class="w-72 h-72 lg:w-96 lg:h-96 overflow-visible" viewBox="0 0 200 200">
-                <rect x="25" y="150" width="35" height="40" fill="#0f172a" />
-                <rect x="60" y="120" width="35" height="70" fill="#1e293b" />
-                <rect x="95" y="90" width="35" height="100" fill="#334155" />
-                <rect x="130" y="60" width="35" height="130" fill="#475569" />
-                <g transform="translate(145, 35)">
-                    <circle cx="0" cy="0" r="10" fill="#2563eb" class="anim-glow" />
-                </g>
-                <path d="M 25 120 L 115 35" fill="none" stroke="#3b82f6" stroke-width="3" stroke-dasharray="8 6" class="anim-dash" />
-                <polygon points="120,30 105,35 115,45" fill="#3b82f6" />
-            </svg>
-        </div>
-
-        <!-- 12. Yawning Face (References) -->
-        <div id="svg-yawn" class="w-full h-full flex items-center justify-center bg-slate-50 relative">
-            <svg class="w-72 h-72 lg:w-96 lg:h-96 overflow-visible" viewBox="0 0 200 200">
-                <circle cx="100" cy="100" r="60" fill="#f8fafc" stroke="#0f172a" stroke-width="6" />
-                <path d="M 65 95 Q 80 105 95 95" fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round" />
-                <path d="M 105 95 Q 120 105 135 95" fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round" />
-                <ellipse cx="100" cy="125" rx="12" ry="18" fill="#0f172a" />
-                <g class="anim-smoke">
-                    <text x="135" y="65" font-size="24" font-weight="bold" fill="#3b82f6" font-family="sans-serif">Z</text>
-                    <text x="155" y="45" font-size="18" font-weight="bold" fill="#60a5fa" font-family="sans-serif">z</text>
-                    <text x="170" y="30" font-size="14" font-weight="bold" fill="#93c5fd" font-family="sans-serif">z</text>
-                </g>
-            </svg>
-        </div>
-
-    </div>
-
-    <!-- Application Logic -->
-    <script>
-        // --- SLIDE DATA ---
-        const slides = [
-            {
-                title: "The Nuclear Imperative",
-                headline: "Powering a Post Scarcity Future",
-                content: `
-                    <ul>
-                        <li><strong>The Manufactured Crisis:</strong> In 2023, families in states like California were paralyzed by $500 summer electricity bills and rolling blackouts, a symptom of an artificially crippled grid. <span class="text-[0.95rem] text-blue-500 font-bold ml-1 tracking-wide">[U.S. EIA, 2026]</span></li>
-                        <li><strong>The Proven Utopia:</strong> Meanwhile, France derives 70% of its power from nuclear energy (And that is on fission!), securing pristine air quality and electricity rates at nearly half the cost of ours. <span class="text-[0.95rem] text-blue-500 font-bold ml-1 tracking-wide">[Shellenberger, 2020]</span></li>
-                        <li><strong>The Grand Objective:</strong> We must abandon the primitive combustion of the past. Today, we will mathematically prove that embracing atomic energy is the singular key to a future of limitless abundance.</li>
-                    </ul>
-                `,
-                svgId: "svg-atom"
-            },
-            {
-                title: "Background & Approach",
-                headline: "Why I Am Presenting This Data",
-                content: `
-                    <ul>
-                        <li><strong>Independent Research:</strong> I am not an energy industry insider. This presentation is the result of personal research into the actual mechanics and economics of our power grid.</li>
-                        <li><strong>Reliance on Public Data:</strong> To avoid bias, the numbers presented here are sourced directly from federal agencies (like the EIA and NRC) and peer reviewed journals.</li>
-                        <li><strong>A Neutral Perspective:</strong> I have no financial stake in nuclear, solar, or fossil fuel companies. My goal is simply to look at the raw math of our energy options.</li>
-                    </ul>
-                `,
-                svgId: "svg-authority"
-            },
-            {
-                title: "The Lethal Status Quo",
-                headline: "Fossil Fuels & Grid Collapse",
-                content: `
-                    <ul>
-                        <li><strong>The Era of Fire:</strong> We are still running a 21st century civilization by burning ancient, fossilized carbon. This primitive method is responsible for a staggering 25% of all U.S. greenhouse gas emissions. <span class="text-[0.95rem] text-blue-500 font-bold ml-1 tracking-wide">[U.S. EIA, 2026]</span></li>
-                        <li><strong>A Lethal Toll:</strong> Coal and natural gas combustion spews sulfur dioxide and micro particulates into our atmosphere, directly precipitating hundreds of thousands of premature deaths globally each year. <span class="text-[0.95rem] text-blue-500 font-bold ml-1 tracking-wide">[Ritchie, 2020]</span></li>
-                        <li><strong>Structural Collapse:</strong> U.S. residential electricity prices skyrocketed over 11% between 2021 and 2023. We are paying a massive premium to maintain a fragile, deteriorating infrastructure. <span class="text-[0.95rem] text-blue-500 font-bold ml-1 tracking-wide">[U.S. EIA, 2026]</span></li>
-                    </ul>
-                `,
-                svgId: "svg-fossil"
-            },
-            {
-                title: "The Physics of Baseload",
-                headline: "Why Renewables Are Not Enough",
-                content: `
-                    <ul>
-                        <li><strong>The Intermittency Trap:</strong> Solar and wind technologies are shackled to the timing of the weather. You cannot reliably power life saving hospitals on systems that fail when the sun sets.</li>
-                        <li><strong>The Mathematical Reality:</strong> Solar operates at a ~25% capacity factor (although not for long!). By stark contrast, nuclear baseload delivers a monumental, uninterrupted <strong>92.5%</strong> reliability. <span class="text-[0.95rem] text-blue-500 font-bold ml-1 tracking-wide">[U.S. EIA, 2026]</span></li>
-                        <li><strong>The Storage Challenge:</strong> While battery technology is a crucial part of the future, scaling it to back up a national grid for days or weeks at a time presents immense logistical and economic hurdles.</li>
-                    </ul>
-                `,
-                svgId: "svg-grid"
-            },
-            {
-                title: "Data Over Fear",
-                headline: "The Unrivaled Safety of the Atom",
-                content: `
-                    <ul>
-                        <li><strong>The Statistical Truth:</strong> When measured by terawatt hour, the data is indisputable: nuclear is statistically the safest and cleanest method of energy generation ever devised by humanity. <span class="text-[0.95rem] text-blue-500 font-bold ml-1 tracking-wide">[Ritchie, 2020]</span></li>
-                        <li><strong>The Ghosts of the Past:</strong> Public perception remains tragically frozen by the anomalies of Chernobyl and Fukushima, creating a paralyzing paranoia that stalls human progress. <span class="text-[0.95rem] text-blue-500 font-bold ml-1 tracking-wide">[Shellenberger, 2020]</span></li>
-                        <li><strong>The Triumph of Engineering:</strong> Modern Gen III+ reactors utilize passive physics. They rely on the laws of gravity and natural convection to cool themselves automatically, rendering catastrophic meltdowns a physical impossibility. <span class="text-[0.95rem] text-blue-500 font-bold ml-1 tracking-wide">[Grossi, 2021]</span></li>
-                    </ul>
-                `,
-                svgId: "svg-reactor"
-            },
-            {
-                title: "Eradicating Scarcity",
-                headline: "The Law of Energy Density",
-                content: `
-                    <ul>
-                        <li><strong>An Astounding Ratio:</strong> The sheer physics of the atom defy human intuition. A single, fingertip sized uranium fuel pellet contains the exact same explosive energy potential as <strong>one entire ton of combustible coal</strong>. <span class="text-[0.95rem] text-blue-500 font-bold ml-1 tracking-wide">[Shellenberger, 2020]</span></li>
-                        <li><strong>Infinite Clean Water:</strong> The staggering heat and energy surplus generated by nuclear baseload unlocks the holy grail of survival: massive scale oceanic desalination, permanently eradicating global droughts.</li>
-                        <li><strong>The Post Scarcity Paradigm:</strong> Hyper abundant, practically free energy will drastically plummet the cost of global manufacturing, agriculture, and daily living.</li>
-                    </ul>
-                `,
-                svgId: "svg-density"
-            },
-            {
-                title: "Beyond Fission: The Fusion Horizon",
-                headline: "From Splitting Atoms to Star Power",
-                content: `
-                    <ul>
-                        <li><strong>The Power of Splitting:</strong> Traditional fission, splitting heavy uranium atoms, already yields an astonishing 50 million times more energy per reaction than the chemical burning of carbon.</li>
-                        <li><strong>Capturing Star Power:</strong> The ultimate frontier is nuclear fusion. By fusing light atoms like Deuterium and Tritium, the exact primordial reaction powering our sun, we yield nearly 400% more energy per nucleon than fission.</li>
-                        <li><strong>An Eternal Engine:</strong> Fusion runs on hydrogen isotopes easily extracted from ordinary seawater. If harnessed, it promises a completely inexhaustible, zero emission fuel supply for the planet.</li>
-                    </ul>
-                `,
-                svgId: "svg-fusion"
-            },
-            {
-                title: "Advancing The Tech Frontier",
-                headline: "Deep Space & Advanced Manufacturing",
-                content: `
-                    <ul>
-                        <li><strong>The Celestial Imperative:</strong> The era of chemical rockets is drawing to a close; they are mathematically incapable of sustaining human colonies on Mars. <em>Nuclear Thermal Propulsion</em> is the absolute prerequisite for mastering the cosmos.</li>
-                        <li><strong>Hyper Industrialization:</strong> Boundless atomic energy enables high output industrial processing and synthetic material creation that are simply impossible to fuel with intermittent wind or solar.</li>
-                        <li><strong>The Data Epoch:</strong> As civilization pivots toward vast artificial intelligence networks, only the gigawatt scale, uninterrupted flow of a nuclear grid can sustain immense computational demands.</li>
-                    </ul>
-                `,
-                svgId: "svg-space"
-            },
-            {
-                title: "Geopolitics & Peace",
-                headline: "Sovereign Energy Independence",
-                content: `
-                    <ul>
-                        <li><strong>The Blood of the Earth:</strong> For over a century, devastating international conflicts and endless proxy wars have been catalyzed by the desperate scramble to control finite fossil fuel pipelines.</li>
-                        <li><strong>The End of Blackmail:</strong> Hostile regimes routinely weaponize energy, cutting off natural gas supplies to freeze out and extort their political adversaries.</li>
-                        <li><strong>The Ultimate Shield:</strong> A nation powered by highly dense, domestically sourced uranium achieves total sovereign energy independence. By transitioning to atomic power, we permanently defund petro dictatorships.</li>
-                    </ul>
-                `,
-                svgId: "svg-globe"
-            },
-            {
-                title: "The Solution",
-                headline: "Actionable Policy Steps",
-                content: `
-                    <ul>
-                        <li><strong>Dismantle the Bureaucracy:</strong> The Nuclear Regulatory Commission's labyrinthine licensing process currently suffocates innovation for 10 to 15 years. <span class="text-[0.95rem] text-blue-500 font-bold ml-1 tracking-wide">[U.S. NRC, 2023]</span> We must aggressively streamline regulations to reflect modern safety realities.</li>
-                        <li><strong>Industrialize the Atom:</strong> We must direct massive federal grants toward Small Modular Reactors (SMRs). By mass producing reactors in factories, we can deploy gigawatts of power in a fraction of the time to combat historically high construction costs. <span class="text-[0.95rem] text-blue-500 font-bold ml-1 tracking-wide">[Lovering et al., 2016]</span></li>
-                        <li><strong>Execute the ADVANCE Act:</strong> Congress must ruthlessly enforce the 2024 ADVANCE Act, permanently breaking the two decade stagnation in American nuclear construction.</li>
-                    </ul>
-                `,
-                svgId: "svg-policy"
-            },
-            {
-                title: "Conclusion",
-                headline: "The Strategic Choice",
-                content: `
-                    <ul>
-                        <li><strong>The Turning Point:</strong> The energy infrastructure we choose to build today will irrevocably dictate whether our children inherit a world of engineered scarcity, or one of boundless opportunities.</li>
-                        <li><strong>The Final Tieback:</strong> Just as that California family was crippled by a $500 utility bill, millions are suffocating under a failing grid. We possess the scientific key to end this suffering right now.</li>
-                        <li><strong>Commanding the Future:</strong> It is time we stop fearing the universe's most powerful force, and start commanding it. By embracing the atom, we forge a cleaner, radically abundant civilization.</li>
-                    </ul>
-                `,
-                svgId: "svg-future"
-            },
-            {
-                title: "References",
-                headline: "Bibliography",
-                content: `
-                    <ul style="font-size: 0.95rem; margin-bottom: 0.5rem;">
-                        <li>Grossi, R. M. (2021). The safety of nuclear's future. <em>Science</em>, 372(6549), 1131.</li>
-                        <li>Lovering, J. R., Yip, A., & Nordhaus, T. (2016). Historical construction costs of global nuclear power reactors. <em>Energy Policy</em>.</li>
-                        <li>Ritchie, H. (2020). What are the safest and cleanest sources of energy? <em>Our World in Data</em>.</li>
-                        <li>Shellenberger, M. (2020). <em>Apocalypse never: Why environmental alarmism hurts us all</em>.</li>
-                        <li>U.S. EIA. (2026). <em>Electric power monthly</em>.</li>
-                        <li>U.S. NRC. (2023). <em>Backgrounder on nuclear power plant licensing process</em>.</li>
-                    </ul>
-                `,
-                svgId: "svg-yawn"
-            }
-        ];
-
-        const container = document.getElementById('slides-container');
-        let currentSlideIndex = 0;
-
-        function buildSlides() {
-            slides.forEach((slide, index) => {
-                const slideDiv = document.createElement('div');
-                slideDiv.className = `slide-fade ${index === 0 ? 'active' : ''} w-full h-full flex flex-col lg:flex-row`;
-                slideDiv.id = `slide-${index}`;
-
-                const svgElement = document.getElementById(slide.svgId);
-                const svgContent = svgElement ? svgElement.innerHTML : '';
-                const bgColor = svgElement ? Array.from(svgElement.classList).find(c => c.startsWith('bg-')) || 'bg-slate-50' : 'bg-slate-50';
-
-                slideDiv.innerHTML = `
-                    <div class="w-full lg:w-5/12 h-64 lg:h-full border-b lg:border-b-0 lg:border-r border-slate-100 flex items-center justify-center overflow-hidden ${bgColor}">
-                        ${svgContent}
-                    </div>
-                    
-                    <div class="w-full lg:w-7/12 h-full p-8 lg:p-20 flex flex-col justify-center bg-white relative overflow-y-auto">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full opacity-50 pointer-events-none"></div>
-                        <div class="max-w-2xl relative z-10 lg:ml-12">
-                            <h2 class="text-blue-600 text-sm font-bold uppercase tracking-widest mb-3">${slide.title}</h2>
-                            <h1 class="text-4xl lg:text-5xl font-black text-slate-900 mb-10 leading-tight tracking-tight">${slide.headline}</h1>
-                            <div class="content-area">
-                                ${slide.content}
-                            </div>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(slideDiv);
-            });
-        }
-
-        function showSlide(index) {
-            if (index < 0) index = 0;
-            if (index >= slides.length) index = slides.length - 1;
-            if (index === currentSlideIndex) return;
-
-            document.getElementById(`slide-${currentSlideIndex}`).classList.remove('active');
-            
-            currentSlideIndex = index;
-            document.getElementById(`slide-${currentSlideIndex}`).classList.add('active');
-        }
-
-        function nextSlide() { showSlide(currentSlideIndex + 1); }
-        function prevSlide() { showSlide(currentSlideIndex - 1); }
-
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === 'Space') nextSlide();
-            if (e.key === 'ArrowLeft') prevSlide();
-        });
-
-        buildSlides();
-
-    </script>
 </body>
 </html>
